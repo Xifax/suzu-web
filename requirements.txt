@@ -1,4 +1,1 @@
-Jinja2==2.6
-Werkzeug==0.8.3
 bottle==0.10.9
-distribute==0.6.24
