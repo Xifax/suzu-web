@@ -2,3 +2,5 @@ venv
 .ropeproject
 *.pyc
 *.log
+bin
+lib
