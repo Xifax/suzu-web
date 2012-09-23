@@ -1,41 +1,58 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#import os
+# TODO: readme goes here
 
-#from flask import Flask
-#app = Flask(__name__)
-
-#@app.route('/')
-#def hello():
-    #return 'Hello World!'
-
-#if __name__ == '__main__':
-    ## Bind to PORT if defined, otherwise default to 5000.
-    #port = int(os.environ.get('PORT', 5000))
-    #app.run(host='0.0.0.0', port=port)
-    
-#from bottle import route, run
-
-##@route('/hello/:name')
-#@route('/')
-#def index(name='World'):
-    #return '<b>Hello %s!</b>' % name
-
-#run(host='0.0.0.0', port=5000)
-##run(host='localhost', port=8080)
-
+# Generic libs
 import os
-from os import environ as env
-from sys import argv
+import sys
 
+# Framework modules
 import bottle
-from bottle import default_app, request, route, response, get
+import bottle_werkzeug
+from bottle import request, response, get, route,\
+    jinja2_template as render
 
+# Application modules
+# ...
+
+# Initialize Werkzeug plugin
+wz = bottle_werkzeug.Plugin(evalex=True)  # should work without True
+bottle.install(wz)
+# Enable debug mode
 bottle.debug(True)
+# Process request by Werkzeug
+req = wz.request
+# Update paths
+#TEMPLATE_PATH.append('./views')
 
-@get('/')
-def index():
+
+@route('/add/:key')
+def add_item(key):
+    ''' Add new item '''
+    return {'status': 'testing'}  # auto-JSON'ed
+
+
+@route('/get/:key')
+def get_item(key):
+    ''' Get existing item '''
+    return {'status': 'testing'}
+
+
+@route('/hello/:name')
+def say_hello(name):
+    '''Testing page'''
+    greet = {'en': 'Hello'}
+    language = req.accept_languages.best_match(greet.keys())
+    if language:
+        return wz.Response('%s %s!' % (greet[language], name))
+    else:
+        raise wz.exceptions.NotAcceptable()
+
+
+@get('/debug')
+def debug():
+    '''Debug info'''
     response.content_type = 'text/plain; charset=utf-8'
     ret = 'Hello world, I\'m %s!\n\n' % os.getpid()
     ret += 'Request vars:\n'
@@ -47,11 +64,22 @@ def index():
     ret += '\n'
     ret += 'Environment vars:\n'
 
-    for k, v in env.iteritems():
+    for k, v in os.env.iteritems():
         if 'bottle.' in k:
             continue
         ret += '%s=%s\n' % (k, v)
 
     return ret
 
-bottle.run(host='0.0.0.0', port=argv[1])
+
+@get('/')
+def index():
+    '''Main page'''
+    return render('home', name='Anonymous')
+
+#@error(404)
+#def error404(error):
+    #return 'Ooops'
+
+# Run application on port provided from cmd (heroku)
+bottle.run(host='0.0.0.0', port=sys.argv[1])
