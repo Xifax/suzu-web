@@ -64,7 +64,7 @@ def debug():
     ret += '\n'
     ret += 'Environment vars:\n'
 
-    for k, v in os.env.iteritems():
+    for k, v in os.environ.iteritems():
         if 'bottle.' in k:
             continue
         ret += '%s=%s\n' % (k, v)
