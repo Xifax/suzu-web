@@ -31,5 +31,6 @@ class MongoOnHeroku(Mongo):
 
     def __init__(self, db):
         '''Initialize MongoDB on Heroku'''
-        super(self, db=db, uri=os.environ['MONGOHQ_URL'])
-        self.connect()
+        #super(self, db=db, uri=os.environ['MONGOHQ_URL'])
+        #self.connect()
+        connect(db, host=os.environ['MONGOHQ_URL'])
