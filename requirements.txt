@@ -2,3 +2,6 @@ bottle==0.10.11
 Werkzeug==0.8.3
 bottle-werkzeug==0.1
 Jinja2==2.6
+nose==1.2.1
+mock==0.8.0
+sphinx==1.1.3
