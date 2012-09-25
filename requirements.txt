@@ -1,6 +1,7 @@
 bottle==0.10.11
 Werkzeug==0.8.3
 bottle-werkzeug==0.1
+mongoengine==0.6.20
 Jinja2==2.6
 nose==1.2.1
 mock==0.8.0

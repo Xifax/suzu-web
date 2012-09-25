@@ -14,7 +14,8 @@ from bottle import request, response, get, route,\
     jinja2_template as render
 
 # Application modules
-# ...
+from src.mongo import MongoOnHeroku
+from src.models import Key
 
 # Initialize Werkzeug plugin
 wz = bottle_werkzeug.Plugin(evalex=True)  # should work without True
@@ -26,17 +27,30 @@ req = wz.request
 # Update paths
 #TEMPLATE_PATH.append('./views')
 
+#from mongoengine import connect
+#connect('facts')
+
+# Initialize MongoDB
+#db = Mongo(db='facts', host='127.0.0.1', port=27818)
+#db = Mongo(db='facts')
+#db.connect()
+db = MongoOnHeroku('facts')
+
 
 @route('/add/:key')
 def add_item(key):
     ''' Add new item '''
+    item = Key(value=key)
+    item.save()
+    #return item
     return {'status': 'testing'}  # auto-JSON'ed
 
 
 @route('/get/:key')
 def get_item(key):
     ''' Get existing item '''
-    return {'status': 'testing'}
+    #return Key.objects(value=key)
+    return {'value': 'testing'}
 
 
 @route('/hello/:name')
@@ -76,6 +90,7 @@ def debug():
 def index():
     '''Main page'''
     return render('home', name='Anonymous')
+
 
 #@error(404)
 #def error404(error):
