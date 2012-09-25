@@ -34,7 +34,8 @@ req = wz.request
 #db = Mongo(db='facts', host='127.0.0.1', port=27818)
 #db = Mongo(db='facts')
 #db.connect()
-db = MongoOnHeroku('facts')
+#db = MongoOnHeroku('facts')
+db = MongoOnHeroku('app3405448')
 
 
 @route('/add/:key')
