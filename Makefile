@@ -3,3 +3,6 @@ init:
 
 test:
 	nosetests tests
+
+run:
+	python suzu.py 8000
