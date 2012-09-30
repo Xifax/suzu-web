@@ -1,8 +1,24 @@
+# NB: should not be regenerated using pip freeze > requirements.txt
+# as it will remove all the comments.
+# Instead, use make update
+
+# Web microframework
 bottle==0.10.11
+# Web requests and debugging tools
 Werkzeug==0.8.3
+# Werkzeug plugin for bottle
 bottle-werkzeug==0.1
+# MongoDB ORM
 mongoengine==0.6.20
+# Templater
 Jinja2==2.6
+# Unit testing utility
 nose==1.2.1
+# Mocks for tests
 mock==0.8.0
+# Documentation tool
 sphinx==1.1.3
+# HTTP library
+requests==0.14.0
+# HTML parser
+BeautifulSoup4==4.1.3

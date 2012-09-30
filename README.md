@@ -60,3 +60,7 @@ src/    -> project modules
 ## Additional notes
 
 Nothing at the moment.
+
+## TODO:
+
+Implement JS|CSS compiling on launch using Shovel.
