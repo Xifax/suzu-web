@@ -10,8 +10,13 @@ import sys
 # Framework modules
 import bottle
 import bottle_werkzeug
-from bottle import request, response, get, route,\
+from bottle import (
+    request,
+    response,
+    get,
+    route,
     jinja2_template as render
+)
 
 # Application modules
 from src.mongo import MongoOnHeroku
@@ -41,6 +46,7 @@ db = MongoOnHeroku('app3405448')
 @route('/add/:key')
 def add_item(key):
     ''' Add new item '''
+    # TODO: Detect item language
     item = Key(value=key)
     item.save()
     #return item

@@ -5,8 +5,13 @@
     DB entities
 '''
 
-from mongoengine import Document, StringField, ListField, DictField,\
+from mongoengine import (
+    Document,
+    StringField,
+    ListField,
+    DictField,
     ReferenceField
+)
 
 #from src.mongo import Mongo, MongoOnHeroku
 
