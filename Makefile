@@ -1,6 +1,9 @@
 init:
 	pip install -r requirements.txt --use-mirrors
 
+env:
+	source venv/bin/activate
+
 test:
 	nosetests tests
 

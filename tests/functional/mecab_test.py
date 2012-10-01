@@ -16,6 +16,6 @@ class TestMeCab:
     def test_can_sentence_reading_in_katakana(self):
         '''Test that we can get correct sentence reading without conversion'''
         assert (
-            MeCab().reading(u'来週からテストが始まる。') ==
+            MeCab().reading(u'来週からテストが始まる。', hiragana=False) ==
             u'ライシュウカラテストガハジマル。'
         )

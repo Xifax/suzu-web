@@ -40,8 +40,41 @@ req = wz.request
 #db = Mongo(db='facts')
 #db.connect()
 #db = MongoOnHeroku('facts')
-db = MongoOnHeroku('app3405448')
+#db = MongoOnHeroku('app3405448')
 
+@route('/lookup/:key')
+def lookup_item(key):
+    # NB!
+    key = unicode(key, 'utf-8')
+    """Looks up item definition, translations, readings, examples and so on"""
+    # TODO: profile!
+    from src.language import Language
+    from src.weblio import Weblio
+    from src.mecab import MeCab
+    lang = Language().detect(key)
+    # TODO: supported language list
+    # TODO: 'Processor' module to use in scheduler
+    if lang in ['ja']:
+        results = []
+        # Get examples
+        examples = Weblio().examples(key, 10)
+        mecab = MeCab()
+        # Get readings for examples
+        # TODO: double check, that everything is in unicode
+        for example, translation in examples:
+            reading = mecab.reading(example)
+            results.append({
+                'example': example,
+                'reading': reading,
+                'translation': translation
+            })
+
+        # TODO: add another (optional) key to rout -> response type, json|html
+        #return {'term': key, 'data': results}
+        return render('lookup', term=key, examples=results)
+
+    else:
+        return {'result': 'error', 'reason': 'Unsupported language'}
 
 @route('/add/:key')
 def add_item(key):
@@ -95,7 +128,7 @@ def debug():
 
 @get('/')
 def index():
-    '''Main page'''
+    """Main page"""
     return render('home', name='Anonymous')
 
 
