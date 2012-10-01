@@ -6,8 +6,14 @@
     <ul>
     {% for example in examples %}
     <li>
-        <p>{{ example.get('example') }}</p>
-        <p>{{ example.get('reading') }}</p>
+        <!--<p>{{ example.get('example') }}</p>-->
+        <!--<p>{{ example.get('reading') }}</p>-->
+        <ruby>
+            <rb>{{ example.get('example')}}</rb>
+            <rp>/</rp>
+            <rt>{{ example.get('reading')}}</rt>
+        <rp>/</rp>
+        </ruby>
         <p>{{ example.get('translation') }}</p>
     </li>
     {% endfor %}
