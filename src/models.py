@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-'''
+"""
     DB entities
-'''
+"""
 
 from mongoengine import (
     Document,
@@ -23,7 +23,7 @@ from mongoengine import (
 
 
 class Key(Document):
-    '''Fact key'''
+    """Fact key"""
     # Key value
     value = StringField()
     # Corresponding tags
@@ -35,7 +35,7 @@ class Key(Document):
 
 
 class Gloss(Document):
-    '''Fact glossary'''
+    """Fact glossary"""
     # Thesaurus definitions (in native language)
     definitions = ListField()
     # Possible readings with different types
@@ -45,7 +45,7 @@ class Gloss(Document):
 
 
 class Example(Document):
-    '''Relatively complex usage example'''
+    """Relatively complex usage example"""
     # Example
     example = StringField()
     # Translation
@@ -53,7 +53,7 @@ class Example(Document):
 
 
 class Fact(Document):
-    '''Simple lexical term: kanji, word, idiom and so on'''
+    """Simple lexical term: kanji, word, idiom and so on"""
     # Key (uid, search index)
     key = ReferenceField(Key)
     # Glossary (reading, definition, translation, etc)

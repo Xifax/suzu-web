@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-'''
+"""
     Weblio API(as if) consumer
-'''
+"""
 
 import requests
 from requests import RequestException
@@ -21,7 +21,7 @@ class Weblio:
         # TODO: stats
 
     def definition(self, term):
-        '''Fetches definitions and similar words, synonyms'''
+        """Fetches definitions and similar words, synonyms"""
         data = self.process(self.definition_url, term)
         # TODO: implement!
         if data:
@@ -34,11 +34,11 @@ class Weblio:
             print definitions
 
     def lookup(self, term):
-        '''Fetches translations (jp-en) for different use-cases'''
+        """Fetches translations (jp-en) for different use-cases"""
         pass
 
     def examples(self, term):
-        '''Fetches examples'''
+        """Fetches examples"""
         data = self.process(self.examples_url, term)
         examples = []
         if data:
@@ -89,7 +89,7 @@ def local_run():
         output.write('\n')
 
 if __name__ == '__main__':
-    '''Run as test script'''
+    """Run as test script"""
     #term = u'募らす'
     term = u'読み方'
     '''

@@ -45,8 +45,11 @@ db = MongoOnHeroku('app3405448')
 
 @route('/add/:key')
 def add_item(key):
-    ''' Add new item '''
+    """ Add new item """
     # TODO: Detect item language
+    # TODO: check, if such language is available
+    # TODO: if not, reject with message
+    # TODO: else, add new item and mark as 'unprepared'
     item = Key(value=key)
     item.save()
     #return item
@@ -55,14 +58,14 @@ def add_item(key):
 
 @route('/get/:key')
 def get_item(key):
-    ''' Get existing item '''
+    """ Get existing item """
     #return Key.objects(value=key)
     return {'value': 'testing'}
 
 
 @route('/hello/:name')
 def say_hello(name):
-    '''Testing page'''
+    """Testing page"""
     greet = {'en': 'Hello'}
     language = req.accept_languages.best_match(greet.keys())
     if language:
@@ -73,7 +76,7 @@ def say_hello(name):
 
 @get('/debug')
 def debug():
-    '''Debug info'''
+    """Debug info"""
     response.content_type = 'text/plain; charset=utf-8'
     ret = 'Hello world, I\'m %s!\n\n' % os.getpid()
     ret += 'Request vars:\n'
@@ -95,7 +98,7 @@ def debug():
 
 @get('/')
 def index():
-    '''Main page'''
+    """Main page"""
     return render('home', name='Anonymous')
 
 
