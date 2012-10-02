@@ -16,12 +16,14 @@ class Language:
         self.api_key = 'bb796e6266360e7ce1c633ce56031b9e'
 
     def detect(self, text):
-        """Detect text language code"""
+        """Detect text language code(s)"""
+        langs = []
         detected = self.query(text)
         if detected:
-            # TODO: return ALL possible languages
-            for lang in detected.get('data').get('detections'):
-                return lang.get('language')
+            return [
+                lang.get('language') for lang
+                in detected.get('data').get('detections')
+            ]
 
     def query(self, text):
         """Query Detect Language to determine language(s) code(s)"""

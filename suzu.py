@@ -44,17 +44,25 @@ req = wz.request
 
 @route('/lookup/:key')
 def lookup_item(key):
-    # NB!
-    key = unicode(key, 'utf-8')
     """Looks up item definition, translations, readings, examples and so on"""
-    # TODO: profile!
+    # Convert key to unicode
+    key = unicode(key, 'utf-8')
+    # TODO: profile & move to controller|processor, etc
     from src.language import Language
     from src.weblio import Weblio
     from src.mecab import MeCab
-    lang = Language().detect(key)
-    # TODO: supported language list
+    # TODO: supported language list (dict?)
+    supported = {
+        'Japanese': set(['ja', 'zh']),
+        'English': set(['en']),
+        'Russian': set(['ru']),
+    }
     # TODO: 'Processor' module to use in scheduler
-    if lang in ['ja']:
+    #if lang in ['ja']:
+    # Get a set of possible key languages
+    detected = set(Language().detect(key))
+    # If at least one detected language is supported
+    if detected.intersection(supported['Japanese']):
         results = []
         # Get examples
         examples = Weblio().examples(key, 10)

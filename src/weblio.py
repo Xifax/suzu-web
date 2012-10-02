@@ -59,17 +59,8 @@ class Weblio:
 
     def process(self, url, term):
         try:
-            # NB: FOR PYTHON 2.7.3
-            #return BeautifulSoup(requests.get(url % term).text)
-            # NB: Python 2.7.2 has some problems with malformed tags, so...
-            #try:
-            result = requests.get(url % term).text
-            #result = result.replace(u"</' + 'span>'", u'')
-            #result = result.replace(u"</' + 'p>", u'')
-            # TODO: use lxml insetad of HTMLParser
-            return BeautifulSoup(result, 'lxml')
-            #raise Exception
-        # TODO: process HTMLParser exceptions
+            # Use lxml instead of HTMLParser (2.7.2 is bad with malformed tags)
+            return BeautifulSoup(requests.get(url % term).text, 'lxml')
         except RequestException:
             return None
 
