@@ -19,6 +19,7 @@ class Language:
         """Detect text language code"""
         detected = self.query(text)
         if detected:
+            # TODO: return ALL possible languages
             for lang in detected.get('data').get('detections'):
                 return lang.get('language')
 

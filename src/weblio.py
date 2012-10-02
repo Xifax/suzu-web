@@ -43,6 +43,7 @@ class Weblio:
         examples = []
         if data:
             # Iterate from the END, not the beginning
+            # TODO: remove identical examples or similar to term
             for example in data.find_all('div', 'qotC')[-number:]:
                 # TODO: if no examples found -> log it (and mark term)
                 # TODO: check (term:example) when there's english example [0] instead
@@ -58,7 +59,15 @@ class Weblio:
 
     def process(self, url, term):
         try:
-            return BeautifulSoup(requests.get(url % term).text)
+            # NB: FOR PYTHON 2.7.3
+            #return BeautifulSoup(requests.get(url % term).text)
+            # NB: Python 2.7.2 has some problems with malformed tags, so...
+            #try:
+            result = requests.get(url % term).text
+            result = result.replace(u"</' + 'span>'", u'')
+            return BeautifulSoup(result)
+            #raise Exception
+        # TODO: process HTMLParser exceptions
         except RequestException:
             return None
 
