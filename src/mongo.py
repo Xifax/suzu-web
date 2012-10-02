@@ -33,4 +33,5 @@ class MongoOnHeroku(Mongo):
         """Initialize MongoDB on Heroku"""
         #super(self, db=db, uri=os.environ['MONGOHQ_URL'])
         #self.connect()
+        # TODO: take db name from URL
         connect(db, host=os.environ['MONGOHQ_URL'])

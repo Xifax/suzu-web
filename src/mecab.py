@@ -32,7 +32,10 @@ class MeCab:
         """Get reading for provided sentence|word"""
         info = self.parse(sentence)
         if info:
-            kana = u''.join([reading.get('pronounciation') for reading in info])
+            kana = u''.join([
+                reading.get('pronounciation', '') for reading in info
+                if reading.get('pronounciation')
+            ])
             if hiragana:
                 return kata2hira(kana)
             return kana

@@ -37,19 +37,19 @@ class Weblio:
         """Fetches translations (jp-en) for different use-cases"""
         pass
 
-    def examples(self, term):
+    def examples(self, term, number=2):
         """Fetches examples"""
         data = self.process(self.examples_url, term)
         examples = []
         if data:
             # Iterate from the END, not the beginning
-            for example in data.find_all('div', 'qotC')[2:]:
+            for example in data.find_all('div', 'qotC')[-number:]:
                 # TODO: if no examples found -> log it (and mark term)
                 # TODO: check (term:example) when there's english example [0] instead
-                print example.contents[0].getText()
+                sentence = example.contents[0].getText()
                 source = example.contents[1].span.getText()
-                print example.contents[1].getText().replace(source, '')
-
+                translation = example.contents[1].getText().replace(source, '')
+                examples.append((sentence, translation))
 
                 # temporary solution
                 #examples.append(example.contents[0].getText())
@@ -108,4 +108,3 @@ if __name__ == '__main__':
     #weblio.definition(term)
     #weblio.examples(term)
     local_run()
-
