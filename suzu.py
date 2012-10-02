@@ -73,41 +73,23 @@ def lookup_item(key):
         # Get readings for examples
         # TODO: double check, that everything is in unicode
         for example, translation in examples:
-            reading = mecab.reading(example)
+            #reading = mecab.reading(example)
+            readings = mecab.wordByWord(example)
             results.append({
                 'example': example,
-                'reading': reading,
+                #'reading': reading,
+                'readings': readings,
                 'translation': translation
             })
 
         # TODO: add another (optional) key to rout -> response type, json|html
         #return {'term': key, 'data': results}
-        # TODO: add ruby css :
-        '''
-        ruby > rt, ruby > rbc + rtc {
-            font-size: 60%;
-            letter-spacing: 0px;
-            display: table-header-group;
-        }
-        OR
-        ruby { display: inline-table; text-align: center; white-space: nowrap; text-indent: 0; margin: 0; vertical-align: bottom; }
-        ruby > rb, ruby > rbc { display: table-row-group; }
-        ruby > rt, ruby > rbc + rtc { display: table-header-group; font-size: 60%; letter-spacing: 0; }
-        ruby > rbc + rtc + rtc { display: table-footer-group; font-size: 60%; letter-spacing: 0; }
-        rbc > rb, rtc > rt { display: table-cell; letter-spacing: 0; }
-        rtc > rt[rbspan] { display: table-caption; }
-        rp { display: none; }
-        SEE
-        http://html5doctor.com/ruby-rt-rp-element/
-        http://oli.jp/example/ruby/
-        http://po-ru.com/diary/retrofitting-furigana-to-browsers/
-        Better still, single jscript:
-        https://github.com/threedaymonk/furigana-shim
-        '''
+
         return render('lookup', term=key, examples=results)
 
     else:
         return {'result': 'error', 'reason': 'Unsupported language'}
+
 
 @route('/add/:key')
 def add_item(key):

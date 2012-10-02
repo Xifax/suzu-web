@@ -40,6 +40,34 @@ class MeCab:
                 return kata2hira(kana)
             return kana
 
+    def wordByWord(self, sentence, hiragana=True):
+        """Get reading for every element in provided sentence"""
+        self.includeSurface()
+        info = self.parse(sentence)
+        words = []
+        if info:
+            # Compile list of {word: reading} excluding okurigana and and so on
+            for word in info:
+                # No reading
+                if not word.get('pronounciation'):
+                    reading = u''
+                # Word is already in kana
+                elif (
+                    word.get('pronounciation') == word.get('surface') or
+                    kata2hira(word.get('pronounciation')) == word.get('surface')
+                ):
+                    reading = u''
+                # Need to convert to hiragana
+                elif hiragana:
+                    reading = kata2hira(word.get('pronounciation'))
+                # Otherwise, let it be
+                else:
+                    reading = word.get('pronounciation')
+                # Append tuple to word list
+                words.append((word.get('surface'), reading))
+
+        return words
+
     def parse(self, sentence):
         """Query MeCab to parse sentence|word"""
         try:
@@ -53,6 +81,12 @@ class MeCab:
         """nclude reading in response"""
         if 'pronounciation' not in self.options:
             self.options.append('pronounciation')
+        return self
+
+    def includeSurface(self):
+        """Include surface in response"""
+        if 'surface' not in self.options:
+            self.options.append('surface')
         return self
 
     def includeFeature(self):

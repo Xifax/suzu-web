@@ -8,12 +8,19 @@
     <li>
         <!--<p>{{ example.get('example') }}</p>-->
         <!--<p>{{ example.get('reading') }}</p>-->
-        <ruby>
-            <rb>{{ example.get('example')}}</rb>
-            <rp>/</rp>
-            <rt>{{ example.get('reading')}}</rt>
-        <rp>/</rp>
-        </ruby>
+        <!--<ruby>-->
+            <!--<rb>{{ example.get('example')}}</rb>-->
+            <!--<rp>/</rp>-->
+            <!--<rt>{{ example.get('reading')}}</rt>-->
+        <!--<rp>/</rp>-->
+        <!--</ruby>-->
+        <p>
+        {% for word, reading in example.get('readings') -%}
+            <ruby>
+            <rb>{{ word }}</rb><rp>/</rp><rt>{{ reading }}</rt><rp>/</rp>
+            </ruby>
+        {%- endfor %}
+        </p>
         <p>{{ example.get('translation') }}</p>
     </li>
     {% endfor %}

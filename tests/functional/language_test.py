@@ -8,4 +8,4 @@ class TestLanguage:
 
     def test_can_detect_language(self):
         """Test that we can correctly detect language code"""
-        assert Language().detect(u'Водка балалайка!') == 'ru'
+        assert 'ru' in Language().detect(u'Водка-балалайка!')
