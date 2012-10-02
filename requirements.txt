@@ -24,7 +24,9 @@ snake-guice==0.4
 sphinx==1.1.3
 # HTTP library
 requests==0.14.0
-# HTML parser
+# HTML parser wrapper
 BeautifulSoup4==4.1.3
+# HTML parser
+lxml==2.3.6
 # Convert kana
 jcconv==0.1.2
