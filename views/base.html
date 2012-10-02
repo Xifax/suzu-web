@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" itemtype="http://schema.org/WebPage" itemscope="" xmlns:og="http://opengraphprotocol.org/schema/">
+<html lang="en" itemtype="http://schema.org/WebPage" itemscope=""
+    xmlns:og="http://opengraphprotocol.org/schema/">
 	<head>
 
-		<!--<script type="text/javascript" src="/media/js/jquery-1.6.2.min.js"></script>-->
+        {% block javascript %}
+            <script src="/media/js/furigana.js"></script>
+        {% endblock %}
+        <!--<script type="text/javascript" src="/media/js/furigana.js"></script>-->
 		<!--<link type="text/css" rel="stylesheet" href="/media/css/main_template.css"/>-->
 
-		<title> Sample Bottle App </title>
+		<title> Suzu Lazy Aggregator </title>
 	</head>
 
 	<body>

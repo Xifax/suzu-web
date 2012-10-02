@@ -20,10 +20,11 @@ class Language:
         langs = []
         detected = self.query(text)
         if detected:
-            return [
+            langs = [
                 lang.get('language') for lang
                 in detected.get('data').get('detections')
             ]
+        return langs;
 
     def query(self, text):
         """Query Detect Language to determine language(s) code(s)"""

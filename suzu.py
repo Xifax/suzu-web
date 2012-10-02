@@ -15,6 +15,7 @@ from bottle import (
     response,
     get,
     route,
+    static_file,
     jinja2_template as render
 )
 
@@ -53,12 +54,14 @@ def lookup_item(key):
     from src.mecab import MeCab
     # TODO: supported language list (dict?)
     supported = {
+        # Single kanji characters may be recognised as Chinese
         'Japanese': set(['ja', 'zh']),
         'English': set(['en']),
-        'Russian': set(['ru']),
+        # Some words are nearly identical in Ukrainian
+        'Russian': set(['ru', 'uk']),
     }
     # TODO: 'Processor' module to use in scheduler
-    #if lang in ['ja']:
+    # TODO: language detector (in 'Processor'?)
     # Get a set of possible key languages
     detected = set(Language().detect(key))
     # If at least one detected language is supported
@@ -98,6 +101,7 @@ def lookup_item(key):
         http://html5doctor.com/ruby-rt-rp-element/
         http://oli.jp/example/ruby/
         http://po-ru.com/diary/retrofitting-furigana-to-browsers/
+        Better still, single jscript:
         https://github.com/threedaymonk/furigana-shim
         '''
         return render('lookup', term=key, examples=results)
@@ -162,6 +166,18 @@ def debug():
 def index():
     """Main page"""
     return render('home', name='Anonymous')
+
+
+#@route('/media/js/<filename:re:.*\.js>#')
+#def send_image(filename):
+    #return static_file(filename, root='/media/js/', mimetype='image/png')
+
+
+@route('/media/<filepath:path>')
+def server_static(filepath):
+    """Serve static assets"""
+    # Note the relative paths!
+    return static_file(filepath, root='./media/')
 
 
 #@error(404)
