@@ -4,10 +4,14 @@
 	<head>
 
         {% block javascript %}
+            <script src="/media/js/jquery-1.8.2.min.js"></script>
+            <script src="/media/bootstrap/js/bootstrap.min.js"></script>
             <script src="/media/js/furigana.js"></script>
         {% endblock %}
-        <!--<script type="text/javascript" src="/media/js/furigana.js"></script>-->
-		<!--<link type="text/css" rel="stylesheet" href="/media/css/main_template.css"/>-->
+
+        {% block stylesheet %}
+            <link href="/media/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        {% endblock %}
 
 		<title> Suzu Lazy Aggregator </title>
 	</head>
