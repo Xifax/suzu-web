@@ -12,6 +12,8 @@ bottle-werkzeug==0.1
 mongoengine==0.6.20
 # Templater
 Jinja2==2.6
+# Additional tags for Jinja [unused]
+#jinja2modern==0.2.0
 # Unit testing utility
 nose==1.2.1
 # Test coverage plugin for nose

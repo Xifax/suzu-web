@@ -1,24 +1,32 @@
-<!DOCTYPE html>
-<html lang="en" itemtype="http://schema.org/WebPage" itemscope=""
-    xmlns:og="http://opengraphprotocol.org/schema/">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html lang="en">
+
+    <!-- Title, meta, stylesheets -->
 	<head>
 
-        {% block javascript %}
-            <script src="/media/js/jquery-1.8.2.min.js"></script>
-            <script src="/media/bootstrap/js/bootstrap.min.js"></script>
-            <script src="/media/js/furigana.js"></script>
-        {% endblock %}
-
+        <!-- Stylesheets ahead -->
         {% block stylesheet %}
-            <link href="/media/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/media/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         {% endblock %}
 
 		<title> Suzu Lazy Aggregator </title>
+
 	</head>
 
+    <!-- Content, JS -->
 	<body>
 
+        <!-- Content goes here -->
 		{% block content %} {% endblock %}
+
+        <!-- Javascript at the end of the body -->
+        {% block javascript %}
+        <script src="/media/js/jquery-1.8.2.min.js"></script>
+        <script src="/media/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/media/js/furigana.js"></script>
+        {% endblock %}
 
 	</body>
 

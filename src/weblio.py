@@ -18,7 +18,8 @@ class Weblio:
         self.definition_url = 'http://ejje.weblio.jp/english-thesaurus/%s'
         self.lookup_url = 'http://ejje.weblio.jp/content/%s'
         self.examples_url = 'http://ejje.weblio.jp/sentence/content/%s'
-        # TODO: stats
+        # TODO: stats (and corresponding DB entity)
+        self.stats = {}
 
     def definition(self, term):
         """Fetches definitions and similar words, synonyms"""
@@ -43,17 +44,14 @@ class Weblio:
         examples = []
         if data:
             # Iterate from the END, not the beginning
-            # TODO: remove identical examples or similar to term
             for example in data.find_all('div', 'qotC')[-number:]:
+                # TODO: remove identical examples or similar to term
                 # TODO: if no examples found -> log it (and mark term)
                 # TODO: check (term:example) when there's english example [0] instead
                 sentence = example.contents[0].getText()
                 source = example.contents[1].span.getText()
                 translation = example.contents[1].getText().replace(source, '')
                 examples.append((sentence, translation))
-
-                # temporary solution
-                #examples.append(example.contents[0].getText())
 
         return examples
 
@@ -66,6 +64,7 @@ class Weblio:
 
 
 def local_run():
+    """Cosole utility stub"""
     output = open('/home/yadavito/Desktop/test2_export.txt', 'w')
     export = []
     for line in open('/home/yadavito/Desktop/test2.txt'):
@@ -92,21 +91,4 @@ def local_run():
 
 if __name__ == '__main__':
     """Run as test script"""
-    #term = u'募らす'
-    term = u'読み方'
-    '''
-    r = requests.get('http://ejje.weblio.jp/sentence/content/%s' % term)
-    data = BeautifulSoup(r.text)
-    # Two examples should be plenty | TODO: get random two indices?
-    for example in data.find_all('div', 'qotC')[2:]:
-        # Sentence
-        print example.contents[0].getText()
-        # Translation
-        source = example.contents[1].span.getText()
-        print example.contents[1].getText().replace(source, '')
-    '''
-
-    #weblio = Weblio()
-    #weblio.definition(term)
-    #weblio.examples(term)
     local_run()
