@@ -129,7 +129,7 @@ def add_item(key):
 @route('/get/:key')
 def get_item(key):
     """ Get existing item """
-    return {'found': Key.objects(value=unicode(key, 'utf-8'))}
+    return {'found': [item.value for item in Key.objects(value=unicode(key, 'utf-8'))]}
 
 
 @route('/list/')

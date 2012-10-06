@@ -38,17 +38,15 @@ class Weblio:
         """Fetches translations (jp-en) for different use-cases"""
         pass
 
-    def examples(self, term, number=2):
+    def examples(self, term, number=2, portion=5):
         """Fetches examples"""
         data = self.process(self.examples_url, term)
         examples = []
         if data:
-            # Iterate from the END, not the beginning
-            # TODO: not from the END, but from the middle!
             #for example in data.find_all('div', 'qotC')[-number:]:
             total = data.find_all('div', 'qotC')
-            n = len(total) / 3
-            # Let's take examples from the middle
+            n = len(total) / portion
+            # Let's take examples from the middle (TODO: golden ratio?)
             for example in total[n: n + number]:
                 # TODO: remove identical examples or similar to term
                 # TODO: if no examples found -> log it (and mark term)

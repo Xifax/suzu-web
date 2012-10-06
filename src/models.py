@@ -85,3 +85,5 @@ class Stats(Document):
     failures = IntField()
     # Failure logs [time: failure info]
     logs = DictField()
+    # Specific info
+    info = DictField()

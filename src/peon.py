@@ -31,14 +31,18 @@ class Peon:
 
     def addItem(self, key):
         """Add pending item to DB"""
-        # TODO: should actually check, if item already exists
         key = unicode(key, 'utf-8')
+        # Check, if key already exists
+        if len(Key.objects(value=key)) == 1:
+            return None
+
+        # Detect language
         detected = set(Language().detect(key))
         supported = [
             lang for lang in languages
             if detected.intersection(languages.get(lang))
         ]
-        # Detected supported language
+        # Supported language detected
         if supported:
             item = Key(value=key, lang=supported.pop())
             # TODO: process based on language
@@ -61,7 +65,7 @@ class Peon:
             # Save item
             item.save()
             return item
-        # Could not add item
+        # Unsupported language
         else:
             return None
 
