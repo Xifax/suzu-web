@@ -8,18 +8,11 @@
 from mongoengine import (
     Document,
     StringField,
+    IntField,
     ListField,
     DictField,
     ReferenceField
 )
-
-#from src.mongo import Mongo, MongoOnHeroku
-
-#db = Mongo(db='facts')
-#db.connect()
-#from mongoengine import connect
-
-#connect('facts')
 
 
 class Key(Document):
@@ -31,7 +24,11 @@ class Key(Document):
     # Language (consider it special tag)
     lang = StringField()
     # Type (kanji, word, word pair, idiom)
-    type = StringField()
+    category = StringField()
+    # Part of speech
+    pos = StringField()
+    # Processing status
+    status = StringField()
 
 
 class Gloss(Document):
@@ -74,3 +71,17 @@ class Fact(Document):
     homonyms = ListField(ReferenceField('self'))
     # Omonyms (different meaning, same pronounsation and written form)
     omonyms = ListField(ReferenceField('self'))
+
+
+class Stats(Document):
+    """Request stats, traffic stats, failure stats and so on"""
+    # Name of the module
+    name = StringField()
+    # Requests count
+    requests = IntField()
+    # Request time (in ms)
+    time = IntField()
+    # Number of failures
+    failures = IntField()
+    # Failure logs [time: failure info]
+    logs = DictField()

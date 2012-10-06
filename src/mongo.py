@@ -29,9 +29,11 @@ class Mongo():
 
 class MongoOnHeroku(Mongo):
 
-    def __init__(self, db):
+    def __init__(self, db=None):
         """Initialize MongoDB on Heroku"""
+        #connect(db, host=os.environ['MONGOHQ_URL'])
+        if not db:
+            db = os.environ['MONGOHQ_URL'].split('/')[1]
+        connect(db, host=os.environ['MONGOHQ_URL'])
         #super(self, db=db, uri=os.environ['MONGOHQ_URL'])
         #self.connect()
-        # TODO: take db name from URL
-        connect(db, host=os.environ['MONGOHQ_URL'])

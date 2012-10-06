@@ -19,17 +19,21 @@ class MeCab:
         """Setup request url and default request options"""
         self.url = ('http://chasen.org/~taku/software/mecapi/mecapi.cgi?'
                     'sentence=%s&response=%s&format=json')
+        # NB: nothing is included, by default
         self.options = [
-            'surface',          # parts of the sentence
-            'feature',          # inflection, baseform, pos
+            #'surface',          # parts of the sentence
+            #'feature',          # inflection, baseform, pos
             #'pos',              # part of speech
             #'inflection',       # type and form of inflection
             #'baseform',         # baseform of the word
-            'pronounciation'    # word pronounciation
+            #'pronounciation'    # word pronounciation
         ]
+
+        self.stats = {}
 
     def reading(self, sentence, hiragana=True):
         """Get reading for provided sentence|word"""
+        self.includeReading()
         info = self.parse(sentence)
         if info:
             kana = u''.join([
@@ -42,7 +46,7 @@ class MeCab:
 
     def wordByWord(self, sentence, hiragana=True):
         """Get reading for every element in provided sentence"""
-        self.includeSurface()
+        self.includeSurface().includeReading()
         info = self.parse(sentence)
         words = []
         if info:
@@ -68,6 +72,19 @@ class MeCab:
 
         return words
 
+    def partOfSpeech(self, term):
+        """Get term type"""
+        self.includePartOfSpeech()
+        info = self.parse(term)
+        if info:
+            if len(info) == 1:
+                # TODO: maybe, should parse
+                return info.pop().get('pos')
+            else:
+                # TODO: should return all the POSes?
+                return ''
+                #return 'compound'
+
     def parse(self, sentence):
         """Query MeCab to parse sentence|word"""
         try:
@@ -77,8 +94,12 @@ class MeCab:
         except RequestException:
             return None
 
-    def includeReadings(self):
-        """nclude reading in response"""
+    def include(self, options):
+        """Specify, which responce elements should be included"""
+        self.options = options
+
+    def includeReading(self):
+        """Include reading in response"""
         if 'pronounciation' not in self.options:
             self.options.append('pronounciation')
         return self
@@ -93,4 +114,10 @@ class MeCab:
         """Include feature in response"""
         if 'feature' not in self.options:
             self.options.append('feature')
+        return self
+
+    def includePartOfSpeech(self):
+        """Include pronounciation in response"""
+        if 'pos' not in self.options:
+            self.options.append('pos')
         return self

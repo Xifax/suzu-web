@@ -44,7 +44,12 @@ class Weblio:
         examples = []
         if data:
             # Iterate from the END, not the beginning
-            for example in data.find_all('div', 'qotC')[-number:]:
+            # TODO: not from the END, but from the middle!
+            #for example in data.find_all('div', 'qotC')[-number:]:
+            total = data.find_all('div', 'qotC')
+            n = len(total) / 3
+            # Let's take examples from the middle
+            for example in total[n: n + number]:
                 # TODO: remove identical examples or similar to term
                 # TODO: if no examples found -> log it (and mark term)
                 # TODO: check (term:example) when there's english example [0] instead
@@ -91,4 +96,5 @@ def local_run():
 
 if __name__ == '__main__':
     """Run as test script"""
-    local_run()
+    Weblio().definition(u'唆す')
+    #local_run()
