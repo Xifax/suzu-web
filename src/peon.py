@@ -58,7 +58,6 @@ class Peon:
                     item.category = 'word'
             # Unprocesed item
             item.status = 'new'
-            raise Exception
             # Save item
             item.save()
             return item
