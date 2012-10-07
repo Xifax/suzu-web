@@ -10,14 +10,6 @@ from src.language import Language
 from src.config import languages
 from src.models import Key
 
-# Initialize MongoDB
-# TODO: move to init
-#db = Mongo(db='facts', host='127.0.0.1', port=27818)
-#db = Mongo(db='facts')
-#db.connect()
-#db = MongoOnHeroku('facts')
-#db = MongoOnHeroku('app3405448')
-
 
 class Peon:
 
@@ -52,6 +44,9 @@ class Peon:
                 # Detect part of speech
                 # NB: should probably do this in POST-PROCESSING
                 item.pos = MeCab().partOfSpeech(item.value)
+                #item.pos, base = MeCab().partOfSpeech(item.value)
+                #if base != item.value:
+                    #item.value = base
                 # TODO: get type (somehow, based on pos)
                 # TODO: if noun & 1 symbol == kanji, if two and more = word...
                 if len(item.value) == 1:

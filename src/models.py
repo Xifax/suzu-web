@@ -5,13 +5,16 @@
     DB entities
 """
 
+from datetime import datetime
+
 from mongoengine import (
     Document,
     StringField,
     IntField,
     ListField,
     DictField,
-    ReferenceField
+    ReferenceField,
+    DateTimeField,
 )
 
 
@@ -19,6 +22,8 @@ class Key(Document):
     """Fact key"""
     # Key value
     value = StringField()
+    # Corresponding fact
+    fact = ReferenceField('Fact')
     # Corresponding tags
     tags = ListField()
     # Language (consider it special tag)
@@ -28,7 +33,11 @@ class Key(Document):
     # Part of speech
     pos = StringField()
     # Processing status
-    status = StringField()
+    status = StringField(default='new')
+    # Date added
+    added = DateTimeField(default=datetime.today())
+    # Times exported
+    exported = IntField(default=0)
 
 
 class Gloss(Document):
@@ -52,14 +61,14 @@ class Example(Document):
 class Fact(Document):
     """Simple lexical term: kanji, word, idiom and so on"""
     # Key (uid, search index)
-    key = ReferenceField(Key)
+    key = ReferenceField('Key')
     # Glossary (reading, definition, translation, etc)
-    gloss = ReferenceField(Gloss)
+    gloss = ReferenceField('Gloss')
 
     # Components (list of kanji, words, radikals and so on)
     components = DictField()
     # Complex usage examples (sentences)
-    examples = ListField(ReferenceField(Example))
+    examples = ListField(ReferenceField('Example'))
     # Simple usage examples (word pairs, compounds, idioms)
     usages = ListField(ReferenceField('self'))
 
@@ -78,11 +87,11 @@ class Stats(Document):
     # Name of the module
     name = StringField()
     # Requests count
-    requests = IntField()
+    requests = IntField(default=0)
     # Request time (in ms)
-    time = IntField()
+    time = IntField(default=0)
     # Number of failures
-    failures = IntField()
+    failures = IntField(default=0)
     # Failure logs [time: failure info]
     logs = DictField()
     # Specific info

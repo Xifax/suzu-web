@@ -75,10 +75,14 @@ class MeCab:
     def partOfSpeech(self, term):
         """Get term type"""
         self.includePartOfSpeech()
+        self.includeBaseForm()
         info = self.parse(term)
         if info:
             if len(info) == 1:
-                # TODO: maybe, should parse
+                # TODO: should really PARSE this stuff, as it gets ugly
+                # with all that subitems for all the okurigana
+                #reply = info.pop()
+                #return reply.get('pos'), reply.get('baseform')
                 return info.pop().get('pos')
             else:
                 # TODO: should return all the POSes?
@@ -120,4 +124,10 @@ class MeCab:
         """Include pronounciation in response"""
         if 'pos' not in self.options:
             self.options.append('pos')
+        return self
+
+    def includeBaseform(self):
+        """Include baseform in response"""
+        if 'baseform' not in self.options:
+            self.options.append('baseform')
         return self

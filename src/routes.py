@@ -19,6 +19,7 @@ from bottle import (
     get,
     route,
     static_file,
+    validate,
     jinja2_template as render
 )
 
@@ -125,6 +126,22 @@ def add_item(key):
     else:
         return {'result': 'failure', 'reason': 'Item is already in DB'}
 
+@route('/add/:key/:example')
+def add_item_with_example(key, example):
+    """Add new item, generate fact and link example"""
+    return {'key': key, 'example': example}
+
+@route('/add/:example/<items:path>')
+def add_example_with_items(example, items):
+    """Add multiple items and corresponding example"""
+    return {'keys': items.split('/'), 'example': example}
+
+@route('/batch/<items:path>')
+def batch_add(items):
+    """Add multiple items at once"""
+    for key in items.split('/'):
+        if key:
+            add_item(key)
 
 @route('/get/:key')
 def get_item(key):
