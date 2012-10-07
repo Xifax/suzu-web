@@ -71,7 +71,7 @@ class Peon:
         item = self.addItem(key)
         if item:
             fact = Fact(key=item)
-            example = Example(example=example)
+            example = Example(example=unicode(example, 'utf-8')).save()
             fact.examples.append(example)
             fact.save()
 
@@ -79,7 +79,7 @@ class Peon:
 
     def addExampleWithItems(self, example, keys):
         """Prepares items, corresponding facts and refereces example"""
-        example = Example(example=example)
+        example = Example(example=unicode(example, 'utf-8')).save()
         results = []
         for key in keys:
             item = self.addItem(key)

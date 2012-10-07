@@ -147,9 +147,16 @@ def add_example_with_items(example, keys):
 @route('/batch/<items:path>')
 def batch_add(items):
     """Add multiple items at once"""
+    peon = Peon(db)
+    results = {}
     for key in items.split('/'):
         if key:
-            add_item(key)
+            #add_item(key)
+            if peon.addItem(key):
+                results[key] = {'result': 'success'}
+            else:
+                results[key] = {'result': 'failure', 'reason': 'Already in DB'}
+    return results
 
 @route('/get/:key')
 def get_item(key):
