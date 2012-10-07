@@ -4,25 +4,6 @@
 
     <div class="page-header"><h1>{{ term }}</h1></div>
     <!-- TODO: definitions, gloss, similar -->
-    <!--<a href="#" rel="tooltip" title="first tooltip">hover over me</a>-->
-
-    <!--<ul>-->
-    <!--{% for example in examples %}-->
-    <!--<li>-->
-        <!--<p>-->
-        <!--{% for word, reading in example.get('readings') -%}-->
-            <!--<ruby>-->
-                <!--<rb>{{ word }}</rb>-->
-                <!--<rp>/</rp>-->
-                <!--<rt>{{ reading }}</rt>-->
-                <!--<rp>/</rp>-->
-            <!--</ruby>-->
-        <!--{%- endfor %}-->
-        <!--</p>-->
-        <!--<p class="text-info">{{ example.get('translation') }}</p>-->
-    <!--</li>-->
-    <!--{% endfor %}-->
-    <!--</ul>-->
 
     <div class="accordion" id="examples">
     {% for example in examples %}
@@ -42,7 +23,6 @@
         </div>
         <div id="collapse{{ loop.index }}" class="accordion-body collapse">
             <div class="accordion-inner">
-                <!--<p class="text-info">{{ example.get('translation') }}</p>-->
                 <p>{{ example.get('translation') }}</p>
             </div>
         </div>
