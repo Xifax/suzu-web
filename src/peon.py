@@ -9,6 +9,8 @@ from src.mecab import MeCab
 from src.language import Language
 from src.config import languages
 from src.models import Key
+from src.models import Fact
+from src.models import Example
 
 
 class Peon:
@@ -36,8 +38,8 @@ class Peon:
         ]
         # Supported language detected
         if supported:
+            # NB: should deinflect to baseform (not so simple, actually!)
             item = Key(value=key, lang=supported.pop())
-            # TODO: process based on language
             if(item.lang == 'Japanese'):
                 # Set tags
                 item.tags = ['testing']
@@ -63,6 +65,31 @@ class Peon:
         # Unsupported language
         else:
             return None
+
+    def addItemWithExample(self, key, example):
+        """Prepares item, create fact, create example"""
+        item = self.addItem(key)
+        if item:
+            fact = Fact(key=item)
+            example = Example(example=example)
+            fact.examples.append(example)
+            fact.save()
+
+        return item, fact, example
+
+    def addExampleWithItems(self, example, keys):
+        """Prepares items, corresponding facts and refereces example"""
+        example = Example(example=example)
+        results = []
+        for key in keys:
+            item = self.addItem(key)
+            if item:
+                fact = Fact(key=item)
+                fact.examples.append(example)
+                fact.save()
+                results.append((item, fact))
+
+        return results
 
     def createFact(self, key):
         """ Should create facts, glosses, examples for new items"""

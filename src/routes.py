@@ -129,12 +129,20 @@ def add_item(key):
 @route('/add/:key/:example')
 def add_item_with_example(key, example):
     """Add new item, generate fact and link example"""
-    return {'key': key, 'example': example}
+    if Peon(db).addItemWithExample(key, example):
+        return {'result': 'success'}
+    else:
+        return {'result': 'failure', 'reason': 'Could not add new item'}
+    #return {'key': key, 'example': example}
 
-@route('/add/:example/<items:path>')
-def add_example_with_items(example, items):
+@route('/add/:example/<keys:path>')
+def add_example_with_items(example, keys):
     """Add multiple items and corresponding example"""
-    return {'keys': items.split('/'), 'example': example}
+    if Peon(db).addExampleWithItems(example, keys.split('/')):
+        return {'result': 'success'}
+    else:
+        return {'result': 'failure', 'reason': 'Could not add new items'}
+    #return {'keys': keys.split('/'), 'example': example}
 
 @route('/batch/<items:path>')
 def batch_add(items):
@@ -152,7 +160,8 @@ def get_item(key):
 @route('/list/')
 def list_items():
     """ List all items """
-    return {'items': [item.value for item in Key.objects]}
+    #return {'items': [item.value for item in Key.objects]}
+    return render('list', items=Key.objects())
 
 
 @route('/hello/:name')
