@@ -74,8 +74,8 @@ class Peon:
             example = Example(example=unicode(example, 'utf-8')).save()
             fact.examples.append(example)
             fact.save()
-
-        return item, fact, example
+            return item, fact, example
+        return None
 
     def addExampleWithItems(self, example, keys):
         """Prepares items, corresponding facts and refereces example"""
