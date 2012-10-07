@@ -1,6 +1,8 @@
 This is A WISE PLAN, regarding next development steps:
 
-I. Milestone: JP-EN-JP
+---
+
+# I. Milestone: JP-EN-JP
 
 1. [SOMEWHAT DONE] Debug and tweak Weblio examples API
 2. [-->] Impelement english-japanese-japanese thesaurus Weblio API (synonyms!)
@@ -10,22 +12,22 @@ I. Milestone: JP-EN-JP
 6. Implement scheduler script working with Mongoengine and aforementioned APIs
 7. Test, debug, tweak
 
-IA: [OPTIONAL] Milestone: console utility
+# IA: [OPTIONAL] Milestone: console utility
 
 1. Quick hack to process existing decks
 2. Decks reorganisation with 'Japanese' model (furigana in [] brackets and so on)
 
-II. Milestone: REST API to export DB as plain texts Anki-compatibles
+# II. Milestone: REST API to export DB as plain texts Anki-compatibles
 
 1. ???
 
-III. Milestone: EN-EN
+# III. Milestone: EN-EN
 
 1. Port Wordnick from deckit
 2. Ponder, what to do with WordNet
 3. ???
 
-IV. Web interface for Anki export
+# IV. Web interface for Anki export
 
 1. [DONE] Setup HTML boostrap
 2. Customize Twitter Bootstrap: font size, css vs less vs stylus vs sass,
