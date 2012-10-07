@@ -126,7 +126,7 @@ class MeCab:
             self.options.append('pos')
         return self
 
-    def includeBaseform(self):
+    def includeBaseForm(self):
         """Include baseform in response"""
         if 'baseform' not in self.options:
             self.options.append('baseform')

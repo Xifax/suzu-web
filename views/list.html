@@ -6,6 +6,7 @@
         <caption>Items available</caption>
         <thead>
             <tr>
+                <th>#</th>
                 <th>Item</th>
                 <th>Added</th>
                 <th>Part of speech</th>
@@ -16,6 +17,7 @@
         <tbody>
             {% for item in items %}
             <tr>
+                <td>{{ loop.index }}</td>
                 <td>{{ item.value }}</td>
                 <td>{{ item.added }}</td>
                 <td>{{ item.pos }}</td>
