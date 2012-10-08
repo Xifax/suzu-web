@@ -4,6 +4,15 @@ Python web application skeleton (for now).
 
 ## General info
 
+Development tools:
+
+* make
+* python
+* pip
+* virtualenv
+* node.js
+* npm
+
 Uses:
 
 * Python 2.7
@@ -18,6 +27,7 @@ Modules and their versions listed in:
 
 * requirements.txt
 * npm_requirements.txt
+* package.json
 
 ## Project structure
 
@@ -29,32 +39,13 @@ Modules and their versions listed in:
 
 ## Setting up development environment
 
-1. Initialize virtual environment 'venv'
+1. Initialize virtual environment 'venv':
     - Install virtualenv (using pip or easyinstall)
     - virtualenv venv --distribute
     - source venv/bin/activate
-2. Install python modules
-3. Install Node.js (preferably, in local environment) and it's modules
-    - bin/
-    - git clone https://github.com/joyent/node.git
-    - cd node
-    - git checkout vLATEST.VERSION
-    - ./configure --prefix=/path/to/repo/bin/nodejs
-    - make -j CPU_CORES_NUMBER
-    - make install
-    - cd ..
-    - ln -s nodejs/bin/node node
-    - ln -s nodejs/bin/npm npm
-    - INSTALLING MODULES
-    - ln -s node_modules/coffe-script/bin/coffee coffee
-    - AAARRGGGHHHHHH
-
-...should really automate this, yep...
+2. Install npm.
+3. Run make, it should install required python and npm modules.
 
 ## Additional notes
 
 Nothing at the moment.
-
-## TODO:
-
-Implement JS|CSS compiling on launch using Shovel|make

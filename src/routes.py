@@ -19,7 +19,7 @@ from bottle import (
     get,
     route,
     static_file,
-    validate,
+    #validate,
     jinja2_template as render
 )
 
@@ -125,6 +125,7 @@ def add_item(key):
     else:
         return {'result': 'failure', 'reason': 'Item is already in DB'}
 
+
 @route('/del/:key')
 def del_item(key):
     """Remove existing item"""
@@ -134,6 +135,7 @@ def del_item(key):
         results[key] = {'result': 'success'}
     return results
 
+
 @route('/add/:key/:example')
 def add_item_with_example(key, example):
     """Add new item, generate fact and link example"""
@@ -142,6 +144,7 @@ def add_item_with_example(key, example):
     else:
         return {'result': 'failure', 'reason': 'Could not add new item'}
 
+
 @route('/add/:example/<keys:path>')
 def add_example_with_items(example, keys):
     """Add multiple items and corresponding example"""
@@ -149,6 +152,7 @@ def add_example_with_items(example, keys):
         return {'result': 'success'}
     else:
         return {'result': 'failure', 'reason': 'Could not add new items'}
+
 
 @route('/batch/<items:path>')
 def batch_add(items):
@@ -163,12 +167,14 @@ def batch_add(items):
                 results[key] = {'result': 'failure', 'reason': 'Already in DB'}
     return results
 
+
 @route('/get/:key')
 def get_item(key):
     """ Get existing item """
-    return {'found': [
-        item.value for item in Key.objects(value=unicode(key, 'utf-8'))
-        ]}
+    return {
+        'found': [item.value for item in
+                  Key.objects(value=unicode(key, 'utf-8'))]
+    }
 
 
 @route('/list/')
@@ -208,6 +214,11 @@ def debug():
         ret += '%s=%s\n' % (k, v)
 
     return ret
+
+
+@get('/test')
+def test():
+    return render('load')
 
 #@error(404)
 #def error404(error):

@@ -4,3 +4,5 @@ venv
 *.log
 bin
 lib
+node_modules
+media/css/*.css
