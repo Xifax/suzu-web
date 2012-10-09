@@ -38,7 +38,7 @@ class Weblio:
         """Fetches translations (jp-en) for different use-cases"""
         pass
 
-    def examples(self, term, number=2, portion=5):
+    def examples(self, term, number=2, portion=4):
         """Fetches examples"""
         data = self.process(self.examples_url, term)
         examples = []

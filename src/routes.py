@@ -20,7 +20,8 @@ from bottle import (
     route,
     static_file,
     #validate,
-    jinja2_template as render
+    jinja2_template as render,
+    Jinja2Template
 )
 
 # Application modules
@@ -52,6 +53,19 @@ except Exception:
     # Either this, or try local mongo
     db = Mongo(db='facts')
     db.connect()
+
+#from jinja2 import Environment as Jinja2Environment
+#from webassets import Environment as AssetsEnvironment
+#from webassets.ext.jinja2 import AssetsExtension
+
+#assets_env = AssetsEnvironment('./media', '/media')
+#jinja2_env = Jinja2Environment(extensions=[AssetsExtension])
+#jinja2_env.assets_environment = assets_env
+#Jinja2Template.global_config('jinja2_env', Jinja2Environment(extensions=[AssetsExtension]))
+#Jinja2Template.extensions.append('assets')
+#Jinja2Template.default
+#Jinja2Template.settings
+
 
 ###############################################################################
 # Describing route handling
@@ -175,9 +189,10 @@ def get_item(key):
     }
 
 
-@route('/list/')
+@route('/blablabla/')
 def list_items():
     """ List all items """
+    # TODO: show nothing if no items
     return render('list', items=Key.objects())
 
 

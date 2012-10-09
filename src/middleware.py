@@ -6,6 +6,8 @@
     Implements custom bottle application with different middleware(s)
 """
 
+#from flup.middleware.gzip import GzipMiddleware
+
 
 class StripPathMiddleware(object):
 
@@ -21,3 +23,4 @@ class CustomApp(StripPathMiddleware):
 
     def __init__(self, app):
         super(CustomApp, self).__init__(app)
+        #self.app = GzipMiddleware(app)
