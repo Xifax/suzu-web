@@ -48,4 +48,6 @@ Modules and their versions listed in:
 
 ## Additional notes
 
-Nothing at the moment.
+Should probably remove major part of npm_requirements, as it's somewhat not in
+use (all compilation is currently happens on client side).
+

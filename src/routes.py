@@ -145,7 +145,7 @@ def add_item_with_example(key, example):
         return {'result': 'failure', 'reason': 'Could not add new item'}
 
 
-@route('/add/:example/<keys:path>')
+@route('/add/example/:example/<keys:path>')
 def add_example_with_items(example, keys):
     """Add multiple items and corresponding example"""
     if Peon(db).addExampleWithItems(example, keys.split('/')):

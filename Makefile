@@ -4,6 +4,7 @@ update:
 
 init: update
 	make link
+	make test
 
 test:
 	nosetests tests
@@ -27,6 +28,9 @@ compile:
 watch:
 	bin/stylus -o media/css/ -w media/styl/
 	bin/coffee -o media/js/ -w media/coffee/
+
+minify:
+	echo 'not implemented yet'
 
 link:
 	ln -s ./node_modules/.bin ./bin
