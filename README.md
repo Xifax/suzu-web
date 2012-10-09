@@ -41,10 +41,10 @@ Modules and their versions listed in:
 
 1. Initialize virtual environment 'venv':
     - Install virtualenv (using pip or easyinstall)
-    - virtualenv venv --distribute
-    - source venv/bin/activate
-2. Install npm.
-3. Run make, it should install required python and npm modules.
+    - `virtualenv venv --distribute`
+    - `source venv/bin/activate`
+2. Install `npm`.
+3. Run `make init`, it should install required python and npm modules.
 
 ## Additional notes
 

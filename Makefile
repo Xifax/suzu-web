@@ -1,9 +1,9 @@
-init:
+update:
 	pip install -r requirements.txt --use-mirrors
 	npm install
 
-#env:
-	#$(source venv/bin/activate)
+init: update
+	make link
 
 test:
 	nosetests tests
@@ -21,8 +21,12 @@ run:
 	python suzu.py 8000
 
 compile:
-	node_modules/stylus/bin/stylus media/css
+	bin/stylus -o media/css/ -c media/styl/
+	bin/coffee -o media/js/ -c media/coffee/
 
 watch:
-	node_modules/stylus/bin/stylus -w media/css
+	bin/stylus -o media/css/ -w media/styl/
+	bin/coffee -o media/js/ -w media/coffee/
 
+link:
+	ln -s ./node_modules/.bin ./bin

@@ -5,4 +5,6 @@ venv
 bin
 lib
 node_modules
-media/css/*.css
+.npm-debug.log
+media/styl/*.css
+media/coffee/*.js
