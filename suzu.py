@@ -7,10 +7,12 @@
 import sys
 
 # Framework modules
-from bottle import run
+from bottle import app, run
 
 # Application modules
+from src.middleware import CustomApp
 import src.routes
 
+
 # Run application on port provided from cmd (heroku)
-run(host='0.0.0.0', port=sys.argv[1])
+run(app=CustomApp(app()), host='0.0.0.0', port=sys.argv[1])

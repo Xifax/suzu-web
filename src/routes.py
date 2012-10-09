@@ -26,7 +26,7 @@ from bottle import (
 # Application modules
 from src.models import Key
 from src.mongo import MongoOnHeroku
-#from src.mongo import Mongo
+from src.mongo import Mongo
 from src.language import Language
 from src.weblio import Weblio
 from src.mecab import MeCab
@@ -46,14 +46,12 @@ req = wz.request
 
 # Initialize MongoDB
 try:
-    #db = Mongo(db='facts')
-    #db.connect()
-    #db = MongoOnHeroku('facts')
-    #db = MongoOnHeroku('app3405448')
     db = MongoOnHeroku()
 except Exception:
-   # DB error!
-    pass
+    # DB error!
+    # Either this, or try local mongo
+    db = Mongo(db='facts')
+    db.connect()
 
 ###############################################################################
 # Describing route handling

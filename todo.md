@@ -37,3 +37,9 @@ themes and so on
 5. ???
 
 
+---
+
+Various TODOs:
+
+1. Inherit from objects (new style)
+2. Check up routes
