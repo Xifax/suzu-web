@@ -189,7 +189,7 @@ def get_item(key):
     }
 
 
-@route('/blablabla/')
+@route('/list')
 def list_items():
     """ List all items """
     # TODO: show nothing if no items
