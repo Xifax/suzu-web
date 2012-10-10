@@ -1,25 +1,30 @@
+@import 'nib'
+
+// Nice looking shadow box
 box-shadow(args...)
-   -webkit-box-shadow args
-   -moz-box-shadow args
-   box-shadow args
+    -webkit-box-shadow args
+    -moz-box-shadow args
+    box-shadow args
+
+// Shadows for top or bottom of the page
+body-shadow(pos)
+    content ""
+    position fixed
+    if pos is 'top'
+        top -10px
+    else
+        bottom -10px
+    left 0
+    width 100%
+    height 10px
+    z-index 100
+    box-shadow 0px 0px 10px rgba(0,0,0,.8)
 
 body:before
-   content ""
-   position fixed
-   top -10px
-   left 0
-   width 100%
-   height 10px
-   z-index 100
-   box-shadow 0px 0px 10px rgba(0,0,0,.8)
+    body-shadow 'top'
 
 body:after
-   content ""
-   position fixed
-   bottom -10px
-   left 0
-   width 100%
-   height 10px
-   z-index 100
-   box-shadow 0px 0px 10px rgba(0,0,0,.8)
+    body-shadow 'bottom'
 
+.main
+    font-size: 20px;
