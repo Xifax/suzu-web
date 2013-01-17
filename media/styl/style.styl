@@ -34,6 +34,14 @@ center(w, h)
     margin-left: -(@width / 2)
     margin-top: -(@height / 2)
 
+// Draw a circle with radius, width and color
+circle(r, w, c)
+    border-radius: 50%
+    width: r
+    height: r
+    border: w double c;
+
+
 // Burning text effect
 burn()
     color: #fff
@@ -89,6 +97,7 @@ unselectable()
 
 /* Classes */
 
+// Page background
 body
     background-image: url('../img/pattern/washi.png')
 
@@ -107,27 +116,30 @@ body:after
 .center-wrapper
     center(500px, 500px)
 
-// Kanji in center
+// Kanji border
 .circle
-    font-size: 300px
-    font-family: 'IPAMincho', 'TakaoExMincho'
-    border-radius: 50%
-    width: 500px
-    height: 500px
-    border: 4px double #ccc;
+    circle 500px 4px #ccc
 
     box-shadow 0px 0px 10px rgba(0,0,0,.8)
-    //background-image: url('../img/pattern/scribble_light.png')
     background-image: url('../img/pattern/subtle.png')
+    transition: all 0.4s ease-in-out
+
+// Kanji itself
+.kanji
+    font-size: 300px
+    font-family: 'IPAMincho', 'TakaoExMincho'
     letterpress()
+    transition: all 0.7s ease-in-out
 
-    //background: #ddd
-
+// Circle & kanji on hover
 .circle:hover
     cursor: default
     unselectable()
     background: black
     opacity: 0.7
     border: 4px double #fff
+    transition: all 0.4s ease-in-out
+
+.kanji:hover
     burn()
-    transition: all 0.4s ease-out
+    transition: all 0.7s ease-in-out
