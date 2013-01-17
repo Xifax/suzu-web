@@ -1,4 +1,3 @@
-# Generic libs
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -49,8 +48,7 @@ req = wz.request
 try:
     db = MongoOnHeroku()
 except Exception:
-    # DB error!
-    # Either this, or try local mongo
+    # If could not connect, try development mongo DB
     db = Mongo(db='facts')
     db.connect()
 
@@ -75,7 +73,7 @@ except Exception:
 @get('/')
 def index():
     """Main page"""
-    return render('home', name='Anonymous')
+    return render('home', kanji=Peon(db).random())
 
 
 @route('/media/<filepath:path>')

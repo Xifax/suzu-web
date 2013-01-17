@@ -5,12 +5,16 @@
     Encompasses all application tasks
 """
 
+from random import choice
+
 from src.mecab import MeCab
 from src.language import Language
 from src.config import languages
-from src.models import Key
-from src.models import Fact
-from src.models import Example
+from src.models import (
+        Key,
+        Fact,
+        Example
+)
 
 
 class Peon:
@@ -101,3 +105,7 @@ class Peon:
     def process(self):
         """Process all new & unprocessed keys"""
         pass
+
+    def random(self, category = 'kanji'):
+        """Get random item from collection"""
+        return choice(Key.objects(category=category))

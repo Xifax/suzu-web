@@ -18,7 +18,7 @@ test-fun:
 test-cover:
 	nosetests --cover-html-dir=docs
 
-run:
+run: compile
 	python suzu.py 8000
 
 launch:
