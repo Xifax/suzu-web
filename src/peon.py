@@ -108,4 +108,8 @@ class Peon:
 
     def random(self, category = 'kanji'):
         """Get random item from collection"""
-        return choice(Key.objects(category=category))
+        try:
+            return choice(Key.objects(category=category))
+        except:
+            # Not item found in this category
+            return Key(value=u'')
