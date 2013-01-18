@@ -97,9 +97,14 @@ unselectable()
 
 /* Classes */
 
+* {
+    margin: 0;
+}
+
+
 // Page background
-body
-    background-image: url('../img/pattern/washi.png')
+html, body
+    height: 100%
 
 // Top and bottom of the page
 body:before
@@ -108,8 +113,12 @@ body:before
 body:after
     body-shadow 'bottom'
 
-.main
+// Title page
+.home
+    height: 100%
+
     font-size: 20px
+    background-image: url('../img/pattern/washi.png')
 
 
 // Centerpiece of page (kanji and info)

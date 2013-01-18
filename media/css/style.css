@@ -1,7 +1,8 @@
-body{background-image:url("../img/pattern/washi.png")}
+*{margin:0}
+html,body{height:100%}
 body:before{content:"";position:fixed;top:-10px;left:0;width:100%;height:10px;z-index:100;-webkit-box-shadow:0 0 10px rgba(0,0,0,0.8);-moz-box-shadow:0 0 10px rgba(0,0,0,0.8);box-shadow:0 0 10px rgba(0,0,0,0.8)}
 body:after{content:"";position:fixed;bottom:-10px;left:0;width:100%;height:10px;z-index:100;-webkit-box-shadow:0 0 10px rgba(0,0,0,0.8);-moz-box-shadow:0 0 10px rgba(0,0,0,0.8);box-shadow:0 0 10px rgba(0,0,0,0.8)}
-.main{font-size:20px}
+.home{height:100%;font-size:20px;background-image:url("../img/pattern/washi.png")}
 .center-wrapper{position:absolute;top:50%;left:50%;text-align:center;width:500px;height:500px;line-height:500px;margin-left:-250px;margin-top:-250px}
 .circle{-webkit-border-radius:50%;border-radius:50%;width:500px;height:500px;border:4px double #ccc;-webkit-box-shadow:0 0 10px rgba(0,0,0,0.8);-moz-box-shadow:0 0 10px rgba(0,0,0,0.8);box-shadow:0 0 10px rgba(0,0,0,0.8);background-image:url("../img/pattern/subtle.png");-webkit-transition:all .4s ease-in-out;-moz-transition:all .4s ease-in-out;-o-transition:all .4s ease-in-out;-ms-transition:all .4s ease-in-out;transition:all .4s ease-in-out}
 .kanji{font-size:300px;font-family:'IPAMincho','TakaoExMincho';text-shadow:0 1px 0 #fff;color:#666;-moz-user-select:-moz-none;-khtml-user-select:none;-webkit-user-select:none;-webkit-transition:all .7s ease-in-out;-moz-transition:all .7s ease-in-out;-o-transition:all .7s ease-in-out;-ms-transition:all .7s ease-in-out;transition:all .7s ease-in-out}
