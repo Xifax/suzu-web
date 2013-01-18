@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from src.language import Language
+from src.api.language import Language
 
 
 class TestLanguage:

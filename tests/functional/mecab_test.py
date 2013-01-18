@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from src.mecab import MeCab
+from src.api.jp.mecab import MeCab
 
 
 class TestMeCab:
