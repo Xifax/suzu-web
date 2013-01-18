@@ -19,17 +19,13 @@ from bottle import (
     route,
     static_file,
     error,
-    #validate,
     jinja2_template as render,
-    Jinja2Template
 )
 
 # Application modules
 from src.db.models import Key
-from src.db.mongo import (
-        Mongo,
-        MongoOnHeroku
-)
+from src.db.mongo import connectMongo
+
 from src.api.language import Language
 from src.api.jp.weblio import Weblio
 from src.api.jp.mecab import MeCab
@@ -48,34 +44,16 @@ bottle.debug(True)
 req = wz.request
 
 # Initialize MongoDB
-try:
-    db = MongoOnHeroku()
-except Exception:
-    # If could not connect, try development mongo DB
-    db = Mongo(db='facts')
-    db.connect()
-
-#from jinja2 import Environment as Jinja2Environment
-#from webassets import Environment as AssetsEnvironment
-#from webassets.ext.jinja2 import AssetsExtension
-
-#assets_env = AssetsEnvironment('./media', '/media')
-#jinja2_env = Jinja2Environment(extensions=[AssetsExtension])
-#jinja2_env.assets_environment = assets_env
-#Jinja2Template.global_config('jinja2_env', Jinja2Environment(extensions=[AssetsExtension]))
-#Jinja2Template.extensions.append('assets')
-#Jinja2Template.default
-#Jinja2Template.settings
-
+db = connectMongo()
 
 ###############################################################################
-# Describing route handling
+# Describing route handlers
 ###############################################################################
 
 
 @get('/')
 def index():
-    """Main page"""
+    """Main page with random kanji"""
     return render('home', kanji=Peon(db).random())
 
 
@@ -132,7 +110,7 @@ def lookup_item(key):
 
 @route('/add/:key')
 def add_item(key):
-    """ Add new item """
+    """Add new item"""
     if Peon(db).addItem(key):
         return {'result': 'success'}
     else:
@@ -234,8 +212,10 @@ def debug():
 def test():
     return render('load')
 
+
 @error(404)
 def error404(error):
+    """Display insightful message"""
     return render(
             'error',
             message=request.path[1:] + '?! This is not the page you seek, knave!'

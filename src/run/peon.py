@@ -111,5 +111,5 @@ class Peon:
         try:
             return choice(Key.objects(category=category))
         except:
-            # Not item found in this category
+            # No item found in this category
             return Key(value=u'')

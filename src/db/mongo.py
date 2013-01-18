@@ -31,9 +31,19 @@ class MongoOnHeroku(Mongo):
 
     def __init__(self, db=None):
         """Initialize MongoDB on Heroku"""
-        #connect(db, host=os.environ['MONGOHQ_URL'])
         if not db:
             db = os.environ['MONGOHQ_URL'].split('/')[1]
         connect(db, host=os.environ['MONGOHQ_URL'])
-        #super(self, db=db, uri=os.environ['MONGOHQ_URL'])
-        #self.connect()
+
+
+def connectMongo():
+    """Try to connect to either development or production DB"""
+    try:
+        # By default use production DB on Heroku
+        db = MongoOnHeroku()
+    except Exception:
+        # If could not connect, try development mongo DB
+        db = Mongo(db='facts')
+        db.connect()
+
+    return db
