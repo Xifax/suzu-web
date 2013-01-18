@@ -35,7 +35,7 @@ class Key(Document):
     # Processing status
     status = StringField(default='new')
     # Date added
-    added = DateTimeField(default=datetime.today())
+    added = DateTimeField(default=datetime.now)
     # Times exported
     exported = IntField(default=0)
 
