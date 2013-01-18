@@ -33,7 +33,7 @@ from src.db.mongo import (
 from src.api.language import Language
 from src.api.jp.weblio import Weblio
 from src.api.jp.mecab import MeCab
-from src.bin.peon import Peon
+from src.run.peon import Peon
 
 ###############################################################################
 # Initializing framework, DB connection and paths
