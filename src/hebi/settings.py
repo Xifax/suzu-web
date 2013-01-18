@@ -15,7 +15,6 @@ NEWSPIDER_MODULE = 'hebi.spiders'
 ITEM_PIPELINES = [
     'hebi.pipelines.DuplicatesPipeline',
     'hebi.pipelines.MongoPipeline',
-    #'hebi.pipelines.JsonWriterPipeline',
 ]
 
 EXTENSIONS = {

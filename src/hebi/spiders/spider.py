@@ -24,7 +24,7 @@ class KanjiSpider(CrawlSpider):
         "http://ja.wikipedia.org/",
     ]
     rules = [
-            Rule(SgmlLinkExtractor(allow=()), follow=True),
+            #Rule(SgmlLinkExtractor(allow=()), follow=True),
             Rule(SgmlLinkExtractor(allow=()), callback='parse_item')
     ]
 
