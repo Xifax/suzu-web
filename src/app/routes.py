@@ -236,4 +236,7 @@ def test():
 
 @error(404)
 def error404(error):
-    return render('error', message='This is not the page you seek, knave!')
+    return render(
+            'error',
+            message=request.path[1:] + '?! This is not the page you seek, knave!'
+           )
