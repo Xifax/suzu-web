@@ -10,8 +10,8 @@ import sys
 from bottle import app, run
 
 # Application modules
-from src.middleware import CustomApp
-import src.routes
+from src.app.middleware import CustomApp
+import src.app.routes
 
 
 # Run application on port provided from cmd (heroku)

@@ -24,13 +24,15 @@ from bottle import (
 )
 
 # Application modules
-from src.models import Key
-from src.mongo import MongoOnHeroku
-from src.mongo import Mongo
-from src.language import Language
-from src.weblio import Weblio
-from src.mecab import MeCab
-from src.peon import Peon
+from src.db.models import Key
+from src.db.mongo import (
+        Mongo,
+        MongoOnHeroku
+)
+from src.api.language import Language
+from src.api.jp.weblio import Weblio
+from src.api.jp.mecab import MeCab
+from src.bin.peon import Peon
 
 ###############################################################################
 # Initializing framework, DB connection and paths
