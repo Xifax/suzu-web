@@ -18,6 +18,7 @@ from bottle import (
     get,
     route,
     static_file,
+    error,
     #validate,
     jinja2_template as render,
     Jinja2Template
@@ -233,6 +234,6 @@ def debug():
 def test():
     return render('load')
 
-#@error(404)
-#def error404(error):
-    #return 'Ooops'
+@error(404)
+def error404(error):
+    return render('error', message='This is not the page you seek, knave!')
