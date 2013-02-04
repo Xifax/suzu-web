@@ -30,12 +30,12 @@ kill:
 	ps aux | grep 'python suzu.py 8000' | head -1 | cut -d " " -f 3 | xargs kill
 
 compile:
-	bin/stylus -u nib -o media/css/ -c media/styl/
-	bin/coffee -o media/js/ -c media/coffee/
+	node_modules/stylus/bin/stylus -u nib -o media/css/ -c media/styl/
+	node_modules/coffee-script/bin/coffee -o media/js/ -c media/coffee/
 
 watch:
-	bin/stylus -u nib -o media/css/ -w media/styl/
-	bin/coffee -o media/js/ -w media/coffee/
+	node_modules/stylus/bin/stylus -u nib -o media/css/ -w media/styl/
+	node_modules/coffee-script/bin/coffee -o media/js/ -w media/coffee/
 
 minify:
 	echo 'not implemented yet'
