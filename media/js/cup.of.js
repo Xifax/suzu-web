@@ -12,4 +12,8 @@
     });
   });
 
+  $(window).scroll(function() {
+    return $('.fixed').css("top", Math.max(0, 20 - $(this).scrollTop()));
+  });
+
 }).call(this);

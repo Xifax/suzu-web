@@ -10,6 +10,7 @@ from random import choice
 from src.api.jp.mecab import MeCab
 from src.api.language import Language
 from src.app.config import languages
+from src.db.mongo import connectMongo
 from src.db.models import (
         Key,
         Fact,
@@ -21,11 +22,13 @@ class Peon:
 
     def __init__(self, db=None):
         if db:
-            # NB: actully, if it's connected, it should work
             self.db = db
         else:
-            # TODO: initialize|connect
-            pass
+            self.db = connectMongo()
+
+    def get(self, id, category='kanji'):
+        """Get item by its id and category"""
+        return Key.objects(id=id, category='kanji').first()
 
     def addItem(self, key):
         """Add pending item to DB"""

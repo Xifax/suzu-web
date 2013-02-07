@@ -6,3 +6,7 @@ reload = () ->
 $ ->
   $('.kanji').click ->
     location.reload()
+
+# Do not scroll those elements
+$(window).scroll ->
+    $('.fixed').css("top", Math.max(0, 20 - $(this).scrollTop()))

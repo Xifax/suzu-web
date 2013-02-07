@@ -8,6 +8,7 @@
 ###############################################################################
 
 import os
+from datetime import timedelta, date
 
 # Framework modules
 import bottle
@@ -54,7 +55,11 @@ db = connectMongo()
 @get('/')
 def index():
     """Main page with random kanji"""
-    return render('home', kanji=Peon(db).random())
+    lock = request.get_cookie('lock', secret='secret')
+    if lock:
+        return render('home', kanji=Peon(db).get(lock))
+    else:
+        return render('home', kanji=Peon(db).random())
 
 
 @route('/media/<filepath:path>')
@@ -184,6 +189,25 @@ def say_hello(name):
         return wz.Response('%s %s!' % (greet[language], name))
     else:
         raise wz.exceptions.NotAcceptable()
+
+@route('/lock')
+def lock():
+    """Lock|unlock kanji for today"""
+    if request.get_cookie('lock'):
+        response.delete_cookie('lock')
+        return {'result': 'unlocked'}
+    else:
+        # Set kanji for today
+        kanji_id = str(Peon(db).random().id)
+        next_day = date.today() + timedelta(days=1)
+        response.set_cookie(
+                'lock',
+                kanji_id,
+                secret='secret',
+                expires=next_day
+                )
+        return {'result': 'locked', 'id': kanji_id}
+
 
 
 @get('/debug')
