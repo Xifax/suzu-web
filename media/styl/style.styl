@@ -1,109 +1,17 @@
 @import 'nib'
 
-/* Mixins */
+@import 'mixins/funs'
+@import 'mixins/effects'
 
-// Nice looking shadow box
-box-shadow(args...)
-    -webkit-box-shadow args
-    -moz-box-shadow args
-    box-shadow args
-
-// Shadows for top or bottom of the page
-body-shadow(pos)
-    content ""
-    position fixed
-    if pos is 'top'
-        top -10px
-    else
-        bottom -10px
-    left 0
-    width 100%
-    height 10px
-    z-index 100
-    box-shadow 0px 0px 10px rgba(0,0,0,.8)
-
-// Center text in div
-center(w, h)
-    position: absolute
-    top: 50%
-    left: 50%
-    text-align: center
-    width: w
-    height: h
-    line-height: h
-    margin-left: -(@width / 2)
-    margin-top: -(@height / 2)
-
-// Draw a circle with radius, width and color
-circle(r, w, c)
-    border-radius: 50%
-    width: r
-    height: r
-    border: w double c;
-
-// Use image from patterns as background
-pattern(name)
-    background-image: url('../img/pattern/' + name + '.png')
-
-// Burning text effect
-burn()
-    color: #fff
-    text-shadow: 0px -1px 4px white,
-        0px -2px 10px yellow,
-        0px -10px 20px #ff8000,
-        0px -18px 40px red
-
-// Cloudy text
-cloud()
-    text-shadow: 0px 0px 10px rgba(255,255,255,0.6),
-        0px 0px 30px rgba(255,255,255,0.4),
-        0px 0px 50px rgba(255,255,255,0.3),
-        0px 0px 180px rgba(255,255,255,0.3)
-    color: rgba(255,255,255,0)
-
-// Neon text effect
-neon()
-    color: #fff
-    text-shadow: 0 0 5px #fff,
-        0 0 10px #fff,
-        0 0 15px #fff,
-        0 0 20px #ff2d95,
-        0 0 30px #ff2d95,
-        0 0 40px #ff2d95,
-        0 0 50px #ff2d95,
-        0 0 75px #ff2d95
-
-// 3D text
-perspective()
-    color: #fff
-    text-shadow: 0px 1px 0px #999,
-        0px 2px 0px #888,
-        0px 3px 0px #777,
-        0px 4px 0px #666,
-        0px 5px 0px #555,
-        0px 6px 0px #444,
-        0px 7px 0px #333,
-        0px 8px 7px #001135
-
-// Letterpress text effect
-letterpress()
-    text-shadow: 0 1px 0 #fff
-    color: #666
+@import 'elements/buttons'
+@import 'elements/toolbars'
 
 
-unselectable()
-    -moz-user-select: -moz-none
-    -khtml-user-select: none
-    -webkit-user-select: none
-
-
-
-/* Classes */
+/* Core elements */
 
 * {
     margin: 0;
 }
-
 
 // Page background
 html, body
@@ -116,13 +24,17 @@ body:before
 body:after
     body-shadow 'bottom'
 
+/* Core elements end */
+
 /* Title page */
+
+// Home page background
 .home
     height: 100%
 
     font-size: 20px
-    pattern('washi')
-
+    pattern('arches')
+    position: relative
 
 // Centerpiece of page (kanji, info, message and so on)
 .center-kanji
@@ -156,15 +68,21 @@ body:after
     burn()
     transition: all 0.7s ease-in-out
 
+/* Title page end */
+
 /* Error page */
+
+// Error page background
 .error
     height: 100%
     pattern('woven')
     font-size: 30px
 
+// Error message
 .center-error
     center(100%, 100px)
     pattern('white_tiles')
     letterpress()
     box-shadow 0px 0px 10px #fff
 
+/* Error page end */

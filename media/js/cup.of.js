@@ -6,14 +6,28 @@
     return location.reload();
   };
 
+  $(window).scroll(function() {
+    return $('.fixed').css("top", Math.max(0, 20 - $(this).scrollTop()));
+  });
+
   $(function() {
     return $('.kanji').click(function() {
       return location.reload();
     });
   });
 
-  $(window).scroll(function() {
-    return $('.fixed').css("top", Math.max(0, 20 - $(this).scrollTop()));
+  $(function() {
+    return $('.kanji').hover(function() {
+      $('.toolbar-top').slideToggle(300);
+      return $('.toolbar-bottom').slideToggle(300);
+    });
+  });
+
+  $(function() {
+    return $('.roll').click(function() {
+      $.get('/lock');
+      return reload();
+    });
   });
 
 }).call(this);

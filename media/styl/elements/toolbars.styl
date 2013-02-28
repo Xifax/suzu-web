@@ -1,0 +1,31 @@
+@import 'mixins/effects'
+/* Toolbars */
+
+.toolbar
+    position: fixed
+    margin: 0px auto
+    width: 100%
+    text-align: center
+    bottom: 0
+    pattern('escheresque')
+    overflow: hidden
+    height: 100px
+    display: none
+    /* Overflow toolbar */
+    //box-shadow 0px 0px 10px rgba(0,0,0,.8)
+    letterpress()
+    line-height: 100px
+
+.toolbar:hover
+    display: block
+
+.toolbar-top
+    @extends .toolbar
+    top: 0
+    /* Inset toolbar */
+    box-shadow inset 0px -10px 10px -10px rgba(0,0,0,.8)
+
+.toolbar-bottom
+    @extends .toolbar
+    bottom: 0
+    box-shadow inset 0px 10px 10px -10px rgba(0,0,0,.8)
