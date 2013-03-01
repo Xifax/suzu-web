@@ -20,20 +20,15 @@ class MeCab:
         self.url = ('http://chasen.org/~taku/software/mecapi/mecapi.cgi?'
                     'sentence=%s&response=%s&format=json')
         # NB: nothing is included, by default
-        self.options = [
-            #'surface',          # parts of the sentence
-            #'feature',          # inflection, baseform, pos
-            #'pos',              # part of speech
-            #'inflection',       # type and form of inflection
-            #'baseform',         # baseform of the word
-            #'pronounciation'    # word pronounciation
-        ]
-
+        self.options = []
         self.stats = {}
 
     def reading(self, sentence, hiragana=True):
-        """Get reading for provided sentence|word"""
-        self.includeReading()
+        """
+        Get reading for provided sentence|word
+        NB: for some rare words there may be no readings available!
+        """
+        self.include('pronounciation')
         info = self.parse(sentence)
         if info:
             kana = u''.join([
@@ -130,4 +125,20 @@ class MeCab:
         """Include baseform in response"""
         if 'baseform' not in self.options:
             self.options.append('baseform')
+        return self
+
+    def include(self, option):
+        """
+        Include specified option in response
+        Options available:
+            * 'surface',          : parts of the sentence
+            * 'feature',          : inflection, baseform, pos
+            * 'pos',              : part of speech
+            * 'inflection',       : type and form of inflection
+            * 'baseform',         : baseform of the word
+            * 'pronounciation'    : word pronounciation
+        TODO: use kwargs of arguments
+        """
+        if option not in self.options:
+            self.options.append(option)
         return self
