@@ -39,6 +39,18 @@ class Key(Document):
     # Times exported
     exported = IntField(default=0)
 
+    def reading(self):
+        try:
+            return self.fact.gloss.get_reading()
+        except AttributeError:
+            return ''
+
+    def usages(self):
+        try:
+            return self.fact.usages
+        except AttributeError:
+            return []
+
 
 class Gloss(Document):
     """Fact glossary"""
@@ -48,6 +60,9 @@ class Gloss(Document):
     readings = DictField()
     # Translations (independent from definitions)
     translations = ListField()
+
+    def get_reading(self):
+        return self.readings.get('default', '')
 
 
 class Example(Document):
@@ -81,6 +96,32 @@ class Fact(Document):
     # Omonyms (different meaning, same pronounsation and written form)
     omonyms = ListField(ReferenceField('self'))
 
+    def value(self):
+        try:
+            return self.key.value
+        except AttributeError:
+            return ''
+
+    def reading(self):
+        try:
+            return self.gloss.get_reading()
+        except AttributeError:
+            return ''
+
+    def emphasize(self, field, item):
+        try:
+            return field.replace(item, '<em>%s</em>' % item)
+        except AttributeError:
+            return ''
+
+    def translation(self):
+        try:
+            return (self.gloss.translations[0]
+                    if self.gloss.translations
+                    else '')
+        except AttributeError:
+            return ''
+
 
 class Stats(Document):
     """Request stats, traffic stats, failure stats and so on"""
@@ -96,3 +137,6 @@ class Stats(Document):
     logs = DictField()
     # Specific info
     info = DictField()
+
+# TODO: implement some utility methods for each of the models,
+# like, saving bi-directional entities and so on

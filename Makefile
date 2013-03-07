@@ -9,6 +9,9 @@ init: update
 test:
 	nosetests tests
 
+test-print:
+	nosetests tests --nocapture
+
 test-unit:
 	nosetests tests/unit
 

@@ -33,3 +33,7 @@ class TestMeCab:
                 assert reading == u''
             elif word == u'が':
                 assert reading == u''
+
+    def test_can_get_single_kanji_reading(self):
+        """Test that we can get single kanji reading"""
+        assert MeCab().reading(u'音') == u'おと'

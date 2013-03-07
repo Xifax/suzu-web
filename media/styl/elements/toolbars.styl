@@ -14,7 +14,6 @@
     /* Overflow toolbar */
     //box-shadow 0px 0px 10px rgba(0,0,0,.8)
     letterpress()
-    line-height: 100px
 
 .toolbar:hover
     display: block
@@ -25,7 +24,37 @@
     /* Inset toolbar */
     box-shadow inset 0px -10px 10px -10px rgba(0,0,0,.8)
 
+    /* Furigana fix */
+    /* TODO: may use completely different element for usages! */
+    line-height: 40px
+    font-size: 30px
+
+    /* TODO: prepare separate file for colors and sizes */
+    p
+        margin-top: 30px
+        font-size: 20px
+
+    ruby
+        margin-top: 15px
+        margin-left: 20px
+
+    ruby:hover
+        color: #1d95d1
+        cursor: pointer
+
+        em
+            color: #007cb9
+
+    em
+        color: #404040
+        font-style: normal
+
+
 .toolbar-bottom
     @extends .toolbar
     bottom: 0
     box-shadow inset 0px 10px 10px -10px rgba(0,0,0,.8)
+    line-height: 100px
+
+    .definition
+        display: none

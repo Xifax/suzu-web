@@ -57,16 +57,20 @@ body:after
     transition: all 0.7s ease-in-out
 
 // Circle & kanji on hover
-.circle:hover
+.circle:hover, .circle-locked
     cursor: pointer
     background: black
     opacity: 0.7
     border: 4px double #fff
     transition: all 0.4s ease-in-out
 
-.kanji:hover
+.kanji:hover, .kanji-locked
     burn()
     transition: all 0.7s ease-in-out
+
+.locked
+    color: #007cb9
+
 
 /* Title page end */
 

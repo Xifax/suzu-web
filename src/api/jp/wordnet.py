@@ -85,6 +85,9 @@ class Wordnet:
                 (int(row), word) for row, word
                 in results['data'].iteritems()
             )).pop())
+        # otherwise return empty list
+        else:
+            return []
 
 
     def complete(self, term):
@@ -106,6 +109,9 @@ class Wordnet:
                         in results['data'].iteritems()
                     )).pop()
                     if len(item['lemma']) > 1]
+        # otherwise return empty list
+        else:
+            return []
 
 
     def browse(self, word):

@@ -1,3 +1,6 @@
+# States
+locked = false
+
 # Reload page
 reload = () ->
   location.reload()
@@ -12,10 +15,18 @@ toggle = (divs...) ->
 
 ## Home page ##
 
-# Reload page, when clicking on kanji
-$ ->
-  $('.kanji').click ->
-    location.reload()
+# Lock toolbars, when clicking on kanji
+$ -> $('.circle').mousedown( (event) ->
+    switch event.which
+        # left click
+        when 1
+            locked = not locked
+            $('.kanji').toggleClass('kanji-locked')
+            $('.circle').toggleClass('circle-locked')
+        # scroller click
+        when 2
+            location.reload()
+)
 
 # Toggle top|bottom divs on kanji hover
 $ -> $('.kanji').mouseover ->
@@ -23,12 +34,21 @@ $ -> $('.kanji').mouseover ->
             toggle '.toolbar-top', '.toolbar-bottom'
 
 $ -> $('.kanji').mouseout ->
-        if $('.toolbar-top').css('display') == 'block'
+        if $('.toolbar-top').css('display') == 'block' and not locked
             toggle '.toolbar-top', '.toolbar-bottom'
 
 # Roll kanji for today
 $ -> $('.roll').click ->
         $.get('/lock')
         reload()
+
+# Update definition on usage hover
+$ -> $('ruby').hover ->
+    #$('.help').fadeToggle(150)
+    #$('#' + this.id + '.definition').fadeToggle(300)
+    $('.help').toggle()
+    $('#' + this.id + '.definition').toggle()
+
+# TODO: Show similar words, when clicking on kanji usage
 
 ## Home page end ##

@@ -12,13 +12,39 @@
             </div>
         </div>
 
-
         <div class="toolbar-top">
-            Words with this kanji go here
+            <!-- Kanji compounds and usages -->
+            {% for usage in kanji.usages() %}
+                <ruby id={{ usage.id }}>
+                    <rb>
+                    {{ usage.emphasize(usage.value(), kanji.value) }}
+                    </rb>
+                    <rp>/</rp>
+                    <rt>
+                    {{ usage.emphasize(usage.reading(), kanji.reading()) }}
+                    </rt>
+                    <rp>/</rp>
+                </ruby>
+            {% endfor %}
+            {% if(not kanji.usages()) %}
+                <p>No usages found</p>
+            {% endif %}
         </div>
 
         <div class="toolbar-bottom">
-            Thesaurus definitions go here
+            <div class="help">
+                Click on kanji to toggle toolbar lock.
+                Mouse over kanji usage to display definition.
+                Middle click on kanji to load random kanji.
+            </div>
+
+            <!-- Definitions for all of the displayed usages -->
+            {% for usage in kanji.usages() %}
+                <div id={{ usage.id }} class="definition">
+                    {{ usage.translation() }}
+                </div>
+            {% endfor %}
+
 
             <div style="display: none">
                 <a class='toggle-button' href='#'>Toggle!</a>

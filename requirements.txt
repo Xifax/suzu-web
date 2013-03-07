@@ -36,3 +36,5 @@ lxml==2.3.6
 jcconv==0.1.2
 # Crawl thy web
 Scrapy==0.16.3
+# Cli tool
+argh==0.23.0
