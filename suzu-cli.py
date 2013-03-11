@@ -20,11 +20,12 @@ def crawl():
     #call("PATH=$PATH:$HOME/bin")
     #call("cd src; ../bin/scrapy runspider hebi/spiders/spider.py", shell=True)
 
-@arg('category', help='Item category (e.g., kanji)')
-def prepare_usages(category):
+@arg('--category', default='kanji', help='Item category (e.g., kanji)')
+@arg('--limit', default=100, help='Process no more than')
+def prepare_usages(category, limit):
     """Generate usages for unprocessed items"""
     peon = Peon()
-    peon.process(category)
+    peon.process(category, limit)
 
 @arg('category', help='Item category (e.g., kanji)')
 def get_random(category):

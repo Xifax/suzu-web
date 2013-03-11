@@ -112,13 +112,15 @@ class Peon:
     def quickLookup(self, key):
         pass
 
-    def process(self, category = 'kanji'):
+    def process(self, category = 'kanji', limit = 100):
         """Process all new & unprocessed kanji keys"""
         wn = Wordnet()
         mc = MeCab()
         # 0. Find unprocessed kanji key
         try:
-            for key in Key.objects(category=category, status='new'):
+            for key in Key.objects(
+                    category=category, status='new'
+                ).timeout(False).limit(limit):
 
                 print 'Processing ', key.value
 
@@ -184,13 +186,14 @@ class Peon:
                 #7. Save key fact and corresponding key (bi-directional link)
                 key_fact.save()
                 key.fact = key_fact
-                key.status = 'processed'
+                if len(key_fact.usages) > 0:
+                    key.status = 'processed'
                 key.save()
 
                 print 'Total usages: ', len(key.usages())
                 print '----------------'
-        except OperationFailure:
-            print 'There was an error querying mongo db!'
+        except OperationFailure as e:
+            print 'There was an error querying mongo db: %s' % e
 
 
     def random(self, category = 'kanji'):

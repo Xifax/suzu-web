@@ -1,4 +1,5 @@
 # States
+# TODO: store in session -> get using ajax -> set on page load
 locked = false
 
 # Reload page
@@ -21,6 +22,7 @@ $ -> $('.circle').mousedown( (event) ->
         # left click
         when 1
             locked = not locked
+            # TODO: set session variable
             $('.kanji').toggleClass('kanji-locked')
             $('.circle').toggleClass('circle-locked')
         # scroller click
