@@ -40,16 +40,20 @@ class Key(Document):
     exported = IntField(default=0)
 
     def reading(self):
+        """Get default reading"""
         try:
             return self.fact.gloss.get_reading()
         except AttributeError:
             return ''
 
     def usages(self):
-        try:
-            return self.fact.usages
-        except AttributeError:
-            return []
+        """Get this item usages (compounds, examples)"""
+        return getattr(self.fact, 'usages', [])
+
+    def mark_processed(self):
+        """Mark key as processed"""
+        self.status = 'processed'
+        return self.save()
 
 
 class Gloss(Document):
@@ -62,6 +66,7 @@ class Gloss(Document):
     translations = ListField()
 
     def get_reading(self):
+        """Get default reading"""
         return self.readings.get('default', '')
 
 
@@ -97,24 +102,22 @@ class Fact(Document):
     omonyms = ListField(ReferenceField('self'))
 
     def value(self):
-        try:
-            return self.key.value
-        except AttributeError:
-            return ''
+        """Get value"""
+        return getattr(self.key, 'value', '')
 
     def reading(self):
+        """Get reading"""
         try:
             return self.gloss.get_reading()
         except AttributeError:
             return ''
 
     def emphasize(self, field, item):
-        try:
-            return field.replace(item, '<em>%s</em>' % item)
-        except AttributeError:
-            return ''
+        """Emphasize specified field"""
+        return field.replace(item, '<em>%s</em>' % item)
 
     def translation(self):
+        """Get one, most common translation"""
         try:
             return (self.gloss.translations[0]
                     if self.gloss.translations
