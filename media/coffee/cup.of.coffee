@@ -1,6 +1,7 @@
-# States
-# TODO: store in session -> get using ajax -> set on page load
+## Global states ##
 locked = false
+
+## Utility methods ##
 
 # Reload page
 reload = () ->
@@ -11,10 +12,27 @@ $(window).scroll ->
     $('.fixed').css("top", Math.max(0, 20 - $(this).scrollTop()))
 
 # Toggle divs
-toggle = (divs...) ->
+slideToggle = (divs...) ->
     $(div).slideToggle(300) for div in divs
 
+toggle = (divs...) ->
+    $(div).toggle() for div in divs
+
+# Lock|unlock items
+lock = (items...) ->
+    $('.' + item).toggleClass(item + '-locked') for item in items
+
 ## Home page ##
+
+# Check toolbars status on page load
+$ -> $.ajax '/toggled',
+    type: 'GET'
+    dataType: 'json'
+    success: (data, textStatus, jqXHR) ->
+        locked = data.status
+        if locked
+            toggle '.toolbar-top', '.toolbar-bottom'
+            lock 'kanji', 'circle'
 
 # Lock toolbars, when clicking on kanji
 $ -> $('.circle').mousedown( (event) ->
@@ -22,9 +40,8 @@ $ -> $('.circle').mousedown( (event) ->
         # left click
         when 1
             locked = not locked
-            # TODO: set session variable
-            $('.kanji').toggleClass('kanji-locked')
-            $('.circle').toggleClass('circle-locked')
+            $.ajax '/toggle', type: 'GET'
+            lock 'kanji', 'circle'
         # scroller click
         when 2
             location.reload()
@@ -33,11 +50,11 @@ $ -> $('.circle').mousedown( (event) ->
 # Toggle top|bottom divs on kanji hover
 $ -> $('.kanji').mouseover ->
         if $('.toolbar-top').css('display') == 'none'
-            toggle '.toolbar-top', '.toolbar-bottom'
+            slideToggle '.toolbar-top', '.toolbar-bottom'
 
 $ -> $('.kanji').mouseout ->
         if $('.toolbar-top').css('display') == 'block' and not locked
-            toggle '.toolbar-top', '.toolbar-bottom'
+            slideToggle '.toolbar-top', '.toolbar-bottom'
 
 # Roll kanji for today
 $ -> $('.roll').click ->

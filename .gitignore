@@ -8,3 +8,4 @@ node_modules
 .npm-debug.log
 media/styl/*.css
 media/coffee/*.js
+session

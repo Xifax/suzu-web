@@ -6,8 +6,9 @@
     Implements custom bottle application with different middleware(s)
 """
 
+from beaker.middleware import SessionMiddleware
 
-class StripPathMiddleware(object):
+class StripPath(object):
 
     def __init__(self, app):
         self.app = app
@@ -17,7 +18,17 @@ class StripPathMiddleware(object):
         return self.app(e, h)
 
 
-class CustomApp(StripPathMiddleware):
+class Session(StripPath):
+
+    def __init__(self, app):
+        self.app = SessionMiddleware(app, {
+            'session.type': 'file',
+            'session.data_dir': './session/',
+            'session.auto': True,
+        })
+
+
+class CustomApp(Session):
 
     def __init__(self, app):
         super(CustomApp, self).__init__(app)

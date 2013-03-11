@@ -56,6 +56,7 @@ db = connectMongo()
 def index():
     """Main page with random kanji"""
     lock = request.get_cookie('lock', secret='secret')
+    #session = request.environ.get('beaker.session')
     if lock:
         return render('home', kanji=Peon(db).get(lock))
     else:
@@ -193,6 +194,7 @@ def say_hello(name):
 @route('/lock')
 def lock():
     """Lock|unlock kanji for today"""
+    session = request.environ.get('beaker.session')
     if request.get_cookie('lock'):
         response.delete_cookie('lock')
         return {'result': 'unlocked'}
@@ -208,6 +210,21 @@ def lock():
                 )
         return {'result': 'locked', 'id': kanji_id}
 
+
+@route('/toggle')
+def toggle():
+    """Toggle toolbar status on page load"""
+    session = request.environ.get('beaker.session')
+    session['toggled'] = not session.get('toggled', False)
+    session.save()
+    return {'status' : session['toggled']}
+
+
+@route('/toggled')
+def toggled():
+    """Check toolbar status status"""
+    session = request.environ.get('beaker.session')
+    return {'status' : session.get('toggled', False)}
 
 
 @get('/debug')
@@ -234,7 +251,11 @@ def debug():
 
 @get('/test')
 def test():
-    return render('load')
+    s = request.environ.get('beaker.session')
+    s['test'] = s.get('test', 0) + 1
+    s.save()
+    return 'Test counter: %d' % s['test']
+    #return render('load')
 
 
 @error(404)
