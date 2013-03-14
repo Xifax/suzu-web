@@ -9,6 +9,7 @@ from scrapy.contrib.spiders import (
         Rule
 )
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
+from scrapy.exceptions import CloseSpider
 from scrapy.selector import HtmlXPathSelector
 from bs4 import BeautifulSoup
 
@@ -28,7 +29,14 @@ class KanjiSpider(CrawlSpider):
             Rule(SgmlLinkExtractor(allow=()), callback='parse_item')
     ]
 
+    def __init__(self, *args, **kwargs):
+        super(KanjiSpider, self).__init__(*args, **kwargs)
+        self.limit = kwargs.get('limit')
+        self.stop_now = False
+
     def parse_item(self, response):
+        if self.stop_now:
+            raise CloseSpider(reason='Limit reached')
         # TODO: if parser rate of found items is not high -> shut down
         # Parse the page
         hxs = HtmlXPathSelector(response)

@@ -17,12 +17,17 @@ class DuplicatesPipeline(object):
     def __init__(self):
         connectMongo()
         self.ids_seen = set()
+        self.total_items = 0
 
     def process_item(self, item, spider):
         # Check, if such items is already in DB
         if len(Key.objects(value=item['character'])) == 1:
             raise DropItem("Duplicate item found: %s" % item)
         else:
+            self.total_items += 1
+            # Check, if total items count is over the limit
+            if self.total_items > int(spider.limit):
+                spider.stop_now = True
             return item
 
 class JsonWriterPipeline(object):

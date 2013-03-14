@@ -14,11 +14,10 @@ from argh import (
 
 from src.run.peon import Peon
 
-def crawl():
+@arg('--limit', default=10, help='How mani new Kanji to add')
+def crawl(limit):
     """Launch Scapy spider to crawl web and gather unique kanji"""
-    call("cd src; scrapy runspider hebi/spiders/spider.py", shell=True)
-    #call("PATH=$PATH:$HOME/bin")
-    #call("cd src; ../bin/scrapy runspider hebi/spiders/spider.py", shell=True)
+    call("cd src; scrapy crawl hebi -a limit=%s" % limit, shell=True)
 
 @arg('--category', default='kanji', help='Item category (e.g., kanji)')
 @arg('--limit', default=100, help='Process no more than')
