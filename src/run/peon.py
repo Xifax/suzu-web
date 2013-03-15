@@ -16,10 +16,10 @@ from src.api.language import Language
 from src.app.config import languages
 from src.db.mongo import connectMongo
 from src.db.models import (
-        Key,
-        Fact,
-        Gloss,
-        Example,
+    Key,
+    Fact,
+    Gloss,
+    Example,
 )
 
 
@@ -33,7 +33,12 @@ class Peon:
 
     def get(self, id, category='kanji'):
         """Get item by its id and category"""
+        " TODO: use objects.get() instead of first"
         return Key.objects(id=id, category='kanji').first()
+
+    def get_item(self, value, category='kanji'):
+        """Get item by its id and category"""
+        return Key.objects(value=value, category='kanji').first()
 
     def addItem(self, key):
         """Add pending item to DB"""
@@ -194,7 +199,6 @@ class Peon:
                 print '----------------'
         except OperationFailure as e:
             print 'There was an error querying mongo db: %s' % e
-
 
     def random(self, category = 'kanji'):
         """Get random item from collection"""

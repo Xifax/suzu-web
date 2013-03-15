@@ -174,6 +174,13 @@ def get_item(key):
     }
 
 
+@route('/view/:key')
+def view_item(key):
+    """ View existing kanji """
+    kanji = unicode(key, 'utf-8')
+    return render('home', kanji=Peon(db).get_item(kanji))
+
+
 @route('/list')
 def list_items():
     """ List all items """

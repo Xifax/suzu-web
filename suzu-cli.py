@@ -17,6 +17,7 @@ from src.run.peon import Peon
 @arg('--limit', default=10, help='How mani new Kanji to add')
 def crawl(limit):
     """Launch Scapy spider to crawl web and gather unique kanji"""
+-   call("PATH=$PATH:$HOME/bin")
     call("cd src; scrapy crawl hebi -a limit=%s" % limit, shell=True)
 
 @arg('--category', default='kanji', help='Item category (e.g., kanji)')
