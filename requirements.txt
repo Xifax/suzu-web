@@ -12,6 +12,8 @@ bottle-werkzeug==0.1
 Beaker==1.6.4
 # MongoDB ORM
 mongoengine==0.6.20
+# Redis
+redis==2.7.2
 # Templater
 Jinja2==2.6
 # Static assets plugin for Jinja
