@@ -100,8 +100,22 @@
 
   $(function() {
     return $('ruby').hover(function() {
-      $('.rads').toggle();
-      return $('#' + this.id + '.definition').toggle();
+      $('.rads').fadeToggle(100);
+      return $('#' + this.id + '.definition').fadeToggle(100);
+    });
+  });
+
+  $(function() {
+    return $('ruby').click(function() {
+      var term;
+      term = $(this).find('rb').text().trim();
+      return $.ajax('/examples/' + term, {
+        type: 'GET',
+        dataType: 'json',
+        success: function(data, textStatus, jqXHR) {
+          return console.log(data.examples);
+        }
+      });
     });
   });
 

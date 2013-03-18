@@ -3,6 +3,7 @@
 
 """
     Encompasses all application tasks
+    TODO: refactor method camel case naming!
 """
 
 from random import choice
@@ -117,15 +118,15 @@ class Peon:
     def quickLookup(self, key):
         pass
 
-    def process(self, category = 'kanji', limit = 100):
+    def process(self, category='kanji', limit=100):
         """Process all new & unprocessed kanji keys"""
         wn = Wordnet()
         mc = MeCab()
         # 0. Find unprocessed kanji key
         try:
             for key in Key.objects(
-                    category=category, status='new'
-                ).timeout(False).limit(limit):
+                category=category, status='new'
+            ).timeout(False).limit(limit):
 
                 print 'Processing ', key.value
 
@@ -137,7 +138,6 @@ class Peon:
 
                 # 0b. Initialize corresponding Fact
                 key_fact = Fact(key=key, gloss=key_gloss)
-
 
                 # TODO: If no words found -> lookup in weblio?
                 # eg: http://www.weblio.jp/content_find/contains/0/%E6%AA%8E
@@ -172,9 +172,9 @@ class Peon:
 
                         # 5b. Create corresponding key & fact
                         new_key = Key(
-                                value=word,
-                                category='word',
-                                tags=['minor']
+                            value=word,
+                            category='word',
+                            tags=['minor']
                         ).save()
                         fact = Fact(key=new_key, gloss=gloss).save()
                         new_key.fact = fact
@@ -200,7 +200,7 @@ class Peon:
         except OperationFailure as e:
             print 'There was an error querying mongo db: %s' % e
 
-    def random(self, category = 'kanji'):
+    def random(self, category='kanji'):
         """Get random item from collection"""
         try:
             return choice(Key.objects(category=category))
@@ -208,3 +208,22 @@ class Peon:
             # No item found in this category
             return Key(value=u'')
 
+    def random_with_usages(self, category='kanji'):
+        """
+        Get random item, only if some usages provided
+        NB: takes some time to compelete due to 'dumb' logic
+        """
+        # Number of items of such category in DB
+        tries = len(Key.objects(category=category))
+
+        while True:
+            key = choice(Key.objects(category=category))
+            tries -= 1
+            if len(key.usages()) > 1 or tries <= 0:
+                break
+
+        # No item found in this category
+        if tries <= 0:
+            return Key(value=u'')
+        else:
+            return key

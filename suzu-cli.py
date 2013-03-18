@@ -43,12 +43,18 @@ def prepare_usages(category, limit):
     peon.process(category, limit)
 
 
-@arg('category', help='Item category (e.g., kanji)')
-def get_random(category):
+@arg('--category', default='kanji', help='Item category (e.g., kanji)')
+@arg('--with-usages', default=False, help='Get items with usages')
+def get_random(args):
     """Get random item from db"""
     peon = Peon()
-    item = peon.random(category)
-    print item.value
+    if not args.with_usages:
+        item = peon.random(args.category)
+    else:
+        item = peon.random_with_usages(args.category)
+    print item.value, '\nUsages:'
+    for usage in item.usages():
+        print usage.value()
 
 
 if __name__ == '__main__':

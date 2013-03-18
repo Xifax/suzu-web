@@ -122,6 +122,14 @@ def lookup_item(key):
         return {'result': 'error', 'reason': 'Unsupported language'}
 
 
+@route('/examples/:term')
+def get_examples(term):
+    """Lookup examples for item in Weblio"""
+    term = unicode(term, 'utf-8')
+    examples = Weblio().examples(term)
+    return {'examples': examples}
+
+
 @route('/add/:key')
 def add_item(key):
     """Add new item"""
@@ -187,7 +195,7 @@ def view_item(key):
     """ View existing kanji """
     kanji = unicode(key, 'utf-8')
     # TODO: test if such kanji exists
-    radikals = store.get_radikals(kanji.value)
+    radikals = store.get_radikals(kanji)
     return render('home', kanji=Peon(db).get_item(kanji), radikals=radikals)
 
 

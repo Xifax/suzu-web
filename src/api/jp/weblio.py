@@ -38,13 +38,20 @@ class Weblio:
         """Fetches translations (jp-en) for different use-cases"""
         pass
 
-    def examples(self, term, number=2, portion=4):
-        """Fetches examples"""
+    def examples(self, term, number=4, portion=4, tuples=False):
+        """
+        Fetches examples from Weblio
+        :param term:    word or phrase to lookup
+        :param number:  number of examples to fetch
+        :param portion: portion of examples to use (e.g., 1/2 -> from the middle)
+        :returns:       list of touples (example, translation)
+        """
         data = self.process(self.examples_url, term)
         examples = []
         if data:
             #for example in data.find_all('div', 'qotC')[-number:]:
             total = data.find_all('div', 'qotC')
+            print len(total)
             n = len(total) / portion
             # Let's take examples from the middle (TODO: golden ratio?)
             for example in total[n: n + number]:
@@ -54,7 +61,11 @@ class Weblio:
                 sentence = example.contents[0].getText()
                 source = example.contents[1].span.getText()
                 translation = example.contents[1].getText().replace(source, '')
-                examples.append((sentence, translation))
+                translation = self.remove_comments(translation, '<!--')
+                if tuples:
+                    examples.append((sentence, translation))
+                else:
+                    examples.append({sentence: translation})
 
         return examples
 
@@ -64,6 +75,12 @@ class Weblio:
             return BeautifulSoup(requests.get(url % term).text, 'lxml')
         except RequestException:
             return None
+
+    def remove_comments(self, line, sep):
+        """Trims comments from string"""
+        for s in sep:
+            line = line.split(s)[0]
+        return line.strip()
 
 
 def local_run():

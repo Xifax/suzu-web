@@ -64,9 +64,16 @@ $ -> $('.roll').click ->
 # Update definition on usage hover
 $ -> $('ruby').hover ->
     #$('.help').fadeToggle(150)
-    $('.rads').toggle()
-    $('#' + this.id + '.definition').toggle()
+    $('.rads').fadeToggle(100)
+    $('#' + this.id + '.definition').fadeToggle(100)
 
-# TODO: Show similar words, when clicking on kanji usage
+# Lookup examples in weblio on click
+$ -> $('ruby').click ->
+    term = $(this).find('rb').text().trim()
+    $.ajax '/examples/' + term,
+        type: 'GET'
+        dataType: 'json'
+        success: (data, textStatus, jqXHR) ->
+            console.log(data.examples)
 
 ## Home page end ##
