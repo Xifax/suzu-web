@@ -178,6 +178,7 @@ def get_item(key):
 def view_item(key):
     """ View existing kanji """
     kanji = unicode(key, 'utf-8')
+    # TODO: test if such kanji exists
     return render('home', kanji=Peon(db).get_item(kanji))
 
 
