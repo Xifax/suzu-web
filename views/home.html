@@ -4,6 +4,7 @@
 
     <div class="home">
 
+        <!-- Kanji itself -->
         <div class="center-kanji">
             <div class="circle">
                 <div class="kanji">
@@ -26,16 +27,25 @@
                     <rp>/</rp>
                 </ruby>
             {% endfor %}
+
             {% if(not kanji.usages()) %}
                 <p>No usages found</p>
             {% endif %}
         </div>
 
         <div class="toolbar-bottom">
-            <div class="help">
+            <!-- Page info -->
+            <div class="help" style="display:none">
                 Click on kanji to toggle toolbar lock.
                 Mouse over kanji usage to display definition.
                 Middle click on kanji to load random kanji.
+            </div>
+
+            <!-- Radikals for kanji -->
+            <div class="rads">
+                {% for rad in radikals %}
+                <span class="rad">{{ rad }}</span>
+                {% endfor %}
             </div>
 
             <!-- Definitions for all of the displayed usages -->
@@ -51,11 +61,13 @@
                 <a class='toggle-button' href='#'>Roll!</a>
                 <a class='toggle-button' href='#'>Info!</a>
             </div>
+
             <ul class="nav" style="display: none"> 
               <li><a href="#" class="info">Info</a></li> 
               <li><a href="#" class="roll">Roll</a></li> 
               <li><a href="#" class="find">Find</a></li> 
             </ul> 
+
         </div>
 
     </div>

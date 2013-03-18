@@ -8,6 +8,7 @@
 import requests
 from requests import RequestException
 
+
 class Kradfile:
 
     def __init__(self):
@@ -28,9 +29,11 @@ class Kradfile:
                 continue
 
             kanji, radikals = line.split(':')
-            # TODO: check unicode conversion for radikals and kanji
-            results[kanji.strip()] = [rad for rad in radikals.split(' ')
-                    if rad != '']
+            results[kanji.strip()] = [
+                unicode(rad, 'utf-8') for rad
+                in radikals.split(' ')
+                if rad != ''
+            ]
 
         return results
 
@@ -39,4 +42,3 @@ if __name__ == '__main__':
     results = Kradfile().prepare()
     print len(results)
     print results.popitem()
-

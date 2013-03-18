@@ -10,5 +10,5 @@ class TestRedis:
         """Test that we can process kradfile"""
         r = redis.StrictRedis(host='localhost', port=6379, db=0)
         red = Storage(r)
-        assert ['一', '言', '口', '五'] == red.get_radikals(u'語')
+        assert [u'一', u'言', u'口', u'五'] == red.get_radikals(u'語')
 

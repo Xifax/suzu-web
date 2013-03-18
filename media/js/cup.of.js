@@ -19,7 +19,7 @@
     _results = [];
     for (_i = 0, _len = divs.length; _i < _len; _i++) {
       div = divs[_i];
-      _results.push($(div).slideToggle(300));
+      _results.push($(div).slideToggle(150));
     }
     return _results;
   };

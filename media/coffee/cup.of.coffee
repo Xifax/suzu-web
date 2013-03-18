@@ -13,7 +13,7 @@ $(window).scroll ->
 
 # Toggle divs
 slideToggle = (divs...) ->
-    $(div).slideToggle(300) for div in divs
+    $(div).slideToggle(150) for div in divs
 
 toggle = (divs...) ->
     $(div).toggle() for div in divs

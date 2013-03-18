@@ -26,6 +26,7 @@ from bottle import (
 # Application modules
 from src.db.models import Key
 from src.db.mongo import connectMongo
+from src.db.storage import Storage
 
 from src.api.language import Language
 from src.api.jp.weblio import Weblio
@@ -46,6 +47,8 @@ req = wz.request
 
 # Initialize MongoDB
 db = connectMongo()
+# Initialize Redis
+store = Storage()
 
 ###############################################################################
 # Describing route handlers
@@ -57,10 +60,15 @@ def index():
     """Main page with random kanji"""
     lock = request.get_cookie('lock', secret='secret')
     #session = request.environ.get('beaker.session')
+
     if lock:
-        return render('home', kanji=Peon(db).get(lock))
+        kanji = Peon(db).get(lock)
     else:
-        return render('home', kanji=Peon(db).random())
+        kanji = Peon(db).random()
+
+    radikals = store.get_radikals(kanji.value)
+
+    return render('home', kanji=kanji, radikals=radikals)
 
 
 @route('/media/<filepath:path>')
@@ -179,7 +187,8 @@ def view_item(key):
     """ View existing kanji """
     kanji = unicode(key, 'utf-8')
     # TODO: test if such kanji exists
-    return render('home', kanji=Peon(db).get_item(kanji))
+    radikals = store.get_radikals(kanji.value)
+    return render('home', kanji=Peon(db).get_item(kanji), radikals=radikals)
 
 
 @route('/list')
@@ -199,10 +208,10 @@ def say_hello(name):
     else:
         raise wz.exceptions.NotAcceptable()
 
+
 @route('/lock')
 def lock():
     """Lock|unlock kanji for today"""
-    session = request.environ.get('beaker.session')
     if request.get_cookie('lock'):
         response.delete_cookie('lock')
         return {'result': 'unlocked'}
@@ -211,11 +220,11 @@ def lock():
         kanji_id = str(Peon(db).random().id)
         next_day = date.today() + timedelta(days=1)
         response.set_cookie(
-                'lock',
-                kanji_id,
-                secret='secret',
-                expires=next_day
-                )
+            'lock',
+            kanji_id,
+            secret='secret',
+            expires=next_day
+        )
         return {'result': 'locked', 'id': kanji_id}
 
 
@@ -225,14 +234,14 @@ def toggle():
     session = request.environ.get('beaker.session')
     session['toggled'] = not session.get('toggled', False)
     session.save()
-    return {'status' : session['toggled']}
+    return {'status': session['toggled']}
 
 
 @route('/toggled')
 def toggled():
     """Check toolbar status status"""
     session = request.environ.get('beaker.session')
-    return {'status' : session.get('toggled', False)}
+    return {'status': session.get('toggled', False)}
 
 
 @get('/debug')
@@ -270,6 +279,6 @@ def test():
 def error404(error):
     """Display insightful message"""
     return render(
-            'error',
-            message=request.path[1:] + '?! This is not the page you seek, knave!'
-           )
+        'error',
+        message=request.path[1:] + '?! This is not the page you seek, knave!'
+    )
