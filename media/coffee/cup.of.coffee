@@ -64,8 +64,7 @@ $ -> $('.roll').click ->
 # Update definition on usage hover
 $ -> $('ruby').hover ->
     #$('.help').fadeToggle(150)
-    #$('#' + this.id + '.definition').fadeToggle(300)
-    $('.help').toggle()
+    $('.rads').toggle()
     $('#' + this.id + '.definition').toggle()
 
 # TODO: Show similar words, when clicking on kanji usage

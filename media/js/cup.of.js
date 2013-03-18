@@ -100,7 +100,7 @@
 
   $(function() {
     return $('ruby').hover(function() {
-      $('.help').toggle();
+      $('.rads').toggle();
       return $('#' + this.id + '.definition').toggle();
     });
   });

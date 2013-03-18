@@ -42,9 +42,7 @@ class Storage:
             # Prepare radikals
             self.prepare_radikals()
         # Get radikals for kanji
-        return pickle.loads(self.r.get(kanji))
-
-if __name__ == '__main__':
-    red = Storage()
-    for rad in red.get_radikals(u'語'):
-        print rad
+        try:
+            return pickle.loads(self.r.get(kanji))
+        except TypeError:
+            return []

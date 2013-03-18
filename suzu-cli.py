@@ -13,6 +13,19 @@ from argh import (
 )
 
 from src.run.peon import Peon
+from src.db.storage import Storage
+
+
+def prepare_radikals():
+    """Prepare radikal decomposition data"""
+    Storage().prepare_radikals()
+
+
+@arg('kanji', help='Kanji to lookup')
+def get_radikals(kanji):
+    """Get radikal decomposition for provided kanji"""
+    for rad in Storage().get_radikals(kanji):
+        print rad
 
 
 @arg('--limit', default=10, help='How mani new Kanji to add')
@@ -40,5 +53,7 @@ def get_random(category):
 
 if __name__ == '__main__':
     parser = ArghParser()
-    parser.add_commands([prepare_usages, get_random, crawl])
+    parser.add_commands([
+        prepare_usages, prepare_radikals, get_random, get_radikals, crawl
+    ])
     parser.dispatch()
