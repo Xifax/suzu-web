@@ -30,6 +30,7 @@
     line-height: 40px
     /* TODO: fix display in Chrome browser */
     font-size: 30px
+    font-family: 'IPAMincho','TakaoExMincho'
 
     /* TODO: prepare separate file for colors and sizes */
     p
@@ -41,11 +42,11 @@
         margin-left: 20px
 
     ruby:hover
-        color: #1d95d1
+        color: #1D95D1
         cursor: pointer
 
         em
-            color: #007cb9
+            color: #007CB9
 
     em
         color: #404040
@@ -63,7 +64,63 @@
 
     .rads
         font-size: 30px
+        font-family: 'IPAMincho','TakaoExMincho'
 
         .rad:hover
-            color: #1d95d1
+            color: #1D95D1
             cursor: pointer
+
+.toolbar-side
+    background: black
+    opacity: 0.7
+    border: 4px double #fff
+    border-radius: 6px
+    position: fixed
+    overflow: hidden
+    box-shadow 0px 0px 10px rgba(0,0,0,.8)
+
+    color: white
+
+    margin: 0px auto
+    //top: 300px
+    //width: 550px
+    //height: 320px
+    top: 270px
+    width: 550px
+    height: 390px
+
+    display: none
+
+    font-family: 'IPAMincho','TakaoExMincho'
+
+    em
+        //neon()
+        neon()
+        font-style: normal
+        //font-weight: bold
+
+.toolbar-right
+    @extends .toolbar-side
+
+    right: -10px
+
+    dl
+        vertical-align: middle
+
+    dt
+        font-size: 23px
+        font-weight: normal
+        margin: 10px 2px 10px 10px
+        line-height: 25px
+
+    dd
+        color: #ADBACC
+        font-size: 18px
+        margin-bottom: 10px
+        margin-left: 20px
+
+.toolbar-left
+    @extends .toolbar-side
+
+    left: -10px
+

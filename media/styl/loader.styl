@@ -1,16 +1,37 @@
+@import 'mixins/effects'
+
 .loader-wrapper
   position: absolute
   top: 47%
   left: 48%
 
+.loader
+    position: absolute
+    left: 3%
+    //right: 3%
+    top: 1%
+    z-index:1000
+    display: none
+
+.message
+    letterpress()
+    position: absolute
+    line-height: 80px
+    left: 95px
+    top: 0px
+
 base-circle(radius)
   background-color: rgba(0,0,0,0)
-  border: 5px solid rgba(0,183,229,0.9)
+  //border: 5px solid rgba(0,183,229,0.9)
+  border: 5px solid #1d95d1
+  //border: 5px solid #666
   opacity: .9
   border-right: 5px solid rgba(0,0,0,0)
   border-left: 5px solid rgba(0,0,0,0)
   border-radius: 50px
-  box-shadow: 0 0 35px #2187e7
+  //box-shadow: 0 0 35px #2187E7
+  box-shadow: 0 0 35px #007CB9
+  //box-shadow: 0 0 35px #404040
   width: radius
   height: radius
   margin: 0 auto
@@ -30,19 +51,21 @@ animation(type, length subtype)
   animation spinoffPulse 1s linear
 
 @keyframes spinPulse
-	0%
-	    -moz-transform:rotate(160deg)
-	    opacity:0
-	    box-shadow:0 0 1px #2187e7
-	50%
-	    -moz-transform:rotate(145deg)
-	    opacity:1
-	100%
-	    -moz-transform:rotate(-320deg)
-	    opacity:0
+    0%
+        -moz-transform:rotate(160deg)
+        opacity:0
+        //box-shadow:0 0 1px #2187E7
+        box-shadow:0 0 1px #007CB9
+        //box-shadow: 0 0 1px #000
+    50%
+        -moz-transform:rotate(145deg)
+        opacity:1
+    100%
+        -moz-transform:rotate(-320deg)
+        opacity:0
 
 @keyframes spinoffPulse
-	0%
-	    -moz-transform:rotate(0deg)
-	100%
-	    -moz-transform:rotate(360deg)
+    0%
+        -moz-transform:rotate(0deg)
+    100%
+        -moz-transform:rotate(360deg)

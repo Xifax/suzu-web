@@ -4,6 +4,12 @@
 
     <div class="home">
 
+        <div class="loader">
+            <div class="outer-circle"></div>
+            <div class="inner-circle"></div>
+            <div class="message">Loading...</div>
+        </div>
+
         <!-- Kanji itself -->
         <div class="center-kanji">
             <div class="circle">
@@ -11,6 +17,14 @@
                     {{ kanji.value }}
                 </div>
             </div>
+        </div>
+
+        <!-- Usage decomposition -->
+        <div class="toolbar-right">
+        </div>
+
+        <!-- Examples for usages -->
+        <div class="toolbar-left">
         </div>
 
         <div class="toolbar-top">
@@ -46,6 +60,9 @@
                 {% for rad in radikals %}
                 <span class="rad">{{ rad }}</span>
                 {% endfor %}
+            </div>
+
+            <div class="example" style="display:none">
             </div>
 
             <!-- Definitions for all of the displayed usages -->

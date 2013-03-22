@@ -9,7 +9,7 @@
 .nav a:hover{text-decoration:none;background:#f5f5f5;text-shadow:0 1px 0 #fff;color:#666}
 .toolbar,.toolbar-top,.toolbar-bottom{position:fixed;margin:0 auto;width:100%;text-align:center;bottom:0;background-image:url("../img/pattern/escheresque.png");overflow:hidden;height:100px;display:none;text-shadow:0 1px 0 #fff;color:#666;-moz-user-select:-moz-none;-khtml-user-select:none;-webkit-user-select:none}
 .toolbar:hover{display:block}
-.toolbar-top{top:0;-webkit-box-shadow:inset 0 -10px 10px -10px rgba(0,0,0,0.8);box-shadow:inset 0 -10px 10px -10px rgba(0,0,0,0.8);line-height:40px;font-size:30px;}
+.toolbar-top{top:0;-webkit-box-shadow:inset 0 -10px 10px -10px rgba(0,0,0,0.8);box-shadow:inset 0 -10px 10px -10px rgba(0,0,0,0.8);line-height:40px;font-size:30px;font-family:'IPAMincho','TakaoExMincho';}
 .toolbar-top p{margin-top:30px;font-size:20px}
 .toolbar-top ruby{margin-top:15px;margin-left:20px}
 .toolbar-top ruby:hover{color:#1d95d1;cursor:pointer;}
@@ -17,8 +17,15 @@
 .toolbar-top em{color:#404040;font-style:normal}
 .toolbar-bottom{bottom:0;-webkit-box-shadow:inset 0 10px 10px -10px rgba(0,0,0,0.8);box-shadow:inset 0 10px 10px -10px rgba(0,0,0,0.8);line-height:100px;}
 .toolbar-bottom .definition{display:none}
-.toolbar-bottom .rads{font-size:30px;}
+.toolbar-bottom .rads{font-size:30px;font-family:'IPAMincho','TakaoExMincho';}
 .toolbar-bottom .rads .rad:hover{color:#1d95d1;cursor:pointer}
+.toolbar-side,.toolbar-right,.toolbar-left{background:#000;opacity:.7;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=70);filter:alpha(opacity=70);border:4px double #fff;-webkit-border-radius:6px;border-radius:6px;position:fixed;overflow:hidden;-webkit-box-shadow:0 0 10px rgba(0,0,0,0.8);box-shadow:0 0 10px rgba(0,0,0,0.8);color:#fff;margin:0 auto;top:270px;width:550px;height:390px;display:none;font-family:'IPAMincho','TakaoExMincho';}
+.toolbar-side em,.toolbar-right em,.toolbar-left em{color:#fff;text-shadow:0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #ff2d95,0 0 30px #ff2d95,0 0 40px #ff2d95,0 0 50px #ff2d95,0 0 75px #ff2d95;font-style:normal}
+.toolbar-right{right:-10px;}
+.toolbar-right dl{vertical-align:middle}
+.toolbar-right dt{font-size:23px;font-weight:normal;margin:10px 2px 10px 10px;line-height:25px}
+.toolbar-right dd{color:#adbacc;font-size:18px;margin-bottom:10px;margin-left:20px}
+.toolbar-left{left:-10px}
 *{margin:0}
 html,body{height:100%}
 body:before{content:"";position:fixed;top:-10px;left:0;width:100%;height:10px;z-index:100;-webkit-box-shadow:0 0 10px rgba(0,0,0,0.8);box-shadow:0 0 10px rgba(0,0,0,0.8)}
