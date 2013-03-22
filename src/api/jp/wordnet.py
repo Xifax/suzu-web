@@ -89,7 +89,6 @@ class Wordnet:
         else:
             return []
 
-
     def complete(self, term):
         """
         Get autocomplete suggestions list for partial word.
@@ -112,7 +111,6 @@ class Wordnet:
         # otherwise return empty list
         else:
             return []
-
 
     def browse(self, word):
         """

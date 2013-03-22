@@ -1,6 +1,8 @@
 ## Global states ##
 locked = false
-slided = false
+# TODO: refactor!
+left_slided = false
+right_slided = false
 
 ## Utility methods ##
 
@@ -47,9 +49,14 @@ $ -> $('.circle').mousedown( (event) ->
             $.ajax '/toggle', type: 'GET'
             lock 'kanji', 'circle'
 
+            # TODO: refactor!
             if $('.toolbar-right').css('display') == 'block'
                 slide '.toolbar-right'
-                slided = not slided
+                right_slided = not slided
+
+            if $('.toolbar-left').css('display') == 'block'
+                slide '.toolbar-left'
+                left_slided = not slided
         # scroller click
         when 2
             location.reload()
@@ -83,7 +90,8 @@ $ -> $('ruby').click ->
     # Get usage text
     term = $(this).find('rb').text().trim()
     # Display progressbar
-    $('.loader').fadeToggle(250)
+    $('.loader-left').fadeToggle(250)
+    #$('.loader-right').fadeToggle(250)
     $.ajax '/examples/' + term,
         type: 'GET'
         dataType: 'json'
@@ -99,12 +107,36 @@ $ -> $('ruby').click ->
             $('.toolbar-right').html(text)
 
             # Hide loader
-            $('.loader').fadeToggle(100)
+            #$('.loader-right').fadeToggle(100)
+            $('.loader-left').fadeToggle(100)
 
             # Display examples
-            if not slided
+            if not right_slided
                 #slide '.toolbar-left', '.toolbar-right'
                 slide '.toolbar-right'
-                slided = not slided
+                right_slided = not right_slided
+
+    #$.ajax '/similar/' + term,
+        #type: 'GET'
+        #dataType: 'json'
+        #success: (data, textStatus, jqXHR) ->
+            ## Prepare similar words
+            #text = '<ul>'
+            ## TODO: implement 'cloud tag' similar composition
+            #for similar in data.similar
+                #for word in similar.split(',')
+                    #console.log word
+                    #text += "<li>#{word}</li>"
+            #text += '</ul>'
+
+            ## Hide left|right loader
+            #$('.loader-left').fadeToggle(100)
+
+            #$('.toolbar-left').html(text)
+
+            ## Display similar words
+            #if not left_slided
+                #slide '.toolbar-left'
+                #left_slided = not left_slided
 
 ## Home page end ##

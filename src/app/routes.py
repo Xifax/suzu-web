@@ -30,6 +30,7 @@ from src.db.storage import Storage
 
 from src.api.language import Language
 from src.api.jp.weblio import Weblio
+from src.api.jp.wordnet import Wordnet
 from src.api.jp.mecab import MeCab
 from src.run.peon import Peon
 
@@ -128,6 +129,15 @@ def get_examples(term):
     term = unicode(term, 'utf-8')
     examples = Weblio().examples(term)
     return {'examples': examples}
+
+
+@route('/similar/:term')
+def get_similar(term):
+    """Lookup similar words for item in Weblio"""
+    term = unicode(term, 'utf-8')
+    similar = [item['translate'] for item in Wordnet().lookup(term)]
+    # TODO: remove identical words
+    return {'similar': similar}
 
 
 @route('/add/:key')

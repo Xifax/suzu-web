@@ -7,18 +7,31 @@
 
 .loader
     position: absolute
-    left: 3%
-    //right: 3%
     top: 1%
     z-index:1000
     display: none
+
+.loader-right
+    @extends .loader
+    right: 3%
+
+.loader-left
+    @extends .loader
+    left: 3%
 
 .message
     letterpress()
     position: absolute
     line-height: 80px
-    left: 95px
     top: 0px
+
+.message-left
+    @extends .message
+    left: 95px
+
+.message-right
+    @extends .message
+    right: 95px
 
 base-circle(radius)
   background-color: rgba(0,0,0,0)

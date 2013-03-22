@@ -1,6 +1,10 @@
 .loader-wrapper{position:absolute;top:47%;left:48%}
-.loader{position:absolute;left:3%;top:1%;z-index:1000;display:none}
-.message{text-shadow:0 1px 0 #fff;color:#666;position:absolute;line-height:80px;left:95px;top:0}
+.loader,.loader-right,.loader-left{position:absolute;top:1%;z-index:1000;display:none}
+.loader-right{right:3%}
+.loader-left{left:3%}
+.message,.message-left,.message-right{text-shadow:0 1px 0 #fff;color:#666;position:absolute;line-height:80px;top:0}
+.message-left{left:95px}
+.message-right{right:95px}
 .outer-circle{background-color:rgba(0,0,0,0);border:5px solid #1d95d1;opacity:.9;border-right:5px solid rgba(0,0,0,0);border-left:5px solid rgba(0,0,0,0);border-radius:50px;box-shadow:0 0 35px #007cb9;width:70px;height:70px;margin:0 auto;-moz-animation:spinPulse 2s infinite ease-in-out;-webkit-animation:spinPulse 2s infinite linear}
 .inner-circle{background-color:rgba(0,0,0,0);border:5px solid #1d95d1;opacity:.9;border-right:5px solid rgba(0,0,0,0);border-left:5px solid rgba(0,0,0,0);border-radius:50px;box-shadow:0 0 35px #007cb9;width:50px;height:50px;margin:0 auto;position:relative;top:-70px;-moz-animation:spinoffPulse 1s infinite linear;-webkit-animation:spinoffPulse 1s infinite linear}
 @-moz-keyframes spinPulse{0%{-moz-transform:rotate(160deg);opacity:0;box-shadow:0 0 1px #007cb9}
