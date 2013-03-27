@@ -58,20 +58,28 @@ body:after
     transition: all 0.7s ease-in-out
 
 // Circle & kanji on hover
-// TODO: implement separate state for locked (slightly different from hover)
-.circle:hover, .circle-locked
+.circle:hover
     cursor: pointer
     background: black
     opacity: 0.7
     border: 4px double #fff
     transition: all 0.4s ease-in-out
+    transform: scale(1.1);
 
-.kanji:hover, .kanji-locked
+.kanji:hover
     burn()
     transition: all 0.7s ease-in-out
 
+.circle-locked
+    @extends .circle:hover
+    //opacity: 0.80
+
+.kanji-locked
+    @extends .kanji:hover
+    opacity: 0.75
+
 .locked
-    color: #007cb9
+    color: #007CB9
 
 
 /* Title page end */
