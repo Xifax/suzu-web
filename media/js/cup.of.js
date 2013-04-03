@@ -64,6 +64,14 @@
   };
 
   $(function() {
+    return $('.tooltip').tooltipster({
+      theme: '.tooltipster-theme',
+      delay: 0,
+      speed: 250
+    });
+  });
+
+  $(function() {
     return $.ajax('/toggled', {
       type: 'GET',
       dataType: 'json',
@@ -121,13 +129,6 @@
     return $('.roll').click(function() {
       $.get('/lock');
       return reload();
-    });
-  });
-
-  $(function() {
-    return $('ruby').hover(function() {
-      $('.rads').fadeToggle(100);
-      return $('#' + this.id + '.definition').fadeToggle(100);
     });
   });
 

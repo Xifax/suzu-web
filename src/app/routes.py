@@ -69,7 +69,12 @@ def index():
 
     radikals = store.get_radikals(kanji.value)
 
-    return render('home', kanji=kanji, radikals=radikals)
+    return render(
+        'home',
+        kanji=kanji,
+        radikals=radikals,
+        rad_info=store.get_info_for_all(radikals)
+    )
 
 
 @route('/media/<filepath:path>')
@@ -206,7 +211,12 @@ def view_item(key):
     kanji = unicode(key, 'utf-8')
     # TODO: test if such kanji exists
     radikals = store.get_radikals(kanji)
-    return render('home', kanji=Peon(db).get_item(kanji), radikals=radikals)
+    return render(
+        'home',
+        kanji=Peon(db).get_item(kanji),
+        radikals=radikals,
+        rad_info=store.get_info_for_all(radikals)
+    )
 
 
 @route('/list')

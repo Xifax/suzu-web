@@ -30,6 +30,14 @@ lock = (items...) ->
 
 ## Home page ##
 
+# Initialize tooltips
+$ -> $('.tooltip').tooltipster({
+    theme: '.tooltipster-theme',
+    delay: 0,
+    speed: 250,
+    #animation: 'swing',
+})
+
 # Check toolbars status on page load
 $ -> $.ajax '/toggled',
     type: 'GET'
@@ -50,6 +58,7 @@ $ -> $('.circle').mousedown( (event) ->
             lock 'kanji', 'circle'
 
             # TODO: refactor!
+            # TODO: fix error, when no popup on click
             if $('.toolbar-right').css('display') == 'block'
                 slide '.toolbar-right'
                 right_slided = not slided
@@ -76,12 +85,6 @@ $ -> $('.kanji').mouseout ->
 $ -> $('.roll').click ->
         $.get('/lock')
         reload()
-
-# Update definition on usage hover
-$ -> $('ruby').hover ->
-    #$('.help').fadeToggle(150)
-    $('.rads').fadeToggle(100)
-    $('#' + this.id + '.definition').fadeToggle(100)
 
 # Lookup examples in weblio on click
 # TODO: also show similar words in left tab?

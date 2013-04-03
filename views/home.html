@@ -25,6 +25,7 @@
             </div>
         </div>
 
+
         <!-- Usage decomposition -->
         <div class="toolbar-right">
         </div>
@@ -36,6 +37,8 @@
         <div class="toolbar-top">
             <!-- Kanji compounds and usages -->
             {% for usage in kanji.usages() %}
+            <!-- Translation in tooltip -->
+            <span class="tooltip" title="{{ usage.translation()|e }}">
                 <ruby id={{ usage.id }}>
                     <rb>
                     {{ usage.emphasize(usage.value(), kanji.value) }}
@@ -46,10 +49,11 @@
                     </rt>
                     <rp>/</rp>
                 </ruby>
+            </span>
             {% endfor %}
 
             {% if(not kanji.usages()) %}
-                <p>No usages found</p>
+                <p class="notice">No usages found</p>
             {% endif %}
         </div>
 
@@ -64,7 +68,22 @@
             <!-- Radikals for kanji -->
             <div class="rads">
                 {% for rad in radikals %}
-                <span class="rad">{{ rad }}</span>
+                <!-- Radikal info -->
+                <span class="rad tooltip"
+                    {% if rad_info.get(rad): %}
+                    title="{{
+                        '%s | <em>%s</em> | %s' % (
+                            rad_info.get(rad)['name'],
+                            rad_info.get(rad)['primitive'],
+                            rad_info.get(rad)['strokes']
+                        )
+                    }}
+                    {% else: %}
+                        title="Could not find!"
+                    {% endif %}
+                    ">
+                    {{ rad }}
+                </span>
                 {% endfor %}
             </div>
 
@@ -72,12 +91,7 @@
             </div>
 
             <!-- Definitions for all of the displayed usages -->
-            {% for usage in kanji.usages() %}
-                <div id={{ usage.id }} class="definition">
-                    {{ usage.translation() }}
-                </div>
-            {% endfor %}
-
+            <!-- TODO: may show japanese example instead? -->
 
             <div style="display: none">
                 <a class='toggle-button' href='#'>Toggle!</a>
