@@ -1,5 +1,5 @@
 .loader-wrapper{position:absolute;top:47%;left:48%}
-.loader,.loader-right,.loader-left{position:absolute;top:2%;z-index:1000;display:none}
+.loader,.loader-right,.loader-left{position:absolute;top:3%;z-index:1000;display:none}
 .loader-right{right:1%}
 .loader-left{left:1%}
 .message,.message-left,.message-right{text-shadow:0 1px 0 #fff;color:#666;position:absolute;line-height:60px;top:0}

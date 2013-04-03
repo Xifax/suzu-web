@@ -65,5 +65,15 @@ class Storage:
         """Get information for all of the radikals"""
         results = {}
         for rad in radikals:
-            results[rad] = self.get_radikal_info(rad)
+            info = self.get_radikal_info(rad)
+            # try to get by alias, if info is empty
+            if not info:
+                # scan all _keys to get, unserialize and find alias?
+                for entry in self.r.get(u'_*'):
+                    entry = pickle.loads(entry)
+                    if rad == entry['alias']:
+                        results[rad] = entry
+                        break
+            else:
+                results[rad] = info
         return results
