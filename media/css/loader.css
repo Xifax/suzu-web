@@ -7,29 +7,29 @@
 .message-right{right:95px}
 .outer-circle{background-color:rgba(0,0,0,0);border:5px solid #1d95d1;opacity:.9;border-right:5px solid rgba(0,0,0,0);border-left:5px solid rgba(0,0,0,0);border-radius:50px;box-shadow:0 0 35px #007cb9;width:50px;height:50px;margin:0 auto;-moz-animation:spinPulse 2s infinite ease-in-out;-webkit-animation:spinPulse 2s infinite linear}
 .inner-circle{background-color:rgba(0,0,0,0);border:5px solid #1d95d1;opacity:.9;border-right:5px solid rgba(0,0,0,0);border-left:5px solid rgba(0,0,0,0);border-radius:50px;box-shadow:0 0 35px #007cb9;width:30px;height:30px;margin:0 auto;position:relative;top:-50px;-moz-animation:spinoffPulse 1s infinite linear;-webkit-animation:spinoffPulse 1s infinite linear}
-@-moz-keyframes spinPulse{0%{-moz-transform:rotate(160deg);opacity:0;box-shadow:0 0 1px #007cb9}
-50%{-moz-transform:rotate(145deg);opacity:1}
-100%{-moz-transform:rotate(-320deg);opacity:0}
-}@-webkit-keyframes spinPulse{0%{-moz-transform:rotate(160deg);opacity:0;box-shadow:0 0 1px #007cb9}
-50%{-moz-transform:rotate(145deg);opacity:1}
-100%{-moz-transform:rotate(-320deg);opacity:0}
-}@-o-keyframes spinPulse{0%{-moz-transform:rotate(160deg);opacity:0;box-shadow:0 0 1px #007cb9}
-50%{-moz-transform:rotate(145deg);opacity:1}
-100%{-moz-transform:rotate(-320deg);opacity:0}
-}@-ms-keyframes spinPulse{0%{-moz-transform:rotate(160deg);opacity:0;box-shadow:0 0 1px #007cb9}
-50%{-moz-transform:rotate(145deg);opacity:1}
-100%{-moz-transform:rotate(-320deg);opacity:0}
-}@keyframes spinPulse{0%{-moz-transform:rotate(160deg);opacity:0;box-shadow:0 0 1px #007cb9}
-50%{-moz-transform:rotate(145deg);opacity:1}
-100%{-moz-transform:rotate(-320deg);opacity:0}
-}@-moz-keyframes spinoffPulse{0%{-moz-transform:rotate(0)}
-100%{-moz-transform:rotate(360deg)}
-}@-webkit-keyframes spinoffPulse{0%{-moz-transform:rotate(0)}
-100%{-moz-transform:rotate(360deg)}
-}@-o-keyframes spinoffPulse{0%{-moz-transform:rotate(0)}
-100%{-moz-transform:rotate(360deg)}
-}@-ms-keyframes spinoffPulse{0%{-moz-transform:rotate(0)}
-100%{-moz-transform:rotate(360deg)}
-}@keyframes spinoffPulse{0%{-moz-transform:rotate(0)}
-100%{-moz-transform:rotate(360deg)}
+@-moz-keyframes spinPulse{0%{transform:rotate(160deg);opacity:0;box-shadow:0 0 1px #007cb9}
+50%{transform:rotate(145deg);opacity:1}
+100%{transform:rotate(-320deg);opacity:0}
+}@-webkit-keyframes spinPulse{0%{transform:rotate(160deg);opacity:0;box-shadow:0 0 1px #007cb9}
+50%{transform:rotate(145deg);opacity:1}
+100%{transform:rotate(-320deg);opacity:0}
+}@-o-keyframes spinPulse{0%{transform:rotate(160deg);opacity:0;box-shadow:0 0 1px #007cb9}
+50%{transform:rotate(145deg);opacity:1}
+100%{transform:rotate(-320deg);opacity:0}
+}@-ms-keyframes spinPulse{0%{transform:rotate(160deg);opacity:0;box-shadow:0 0 1px #007cb9}
+50%{transform:rotate(145deg);opacity:1}
+100%{transform:rotate(-320deg);opacity:0}
+}@keyframes spinPulse{0%{transform:rotate(160deg);opacity:0;box-shadow:0 0 1px #007cb9}
+50%{transform:rotate(145deg);opacity:1}
+100%{transform:rotate(-320deg);opacity:0}
+}@-moz-keyframes spinoffPulse{0%{transform:rotate(0)}
+100%{transform:rotate(360deg)}
+}@-webkit-keyframes spinoffPulse{0%{transform:rotate(0)}
+100%{transform:rotate(360deg)}
+}@-o-keyframes spinoffPulse{0%{transform:rotate(0)}
+100%{transform:rotate(360deg)}
+}@-ms-keyframes spinoffPulse{0%{transform:rotate(0)}
+100%{transform:rotate(360deg)}
+}@keyframes spinoffPulse{0%{transform:rotate(0)}
+100%{transform:rotate(360deg)}
 }
