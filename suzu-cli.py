@@ -19,7 +19,7 @@ from src.db.storage import Storage
 def prepare_radikals():
     """Prepare radikal decomposition data"""
     Storage().prepare_radikals()
-    Storage().get_radikal_info()
+    Storage().prepare_radikals_info()
 
 
 @arg('kanji', help='Kanji to lookup')
@@ -32,7 +32,7 @@ def get_radikals(kanji):
 @arg('--limit', default=10, help='How mani new Kanji to add')
 def crawl(limit):
     """Launch Scapy spider to crawl web and gather unique kanji"""
-    call('export PATH=$PATH:$HOME/bin')
+    #call('export PATH=$PATH:$HOME/bin')
     call("cd src; scrapy crawl hebi -a limit=%s" % limit, shell=True)
 
 
