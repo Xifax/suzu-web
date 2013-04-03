@@ -34,7 +34,11 @@
         <div class="toolbar-left">
         </div>
 
-        <div class="toolbar-top">
+        <div class="toolbar-top"
+            {% if lock: %}
+            style="display:block"
+            {% endif %}
+            >
             <!-- Kanji compounds and usages -->
             {% for usage in kanji.usages() %}
             <!-- Translation in tooltip -->
@@ -57,7 +61,12 @@
             {% endif %}
         </div>
 
-        <div class="toolbar-bottom">
+        <div class="toolbar-bottom"
+            {% if lock: %}
+            style="display:block"
+            {% endif %}
+            >
+
             <!-- Page info -->
             <div class="help" style="display:none">
                 Click on kanji to toggle toolbar lock.
@@ -79,7 +88,7 @@
                         )
                     }}
                     {% else: %}
-                        title="Could not find!"
+                        title="Could not find radikal!"
                     {% endif %}
                     ">
                     {{ rad }}

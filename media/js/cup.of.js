@@ -78,7 +78,6 @@
       success: function(data, textStatus, jqXHR) {
         locked = data.status;
         if (locked) {
-          toggle('.toolbar-top', '.toolbar-bottom');
           return lock('kanji', 'circle');
         }
       }
@@ -96,11 +95,11 @@
           lock('kanji', 'circle');
           if ($('.toolbar-right').css('display') === 'block') {
             slide('.toolbar-right');
-            right_slided = !slided;
+            right_slided = !right_slided;
           }
           if ($('.toolbar-left').css('display') === 'block') {
             slide('.toolbar-left');
-            return left_slided = !slided;
+            return left_slided = !left_slided;
           }
           break;
         case 2:

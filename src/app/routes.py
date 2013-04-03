@@ -60,7 +60,7 @@ store = Storage()
 def index():
     """Main page with random kanji"""
     lock = request.get_cookie('lock', secret='secret')
-    #session = request.environ.get('beaker.session')
+    session = request.environ.get('beaker.session')
 
     if lock:
         kanji = Peon(db).get(lock)
@@ -73,7 +73,8 @@ def index():
         'home',
         kanji=kanji,
         radikals=radikals,
-        rad_info=store.get_info_for_all(radikals)
+        rad_info=store.get_info_for_all(radikals),
+        lock=session.get('toggled', False)
     )
 
 
@@ -211,11 +212,13 @@ def view_item(key):
     kanji = unicode(key, 'utf-8')
     # TODO: test if such kanji exists
     radikals = store.get_radikals(kanji)
+    session = request.environ.get('beaker.session')
     return render(
         'home',
         kanji=Peon(db).get_item(kanji),
         radikals=radikals,
-        rad_info=store.get_info_for_all(radikals)
+        rad_info=store.get_info_for_all(radikals),
+        lock=session.get('toggled', False)
     )
 
 

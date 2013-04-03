@@ -12,8 +12,11 @@ from bs4 import BeautifulSoup
 
 class Radikals:
 
+    # TODO: some of the radikals are missing! Gonna catch'em all
+
     def __init__(self):
-        self.url = 'https://docs.google.com/spreadsheet/ccc?key=0AqYInAMvWw-2cmxGbkZNUWpYcmZTZlVVY0xJbU9tVlE&hl=en#gid=0'
+        self.url = ('https://docs.google.com/spreadsheet/ccc?'
+                    'key=0AqYInAMvWw-2cmxGbkZNUWpYcmZTZlVVY0xJbU9tVlE&hl=en#gid=0')
 
     def get_radikals_info(self):
         """Get info"""

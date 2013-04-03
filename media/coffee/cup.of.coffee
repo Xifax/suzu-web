@@ -45,7 +45,6 @@ $ -> $.ajax '/toggled',
     success: (data, textStatus, jqXHR) ->
         locked = data.status
         if locked
-            toggle '.toolbar-top', '.toolbar-bottom'
             lock 'kanji', 'circle'
 
 # Lock toolbars, when clicking on kanji
@@ -61,11 +60,11 @@ $ -> $('.circle').mousedown( (event) ->
             # TODO: fix error, when no popup on click
             if $('.toolbar-right').css('display') == 'block'
                 slide '.toolbar-right'
-                right_slided = not slided
+                right_slided = not right_slided
 
             if $('.toolbar-left').css('display') == 'block'
                 slide '.toolbar-left'
-                left_slided = not slided
+                left_slided = not left_slided
         # scroller click
         when 2
             location.reload()
