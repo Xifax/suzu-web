@@ -67,7 +67,7 @@ def index():
     else:
         kanji = Peon(db).random()
 
-    radicals = store.get_radikals(kanji.value)
+    radicals = store.get_radicals(kanji.value)
 
     return render(
         'home',
@@ -211,7 +211,7 @@ def view_item(key):
     """ View existing kanji """
     kanji = unicode(key, 'utf-8')
     # TODO: test if such kanji exists
-    radicals = store.get_radikals(kanji)
+    radicals = store.get_radicals(kanji)
     session = request.environ.get('beaker.session')
     return render(
         'home',

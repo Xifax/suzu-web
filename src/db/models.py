@@ -85,7 +85,7 @@ class Fact(Document):
     # Glossary (reading, definition, translation, etc)
     gloss = ReferenceField('Gloss')
 
-    # Components (list of kanji, words, radikals and so on)
+    # Components (list of kanji, words, radicals and so on)
     components = DictField()
     # Complex usage examples (sentences)
     examples = ListField(ReferenceField('Example'))

@@ -28,10 +28,10 @@ class Kradfile:
             if not line or line.startswith('#'):
                 continue
 
-            kanji, radikals = line.split(':')
+            kanji, radicals = line.split(':')
             results[kanji.strip()] = [
                 unicode(rad, 'utf-8') for rad
-                in radikals.split(' ')
+                in radicals.split(' ')
                 if rad != ''
             ]
 

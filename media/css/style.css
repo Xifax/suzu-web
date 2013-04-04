@@ -39,6 +39,7 @@ body:after{content:"";position:fixed;bottom:-10px;left:0;width:100%;height:10px;
 .kanji-locked{opacity:.75;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=75);filter:alpha(opacity=75)}
 .locked{color:#007cb9}
 .tooltipster-theme{-webkit-border-radius:5px;border-radius:5px;background:#fff;-webkit-box-shadow:0 0 14px rgba(0,0,0,0.3);box-shadow:0 0 14px rgba(0,0,0,0.3);color:#2c2c2c}
-.tooltipster-theme .tooltipster-content{font-family:'Volcorn',Georgia,serif;font-size:18px;line-height:16px;text-align:center;padding:8px 10px;text-shadow:0 1px 0 #fff;color:#666}
+.tooltipster-theme .tooltipster-content{font-family:'Volcorn',Georgia,serif;font-size:18px;line-height:16px;text-align:center;padding:8px 10px;text-shadow:0 1px 0 #fff;color:#666;}
+.tooltipster-theme .tooltipster-content code{color:#808080}
 .error{height:100%;background-image:url("../img/pattern/woven.png");font-size:30px}
 .center-error{position:absolute;top:50%;left:50%;text-align:center;width:100%;height:100px;line-height:130px;margin-left:-50%;margin-top:-50px;background-image:url("../img/pattern/white_tiles.png");text-shadow:0 1px 0 #fff;color:#666;-webkit-box-shadow:0 0 10px #fff;box-shadow:0 0 10px #fff}

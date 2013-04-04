@@ -74,7 +74,7 @@
             </div>
 
             <!-- Radicals for kanji -->
-            <!-- TODO: when clicking on radikal, display kanji from:
+            <!-- TODO: when clicking on radical, display kanji from:
                 http://nuthatch.com/kanji/demo/radicals.html
                 TODO: use font containing non-SJIS glyphs (chinese?)
             -->
@@ -84,7 +84,7 @@
                 <span class="rad tooltip"
                     {% if rad_info.get(rad): %}
                     title="{{
-                        '%s | <em>%s</em> | %s' % (
+                    '%s <code>|</code> <em>%s</em> <code>|</code> %s' % (
                             rad_info.get(rad)['name'],
                             rad_info.get(rad)['primitive'],
                             rad_info.get(rad)['strokes']

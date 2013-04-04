@@ -30,24 +30,24 @@ class Storage:
         else:
             self.r = db
         self.krad = Kradfile()
-        self.radikals = Radicals()
+        self.radicals = Radicals()
 
-    def prepare_radikals(self):
-        for kanji, radikals in self.krad.prepare().items():
+    def prepare_radicals(self):
+        for kanji, radicals in self.krad.prepare().items():
             # TODO: use setx or setn
-            self.r.set(kanji, pickle.dumps(radikals))
+            self.r.set(kanji, pickle.dumps(radicals))
 
     def prepare_radicals_info(self):
-        for radikal, fields in self.radikals.prepare().items():
-            self.r.set(u'_' + radikal, pickle.dumps(fields))
+        for radical, fields in self.radicals.prepare().items():
+            self.r.set(u'_' + radical, pickle.dumps(fields))
 
-    def get_radikals(self, kanji):
-        """Get radikal list for kanji"""
+    def get_radicals(self, kanji):
+        """Get radical list for kanji"""
         # Check, if kanji is in db
         if not self.r.exists(kanji):
-            # Prepare radikals
-            self.prepare_radikals()
-        # Get radikals for kanji
+            # Prepare radicals
+            self.prepare_radicals()
+        # Get radicals for kanji
         try:
             return pickle.loads(self.r.get(kanji))
         except TypeError:

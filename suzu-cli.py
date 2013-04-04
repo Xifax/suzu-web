@@ -18,14 +18,14 @@ from src.db.storage import Storage
 
 def prepare_radicals():
     """Prepare radical decomposition data"""
-    Storage().prepare_radikals()
+    Storage().prepare_radicals()
     Storage().prepare_radicals_info()
 
 
 @arg('kanji', help='Kanji to lookup')
-def get_radikals(kanji):
-    """Get radikal decomposition for provided kanji"""
-    for rad in Storage().get_radikals(kanji):
+def get_radicals(kanji):
+    """Get radical decomposition for provided kanji"""
+    for rad in Storage().get_radicals(kanji):
         print rad
 
 
@@ -61,6 +61,6 @@ def get_random(args):
 if __name__ == '__main__':
     parser = ArghParser()
     parser.add_commands([
-        prepare_usages, prepare_radicals, get_random, get_radikals, crawl
+        prepare_usages, prepare_radicals, get_random, get_radicals, crawl
     ])
     parser.dispatch()
