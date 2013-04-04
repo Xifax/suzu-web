@@ -4,7 +4,7 @@
 """
     Asian Wordnet API consumer
     http://ja.asianwordnet.org/services/provide_list
-    NB: service is unresponsive sometimes
+    NB: service has daily quota
 """
 
 import requests
@@ -136,26 +136,3 @@ class Wordnet:
             if 'data' in results and 'rows' in results:
                 if results['rows'] > 0:
                     return True
-
-
-if __name__ == '__main__':
-    """Run as test script"""
-    kanji = u'脅'
-    #kanji = u'嚇'
-    wn = Wordnet()
-    mecab = MeCab()
-    # 0. Autocomplete kanji
-    words = wn.complete(kanji)
-    # 1. Lookup each of the words
-    if words:
-        for word in words:
-            # 1.1. Get reading for each word
-            print word, mecab.reading(word), '\n'
-            # 1.2. Lookup word definitions and related words
-            results = wn.lookup(word)
-            if results:
-                for result in results:
-                    print 'Meaning: ', result['gloss']
-                    print 'Similar words: ', result['translate'], '\n'
-                print '\n'
-

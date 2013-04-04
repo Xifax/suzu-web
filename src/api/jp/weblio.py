@@ -81,35 +81,3 @@ class Weblio:
         for s in sep:
             line = line.split(s)[0]
         return line.strip()
-
-
-def local_run():
-    """Cosole utility stub"""
-    output = open('/home/yadavito/Desktop/test2_export.txt', 'w')
-    export = []
-    for line in open('/home/yadavito/Desktop/test2.txt'):
-        fields = line.split('\t')
-        term = fields[0]
-        weblio = Weblio()
-        examples = weblio.examples(term)
-        if examples:
-            example = weblio.examples(term).pop()
-        else:
-            example = u''
-        #print example
-        fields[0] = unicode(fields[0], 'utf-8')
-        fields[1] = unicode(fields[1], 'utf-8')
-        fields[2] = unicode(fields[2], 'utf-8')
-        fields[3] = example
-        export.append(fields)
-
-    print export
-    for line in export:
-        output.write(u'\t'.join(line).encode('utf-8'))
-        # OMG
-        output.write('\n')
-
-if __name__ == '__main__':
-    """Run as test script"""
-    Weblio().definition(u'唆す')
-    #local_run()

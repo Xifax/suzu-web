@@ -41,7 +41,6 @@
             >
             <!-- Kanji compounds and usages -->
             {% for usage in kanji.usages() %}
-            <!-- Translation in tooltip -->
             <span class="tooltip" title="{{ usage.translation()|e }}">
                 <ruby id={{ usage.id }}>
                     <rb>
@@ -74,9 +73,13 @@
                 Middle click on kanji to load random kanji.
             </div>
 
-            <!-- Radikals for kanji -->
+            <!-- Radicals for kanji -->
+            <!-- TODO: when clicking on radikal, display kanji from:
+                http://nuthatch.com/kanji/demo/radicals.html
+                TODO: use font containing non-SJIS glyphs (chinese?)
+            -->
             <div class="rads">
-                {% for rad in radikals %}
+                {% for rad in radicals %}
                 <!-- Radikal info -->
                 <span class="rad tooltip"
                     {% if rad_info.get(rad): %}
@@ -88,7 +91,7 @@
                         )
                     }}
                     {% else: %}
-                        title="Could not find radikal!
+                        title="Could not find radical!
                     {% endif %}
                     ">
                     {{ rad }}

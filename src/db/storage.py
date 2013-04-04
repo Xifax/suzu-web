@@ -11,7 +11,7 @@ import os
 import redis
 
 from src.api.jp.kradfile import Kradfile
-from src.api.jp.radikals import Radikals
+from src.api.jp.radicals import Radicals
 
 
 class Storage:
@@ -30,14 +30,14 @@ class Storage:
         else:
             self.r = db
         self.krad = Kradfile()
-        self.radikals = Radikals()
+        self.radikals = Radicals()
 
     def prepare_radikals(self):
         for kanji, radikals in self.krad.prepare().items():
             # TODO: use setx or setn
             self.r.set(kanji, pickle.dumps(radikals))
 
-    def prepare_radikals_info(self):
+    def prepare_radicals_info(self):
         for radikal, fields in self.radikals.prepare().items():
             self.r.set(u'_' + radikal, pickle.dumps(fields))
 
@@ -53,27 +53,29 @@ class Storage:
         except TypeError:
             return []
 
-    def get_radikal_info(self, radikal):
-        """Get information about radikal"""
-        # Get radikal info
+    def get_radical_info(self, radical):
+        """Get information about radical"""
+        # Get radical info
         try:
-            return pickle.loads(self.r.get(u'_' + radikal))
+            return pickle.loads(self.r.get(u'_' + radical))
         except TypeError:
             return []
 
-    def get_info_for_all(self, radikals):
-        """Get information for all of the radikals"""
+    def get_info_for_all(self, radicals):
+        """Get information for all of the radicals"""
         results = {}
-        for rad in radikals:
-            info = self.get_radikal_info(rad)
+        for rad in radicals:
+            info = self.get_radical_info(rad)
             # try to get by alias, if info is empty
             if not info:
                 # scan all _keys to get, unserialize and find alias?
-                for entry in self.r.get(u'_*'):
-                    entry = pickle.loads(entry)
-                    if rad == entry['alias']:
+                for key in self.r.keys(u'_*'):
+                    entry = pickle.loads(self.r.get(key))
+                    if rad == entry['alt']:
                         results[rad] = entry
                         break
+                # todo: log this radical?
+                # todo: ponder, what to do with strange radicals
             else:
                 results[rad] = info
         return results

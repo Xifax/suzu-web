@@ -11,10 +11,9 @@
     overflow: hidden
     height: 100px
     display: none
-    /* Overflow toolbar */
-    //box-shadow 0px 0px 10px rgba(0,0,0,.8)
     letterpress()
-    unselectable()
+    // DEBUG
+    //unselectable()
 
 .toolbar:hover
     display: block
@@ -22,6 +21,8 @@
 .toolbar-top
     @extends .toolbar
     top: 0
+    /* Overflow toolbar */
+    //box-shadow 0px 0px 10px rgba(0,0,0,.8)
     /* Inset toolbar */
     box-shadow inset 0px -10px 10px -10px rgba(0,0,0,.8)
 
@@ -82,16 +83,10 @@
 
     color: white
 
-    // TODO: ponder, how to implement auto-height
     margin: 0px auto
     top: 20%
     width: 30%
     height: 58%
-
-    // old
-    //top: 270px
-    //width: 550px
-    //height: 390px
 
     text-align: center
 
@@ -100,10 +95,8 @@
     font-family: 'IPAMincho','TakaoExMincho'
 
     em
-        //neon()
         neon()
         font-style: normal
-        //font-weight: bold
 
 .toolbar-right
     @extends .toolbar-side
@@ -128,6 +121,5 @@
 
 .toolbar-left
     @extends .toolbar-side
-
     left: -10px
 

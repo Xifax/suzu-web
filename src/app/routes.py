@@ -67,13 +67,13 @@ def index():
     else:
         kanji = Peon(db).random()
 
-    radikals = store.get_radikals(kanji.value)
+    radicals = store.get_radikals(kanji.value)
 
     return render(
         'home',
         kanji=kanji,
-        radikals=radikals,
-        rad_info=store.get_info_for_all(radikals),
+        radicals=radicals,
+        rad_info=store.get_info_for_all(radicals),
         lock=session.get('toggled', False)
     )
 
@@ -211,13 +211,13 @@ def view_item(key):
     """ View existing kanji """
     kanji = unicode(key, 'utf-8')
     # TODO: test if such kanji exists
-    radikals = store.get_radikals(kanji)
+    radicals = store.get_radikals(kanji)
     session = request.environ.get('beaker.session')
     return render(
         'home',
         kanji=Peon(db).get_item(kanji),
-        radikals=radikals,
-        rad_info=store.get_info_for_all(radikals),
+        radicals=radicals,
+        rad_info=store.get_info_for_all(radicals),
         lock=session.get('toggled', False)
     )
 

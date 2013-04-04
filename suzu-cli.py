@@ -16,10 +16,10 @@ from src.run.peon import Peon
 from src.db.storage import Storage
 
 
-def prepare_radikals():
-    """Prepare radikal decomposition data"""
+def prepare_radicals():
+    """Prepare radical decomposition data"""
     Storage().prepare_radikals()
-    Storage().prepare_radikals_info()
+    Storage().prepare_radicals_info()
 
 
 @arg('kanji', help='Kanji to lookup')
@@ -61,6 +61,6 @@ def get_random(args):
 if __name__ == '__main__':
     parser = ArghParser()
     parser.add_commands([
-        prepare_usages, prepare_radikals, get_random, get_radikals, crawl
+        prepare_usages, prepare_radicals, get_random, get_radikals, crawl
     ])
     parser.dispatch()
