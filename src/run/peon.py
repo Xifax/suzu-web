@@ -141,6 +141,8 @@ class Peon:
 
                 # TODO: If no words found -> lookup in weblio?
                 # eg: http://www.weblio.jp/content_find/contains/0/%E6%AA%8E
+                # -> lookup in JISHO (best option)
+                # http://jisho.org/words?jap=kanji&eng=&dict=edict
 
                 # 1. Complete kanji with words-compounds-usages from WordNet
                 # No more than 3-10 usages!

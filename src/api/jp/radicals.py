@@ -13,7 +13,8 @@ from bs4 import BeautifulSoup
 class Radicals:
 
     def __init__(self):
-        # public spreadsheet with base radicals collection
+        # public spreadsheet with radicals collection (every radical from
+        # kradfile)
         # TODO: some of the radicals are missing! Gonna catch'em all
         self.url = ('https://docs.google.com/spreadsheet/ccc?'
                     'key=0AkI3jF0lqjOLdGZobEV0bHNHRW1MSmF6dnd6TGh6c3c#gid=0')
@@ -38,17 +39,24 @@ class Radicals:
             cells = row.find_all('td')
             # Total number of columns, including bogus one
             if len(cells) == 7:
+                # todo: strip fields from spaces
                 radical = cells[1].get_text()
                 if radical:
                     results[radical] = {
                         # Alternative radical
-                        'alt':          cells[2].get_text() if cells[2] else '',
+                        'alt':          self.get_cell(cells, 2),
                         # Number of strokes
-                        'strokes':      cells[3].get_text(),
+                        'strokes':      self.get_cell(cells, 3),
                         # Japanese name
-                        'name':         cells[4].get_text(),
+                        'name':         self.get_cell(cells, 4),
                         # Primitive name (RTK, english)
-                        'primitive':    cells[5].get_text(),
+                        'primitive':    self.get_cell(cells, 5),
+                        # Radical position
+                        'position':     self.get_cell(cells, 6)
                     }
 
         return results
+
+    def get_cell(self, cells, n):
+        """Get trimmed cell content"""
+        return cells[n].get_text().strip() if cells[n] else ''

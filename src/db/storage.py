@@ -66,16 +66,13 @@ class Storage:
         results = {}
         for rad in radicals:
             info = self.get_radical_info(rad)
-            # try to get by alias, if info is empty
+            # try to get by alt, if info is empty
             if not info:
-                # scan all _keys to get, unserialize and find alias?
                 for key in self.r.keys(u'_*'):
                     entry = pickle.loads(self.r.get(key))
                     if rad == entry['alt']:
                         results[rad] = entry
                         break
-                # todo: log this radical?
-                # todo: ponder, what to do with strange radicals
             else:
                 results[rad] = info
         return results
