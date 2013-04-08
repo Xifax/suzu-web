@@ -141,6 +141,12 @@
         dataType: 'json',
         success: function(data, textStatus, jqXHR) {
           var example, key, text, value, _i, _len, _ref;
+          if (!(data.examples != null)) {
+            humane.log('Ooops, no examples found!', {
+              timeout: 1000
+            });
+            return;
+          }
           text = '<dl>';
           _ref = data.examples;
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {

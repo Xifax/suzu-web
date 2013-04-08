@@ -98,7 +98,11 @@ $ -> $('ruby').click ->
         type: 'GET'
         dataType: 'json'
         success: (data, textStatus, jqXHR) ->
-            # todo: if nothing is found -> display notification
+            # If nothing is found -> display notification
+            if !data.examples?
+                humane.log('Ooops, no examples found!',  { timeout: 1000})
+                return
+
             # Prepare examples
             text = '<dl>'
             for example in data.examples
