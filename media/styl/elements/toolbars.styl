@@ -73,15 +73,19 @@
 
 // TODO: center contents vertically
 .toolbar-side
-    background: black
-    opacity: 0.7
-    border: 4px double #fff
-    border-radius: 6px
+    //background: black
+    //opacity: 0.7
+    //border: 4px double #fff
+    //border-radius: 6px
     position: fixed
     overflow: hidden
-    box-shadow 0px 0px 10px rgba(0,0,0,.8)
+    //box-shadow 0px 0px 10px rgba(0,0,0,.8)
 
-    color: white
+    box-shadow inset 0px 0px 10px 0px rgba(0,0,0,.8)
+    pattern('escheresque')
+    letterpress()
+
+    //color: white
 
     margin: 0px auto
     top: 20%
@@ -95,7 +99,8 @@
     font-family: 'IPAMincho','TakaoExMincho'
 
     em
-        neon()
+        //neon()
+        color: #404040
         font-style: normal
 
 .toolbar-right
@@ -106,6 +111,7 @@
     dl
         vertical-align: middle
         top:50%
+        padding-top: 10px
 
     dt
         font-size: 23px
@@ -114,10 +120,11 @@
         line-height: 25px
 
     dd
-        color: #ADBACC
-        font-size: 18px
+        //color: #ADBACC
+        font-size: 16px
         margin-bottom: 10px
         margin-left: 20px
+        font-family: 'Volcorn', Georgia, serif
 
 .toolbar-left
     @extends .toolbar-side

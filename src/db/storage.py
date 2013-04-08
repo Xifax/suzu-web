@@ -49,6 +49,7 @@ class Storage:
             self.prepare_radicals()
         # Get radicals for kanji
         try:
+            # todo: should sort radicals by stroke count?
             return pickle.loads(self.r.get(kanji))
         except TypeError:
             return []

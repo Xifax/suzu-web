@@ -98,6 +98,7 @@ $ -> $('ruby').click ->
         type: 'GET'
         dataType: 'json'
         success: (data, textStatus, jqXHR) ->
+            # todo: if nothing is found -> display notification
             # Prepare examples
             text = '<dl>'
             for example in data.examples
