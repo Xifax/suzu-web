@@ -141,10 +141,11 @@
         dataType: 'json',
         success: function(data, textStatus, jqXHR) {
           var example, key, text, value, _i, _len, _ref;
-          if (!(data.examples != null)) {
+          if (data.examples.length === 0) {
             humane.log('Ooops, no examples found!', {
-              timeout: 1000
+              timeout: 2000
             });
+            $('.loader-left').fadeToggle(100);
             return;
           }
           text = '<dl>';

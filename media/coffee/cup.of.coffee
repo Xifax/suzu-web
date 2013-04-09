@@ -94,13 +94,15 @@ $ -> $('ruby').click ->
     # Display progressbar
     $('.loader-left').fadeToggle(250)
     #$('.loader-right').fadeToggle(250)
+    # TODO: may perform one request, instead of a two!
     $.ajax '/examples/' + term,
         type: 'GET'
         dataType: 'json'
         success: (data, textStatus, jqXHR) ->
             # If nothing is found -> display notification
-            if !data.examples?
-                humane.log('Ooops, no examples found!',  { timeout: 1000})
+            if data.examples.length is 0
+                humane.log('Ooops, no examples found!',  { timeout: 2000})
+                $('.loader-left').fadeToggle(100)
                 return
 
             # Prepare examples
@@ -120,6 +122,7 @@ $ -> $('ruby').click ->
             # Display examples
             if not right_slided
                 #slide '.toolbar-left', '.toolbar-right'
+                # TODO: if already visible -> animate
                 slide '.toolbar-right'
                 right_slided = not right_slided
 

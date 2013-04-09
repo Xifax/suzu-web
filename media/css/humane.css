@@ -11,10 +11,11 @@
 }
 .humane,
 .humane-jackedup {
-  font-family: Helvetica Neue, Helvetica, san-serif;
+  /*font-family: Helvetica Neue, Helvetica, san-serif;*/
+  font-family: 'Volcorn', Georgia, serif;
   font-size: 18px;
   letter-spacing: -1px;
-  top: 20px;
+  top: 25px;
   left: 30%;
   opacity: 0;
   width: 40%;

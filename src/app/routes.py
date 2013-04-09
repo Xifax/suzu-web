@@ -128,6 +128,8 @@ def lookup_item(key):
     else:
         return {'result': 'error', 'reason': 'Unsupported language'}
 
+# TODO: implement single route for examples + similar + decomposition!
+
 
 @route('/examples/:term')
 def get_examples(term):
