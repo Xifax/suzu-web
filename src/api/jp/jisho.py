@@ -73,6 +73,10 @@ class Jisho:
 
         return islice(results.iteritems(), limit)
 
+    def decompose(self, word):
+        """Get word decomposition by kanji"""
+        pass
+
 
 if __name__ == '__main__':
     for item, value in Jisho().define(u'琉'):

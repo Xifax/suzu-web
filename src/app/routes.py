@@ -128,8 +128,6 @@ def lookup_item(key):
     else:
         return {'result': 'error', 'reason': 'Unsupported language'}
 
-# TODO: implement single route for examples + similar + decomposition!
-
 
 @route('/examples/:term')
 def get_examples(term):
@@ -146,6 +144,16 @@ def get_similar(term):
     similar = [item['translate'] for item in Wordnet().lookup(term)]
     # TODO: remove identical words
     return {'similar': similar}
+
+
+@route('/info/:term')
+def get_info(term):
+    """Lookup info for left and right toolbars simultaneously"""
+    term = unicode(term, 'utf-8')
+    examples = Weblio().examples(term)
+    #similar = [item['translate'] for item in Wordnet().lookup(term)]
+    decomposition = {}
+    return {'decomposition': decomposition, 'examples': examples}
 
 
 @route('/add/:key')

@@ -86,15 +86,14 @@ $ -> $('.roll').click ->
         reload()
 
 # Lookup examples in weblio on click
-# TODO: also show similar words in left tab?
 # TODO: show compound decomposition in left tab?
 $ -> $('ruby').click ->
     # Get usage text
     term = $(this).find('rb').text().trim()
     # Display progressbar
     $('.loader-left').fadeToggle(250)
-    #$('.loader-right').fadeToggle(250)
     # TODO: may perform one request, instead of a two!
+    #$.ajax '/info/' + term,
     $.ajax '/examples/' + term,
         type: 'GET'
         dataType: 'json'
@@ -113,40 +112,44 @@ $ -> $('ruby').click ->
                     text += "<dt>#{key}</dt><dd>#{value}</dd>"
             text += '</dl>'
 
-            $('.toolbar-right').html(text)
+            # Animate content updated (it rhymes!)
+            if $('.toolbar-right').css('display') == 'block'
+                $('.toolbar-right').fadeOut(150,
+                    (-> $(this).html(text).fadeIn(150) )
+                )
+            else
+                $('.toolbar-right').html(text)
 
             # Hide loader
-            #$('.loader-right').fadeToggle(100)
             $('.loader-left').fadeToggle(100)
 
             # Display examples
             if not right_slided
-                #slide '.toolbar-left', '.toolbar-right'
-                # TODO: if already visible -> animate
                 slide '.toolbar-right'
                 right_slided = not right_slided
 
-    #$.ajax '/similar/' + term,
-        #type: 'GET'
-        #dataType: 'json'
-        #success: (data, textStatus, jqXHR) ->
-            ## Prepare similar words
-            #text = '<ul>'
-            ## TODO: implement 'cloud tag' similar composition
-            #for similar in data.similar
-                #for word in similar.split(',')
-                    #console.log word
-                    #text += "<li>#{word}</li>"
-            #text += '</ul>'
+            ###
 
-            ## Hide left|right loader
-            #$('.loader-left').fadeToggle(100)
+            # Prepare similar words
+            text = '<ul>'
+            console.log(data)
+            # TODO: implement 'cloud tag' similar composition
+            for similar in data.similar
+                for word in similar.split(',')
+                    console.log word
+                    text += "<li>#{word}</li>"
+            text += '</ul>'
 
-            #$('.toolbar-left').html(text)
+            $('.toolbar-left').html(text)
 
-            ## Display similar words
-            #if not left_slided
-                #slide '.toolbar-left'
-                #left_slided = not left_slided
+            # Display similar words
+            if not left_slided
+                slide '.toolbar-left'
+                left_slided = not left_slided
+
+            # Hide loader
+            $('.loader-left').fadeToggle(100)
+
+            ###
 
 ## Home page end ##

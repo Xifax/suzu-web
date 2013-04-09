@@ -159,12 +159,41 @@
             }
           }
           text += '</dl>';
-          $('.toolbar-right').html(text);
+          if ($('.toolbar-right').css('display') === 'block') {
+            $('.toolbar-right').fadeOut(150, (function() {
+              return $(this).html(text).fadeIn(150);
+            }));
+          } else {
+            $('.toolbar-right').html(text);
+          }
           $('.loader-left').fadeToggle(100);
           if (!right_slided) {
             slide('.toolbar-right');
             return right_slided = !right_slided;
           }
+          /*
+          
+                      # Prepare similar words
+                      text = '<ul>'
+                      console.log(data)
+                      # TODO: implement 'cloud tag' similar composition
+                      for similar in data.similar
+                          for word in similar.split(',')
+                              console.log word
+                              text += "<li>#{word}</li>"
+                      text += '</ul>'
+          
+                      $('.toolbar-left').html(text)
+          
+                      # Display similar words
+                      if not left_slided
+                          slide '.toolbar-left'
+                          left_slided = not left_slided
+          
+                      # Hide loader
+                      $('.loader-left').fadeToggle(100)
+          */
+
         }
       });
     });
