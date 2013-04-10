@@ -131,6 +131,7 @@ $ -> $('ruby').click ->
                 # kanji itself
                 details += "<dt>#{kanji}</dt>"
 
+                details += '<hr/>'
                 # readings
                 details += "#{info.on}"
                 if info.kun
@@ -141,7 +142,6 @@ $ -> $('ruby').click ->
                 # translation
                 details += "<br/>#{info.meanings}"
                 details += '</dd>'
-                details += '<hr/>'
 
             details += '</dl>'
 

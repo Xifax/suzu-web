@@ -175,6 +175,7 @@
           for (kanji in _ref1) {
             info = _ref1[kanji];
             details += "<dt>" + kanji + "</dt>";
+            details += '<hr/>';
             details += "" + info.on;
             if (info.kun) {
               details += " | " + info.kun;
@@ -184,7 +185,6 @@
             }
             details += "<br/>" + info.meanings;
             details += '</dd>';
-            details += '<hr/>';
           }
           details += '</dl>';
           if ($('.toolbar-left').css('display') === 'block') {
