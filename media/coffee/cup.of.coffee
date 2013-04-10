@@ -112,7 +112,7 @@ $ -> $('ruby').click ->
                     text += "<dt>#{key}</dt><dd>#{value}</dd>"
             text += '</dl>'
 
-            # Animate content updated (it rhymes!)
+            # Animate content updated
             if $('.toolbar-right').css('display') == 'block'
                 $('.toolbar-right').fadeOut(150,
                     (-> $(this).html(text).fadeIn(150) )

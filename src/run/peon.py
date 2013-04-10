@@ -258,3 +258,7 @@ class Peon:
             return Key(value=u'')
         else:
             return key
+
+    def count(self, category='kanji', status='new'):
+        """Count objects by category and status"""
+        return len(Key.objects(category=category, status=status))

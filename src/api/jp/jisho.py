@@ -17,12 +17,16 @@ from bs4 import BeautifulSoup
 class Jisho:
 
     def __init__(self):
+        # Starting with
         self.url = u'http://jisho.org/words?jap=%s&eng=&dict=edict'
+        # Any position
+        self.fuzzy_url = u'http://jisho.org/words?jap=*%s*&eng=&dict=edict'
 
-    def lookup(self, term):
-        """Lookup term on jisho"""
+    def lookup(self, term, fuzzy=True):
+        """Lookup term on Jisho"""
+        url = self.fuzzy_url if fuzzy else self.url
         try:
-            return requests.get(self.url % term).content
+            return requests.get(url % term).content
         except RequestException:
             return ''
 

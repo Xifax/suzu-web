@@ -40,8 +40,7 @@ def crawl(limit):
 @arg('--limit', default=100, help='Process no more than')
 def prepare_usages(category, limit):
     """Generate usages for unprocessed items"""
-    peon = Peon()
-    peon.process(category, limit)
+    Peon().process(category, limit)
 
 
 @arg('--category', default='kanji', help='Item category (e.g., kanji)')
@@ -58,9 +57,20 @@ def get_random(args):
         print usage.value()
 
 
+@arg('--category', default='kanji', help='Item category (e.g., kanji)')
+def count_new(category):
+    """Count unprocessed items"""
+    print Peon().count(category, 'new')
+
+
 if __name__ == '__main__':
     parser = ArghParser()
     parser.add_commands([
-        prepare_usages, prepare_radicals, get_random, get_radicals, crawl
+        prepare_usages,
+        prepare_radicals,
+        get_random,
+        get_radicals,
+        crawl,
+        count_new,
     ])
     parser.dispatch()
