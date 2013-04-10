@@ -103,9 +103,9 @@ class Jisho:
 
                 details[kanji] = {
                     'meanings': meanings.replace(';', ', '),
-                    'on': on.replace('Japanese on: ', '').strip(),
-                    'kun': kun.replace('Japanese kun: ', '').strip(),
-                    'names': names.replace('Japanese names: ', '').strip()
+                    'on': on.replace('Japanese on:', '').strip(),
+                    'kun': kun.replace('Japanese kun:', '').strip(),
+                    'names': names.replace('Japanese names:', '').strip()
                 }
         except RequestException:
             pass

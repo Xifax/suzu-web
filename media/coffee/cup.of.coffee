@@ -139,8 +139,9 @@ $ -> $('ruby').click ->
                 if info.names
                     details += " | #{info.names}"
 
-                # translation
-                details += "<br/>#{info.meanings}"
+                # translation (with trimmed ',')
+                meaning = info.meanings.replace /[,\s]+$/g, ''
+                details += "<br/><span class='meaning'>#{meaning}</span>"
                 details += '</dd>'
 
             details += '</dl>'

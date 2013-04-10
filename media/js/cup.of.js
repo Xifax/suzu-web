@@ -140,7 +140,7 @@
         type: 'GET',
         dataType: 'json',
         success: function(data, textStatus, jqXHR) {
-          var details, example, info, kanji, key, text, value, _i, _len, _ref, _ref1;
+          var details, example, info, kanji, key, meaning, text, value, _i, _len, _ref, _ref1;
           if (data.examples.length === 0) {
             humane.log('Ooops, no examples found!', {
               timeout: 2000
@@ -183,7 +183,8 @@
             if (info.names) {
               details += " | " + info.names;
             }
-            details += "<br/>" + info.meanings;
+            meaning = info.meanings.replace(/[,\s]+$/g, '');
+            details += "<br/><span class='meaning'>" + meaning + "</span>";
             details += '</dd>';
           }
           details += '</dl>';
