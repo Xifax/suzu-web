@@ -104,16 +104,9 @@
         color: #363636
         font-style: normal
 
-.toolbar-right
-    @extends .toolbar-side
-
-    right: -10px
-
     dl
         vertical-align: middle
-        top:50%
         padding-top: 10px
-        padding-right: 20px
 
     dt
         font-size: 23px
@@ -128,7 +121,32 @@
         margin-left: 20px
         font-family: 'Volcorn', Georgia, serif
 
+.toolbar-right
+    @extends .toolbar-side
+    right: -10px
+
+    dl
+        padding-right: 20px
+
+    dt
+        font-size: 23px
+
 .toolbar-left
     @extends .toolbar-side
     left: -10px
 
+    dl
+        vertical-align: middle
+        padding-top: 10px
+        padding-left: 20px
+
+    dt
+        font-size: 30px
+        line-height: 30px
+        color: #5E5E5E
+
+    hr
+        margin: 4px
+        border: 0;
+        height: 1px;
+        background-image: -moz-linear-gradient(left, rgba(102,102,102,0), rgba(102,102,102,0.75), rgba(102,102,102,0))

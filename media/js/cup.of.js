@@ -136,11 +136,11 @@
       var term;
       term = $(this).find('rb').text().trim();
       $('.loader-left').fadeToggle(250);
-      return $.ajax('/examples/' + term, {
+      return $.ajax('/info/' + term, {
         type: 'GET',
         dataType: 'json',
         success: function(data, textStatus, jqXHR) {
-          var example, key, text, value, _i, _len, _ref;
+          var details, example, info, kanji, key, text, value, _i, _len, _ref, _ref1;
           if (data.examples.length === 0) {
             humane.log('Ooops, no examples found!', {
               timeout: 2000
@@ -166,34 +166,39 @@
           } else {
             $('.toolbar-right').html(text);
           }
-          $('.loader-left').fadeToggle(100);
           if (!right_slided) {
             slide('.toolbar-right');
-            return right_slided = !right_slided;
+            right_slided = !right_slided;
           }
-          /*
-          
-                      # Prepare similar words
-                      text = '<ul>'
-                      console.log(data)
-                      # TODO: implement 'cloud tag' similar composition
-                      for similar in data.similar
-                          for word in similar.split(',')
-                              console.log word
-                              text += "<li>#{word}</li>"
-                      text += '</ul>'
-          
-                      $('.toolbar-left').html(text)
-          
-                      # Display similar words
-                      if not left_slided
-                          slide '.toolbar-left'
-                          left_slided = not left_slided
-          
-                      # Hide loader
-                      $('.loader-left').fadeToggle(100)
-          */
-
+          details = '<dl>';
+          _ref1 = data.details;
+          for (kanji in _ref1) {
+            info = _ref1[kanji];
+            details += "<dt>" + kanji + "</dt>";
+            details += "" + info.on;
+            if (info.kun) {
+              details += " | " + info.kun;
+            }
+            if (info.names) {
+              details += " | " + info.names;
+            }
+            details += "<br/>" + info.meanings;
+            details += '</dd>';
+            details += '<hr/>';
+          }
+          details += '</dl>';
+          if ($('.toolbar-left').css('display') === 'block') {
+            $('.toolbar-left').fadeOut(150, (function() {
+              return $(this).html(details).fadeIn(150);
+            }));
+          } else {
+            $('.toolbar-left').html(details);
+          }
+          if (!left_slided) {
+            slide('.toolbar-left');
+            left_slided = !left_slided;
+          }
+          return $('.loader-left').fadeToggle(100);
         }
       });
     });

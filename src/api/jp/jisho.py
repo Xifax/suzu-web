@@ -21,6 +21,8 @@ class Jisho:
         self.url = u'http://jisho.org/words?jap=%s&eng=&dict=edict'
         # Any position
         self.fuzzy_url = u'http://jisho.org/words?jap=*%s*&eng=&dict=edict'
+        # Details
+        self.details_url = u'http://jisho.org/kanji/details/%s'
 
     def lookup(self, term, fuzzy=True):
         """Lookup term on Jisho"""
@@ -77,11 +79,42 @@ class Jisho:
 
         return islice(results.iteritems(), limit)
 
-    def decompose(self, word):
-        """Get word decomposition by kanji"""
-        pass
+    def details(self, word):
+        """Get info for each kanji in word"""
+        details = {}
+        try:
+            data = BeautifulSoup(
+                requests.get(self.details_url % word).content, 'lxml'
+            )
+
+            for div in data.find_all('div', 'kanji_result'):
+
+                # Get kanji, its meanings and readings
+                kanji = div.find('h1', 'literal').get_text().strip()
+                meanings = div.find('div', 'english_meanings') \
+                    .get_text(strip=True).replace('English meanings', '')
+                try:
+                    kun, on = div.find('div', 'japanese_readings') \
+                        .get_text().strip().split('\n')
+                    names = u''
+                except ValueError:
+                    kun, on, names = div.find('div', 'japanese_readings') \
+                        .get_text().strip().split('\n')
+
+                details[kanji] = {
+                    'meanings': meanings.replace(';', ', '),
+                    'on': on.replace('Japanese on: ', '').strip(),
+                    'kun': kun.replace('Japanese kun: ', '').strip(),
+                    'names': names.replace('Japanese names: ', '').strip()
+                }
+        except RequestException:
+            pass
+
+        return details
 
 
 if __name__ == '__main__':
-    for item, value in Jisho().define(u'琉'):
-        print item, value
+    for item, value in Jisho().details(u'才凱旋').iteritems():
+        print item
+        for key, data in value.iteritems():
+            print key, data

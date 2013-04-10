@@ -32,6 +32,7 @@ from src.api.language import Language
 from src.api.jp.weblio import Weblio
 from src.api.jp.wordnet import Wordnet
 from src.api.jp.mecab import MeCab
+from src.api.jp.jisho import Jisho
 from src.run.peon import Peon
 
 ###############################################################################
@@ -150,10 +151,12 @@ def get_similar(term):
 def get_info(term):
     """Lookup info for left and right toolbars simultaneously"""
     term = unicode(term, 'utf-8')
-    examples = Weblio().examples(term)
-    #similar = [item['translate'] for item in Wordnet().lookup(term)]
-    decomposition = {}
-    return {'decomposition': decomposition, 'examples': examples}
+    #examples = Weblio().examples(term)
+    #details = Jisho().details(term)
+    return {
+        'details': Jisho().details(term),
+        'examples': Weblio().examples(term)
+    }
 
 
 @route('/add/:key')

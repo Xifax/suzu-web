@@ -93,8 +93,8 @@ $ -> $('ruby').click ->
     # Display progressbar
     $('.loader-left').fadeToggle(250)
     # TODO: may perform one request, instead of a two!
-    #$.ajax '/info/' + term,
-    $.ajax '/examples/' + term,
+    $.ajax '/info/' + term,
+    #$.ajax '/examples/' + term,
         type: 'GET'
         dataType: 'json'
         success: (data, textStatus, jqXHR) ->
@@ -120,36 +120,45 @@ $ -> $('ruby').click ->
             else
                 $('.toolbar-right').html(text)
 
-            # Hide loader
-            $('.loader-left').fadeToggle(100)
-
             # Display examples
             if not right_slided
                 slide '.toolbar-right'
                 right_slided = not right_slided
 
-            ###
+            # Prepare details
+            details = '<dl>'
+            for kanji, info of data.details
+                # kanji itself
+                details += "<dt>#{kanji}</dt>"
 
-            # Prepare similar words
-            text = '<ul>'
-            console.log(data)
-            # TODO: implement 'cloud tag' similar composition
-            for similar in data.similar
-                for word in similar.split(',')
-                    console.log word
-                    text += "<li>#{word}</li>"
-            text += '</ul>'
+                # readings
+                details += "#{info.on}"
+                if info.kun
+                    details += " | #{info.kun}"
+                if info.names
+                    details += " | #{info.names}"
 
-            $('.toolbar-left').html(text)
+                # translation
+                details += "<br/>#{info.meanings}"
+                details += '</dd>'
+                details += '<hr/>'
 
-            # Display similar words
+            details += '</dl>'
+
+            # Animate details update
+            if $('.toolbar-left').css('display') == 'block'
+                $('.toolbar-left').fadeOut(150,
+                    (-> $(this).html(details).fadeIn(150) )
+                )
+            else
+                $('.toolbar-left').html(details)
+
+            # Display details toolbar
             if not left_slided
                 slide '.toolbar-left'
                 left_slided = not left_slided
 
             # Hide loader
             $('.loader-left').fadeToggle(100)
-
-            ###
 
 ## Home page end ##
