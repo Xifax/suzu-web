@@ -23,10 +23,13 @@ toggle = (divs...) ->
 
 slide = (divs...) ->
     $(div).animate({width:'toggle'}, 150) for div in divs
+    if $(div).css('display') == 'block'
+        $(div).css('display', 'table')
 
 # Lock|unlock items
 lock = (items...) ->
     $('.' + item).toggleClass(item + '-locked') for item in items
+
 
 ## Home page ##
 
@@ -58,11 +61,11 @@ $ -> $('.circle').mousedown( (event) ->
 
             # TODO: refactor!
             # TODO: fix error, when no popup on click
-            if $('.toolbar-right').css('display') == 'block'
+            if $('.toolbar-right').css('display') == 'table'
                 slide '.toolbar-right'
                 right_slided = not right_slided
 
-            if $('.toolbar-left').css('display') == 'block'
+            if $('.toolbar-left').css('display') == 'table'
                 slide '.toolbar-left'
                 left_slided = not left_slided
         # scroller click
@@ -113,12 +116,12 @@ $ -> $('ruby').click ->
             text += '</dl>'
 
             # Animate content updated
-            if $('.toolbar-right').css('display') == 'block'
-                $('.toolbar-right').fadeOut(150,
-                    (-> $(this).html(text).fadeIn(150) )
+            if $('.toolbar-right').css('display') == 'table'
+                $('.content-right').fadeOut(150,
+                    (-> $(this).html(text).fadeIn(150))
                 )
             else
-                $('.toolbar-right').html(text)
+                $('.content-right').html(text)
 
             # Display examples
             if not right_slided
@@ -147,12 +150,12 @@ $ -> $('ruby').click ->
             details += '</dl>'
 
             # Animate details update
-            if $('.toolbar-left').css('display') == 'block'
-                $('.toolbar-left').fadeOut(150,
-                    (-> $(this).html(details).fadeIn(150) )
+            if $('.toolbar-left').css('display') == 'table'
+                $('.content-left').fadeOut(150,
+                    (-> $(this).html(details).fadeIn(150))
                 )
             else
-                $('.toolbar-left').html(details)
+                $('.content-left').html(details)
 
             # Display details toolbar
             if not left_slided

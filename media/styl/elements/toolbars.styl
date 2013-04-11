@@ -65,9 +65,10 @@
 
     .rads
         font-size: 40px
-        font-family: 'IPAMincho','TakaoExMincho'
-        // TODO: use chinese font?
+        font-family: "FangSong", "仿宋", STFangSong, "华文仿宋", serif
+        //font-family: 'IPAMincho','TakaoExMincho'
         //font-family: '宋体', 'PMingLiU'
+        //font-family: Hei, SimSun, '宋体', '黑体', '微软雅黑', sans-serif
 
         .rad:hover
             color: #1D95D1
@@ -95,6 +96,7 @@
     height: 59%
 
     text-align: center
+    vertical-align: middle
 
     display: none
 
@@ -106,7 +108,7 @@
 
     dl
         vertical-align: middle
-        padding-top: 10px
+        padding-bottom: 20px
 
     dt
         font-size: 23px
@@ -120,6 +122,12 @@
         margin-bottom: 10px
         margin-left: 20px
         font-family: 'Volcorn', Georgia, serif
+
+.content-left, .content-right
+    display: table-cell
+    vertical-align: middle
+    text-align: center
+    max-height: 59%
 
 .toolbar-right
     @extends .toolbar-side
@@ -137,7 +145,6 @@
 
     dl
         vertical-align: middle
-        padding-top: 10px
         padding-left: 20px
 
     dt

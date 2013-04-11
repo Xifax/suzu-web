@@ -40,16 +40,17 @@
   };
 
   slide = function() {
-    var div, divs, _i, _len, _results;
+    var div, divs, _i, _len;
     divs = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-    _results = [];
     for (_i = 0, _len = divs.length; _i < _len; _i++) {
       div = divs[_i];
-      _results.push($(div).animate({
+      $(div).animate({
         width: 'toggle'
-      }, 150));
+      }, 150);
     }
-    return _results;
+    if ($(div).css('display') === 'block') {
+      return $(div).css('display', 'table');
+    }
   };
 
   lock = function() {
@@ -93,11 +94,11 @@
             type: 'GET'
           });
           lock('kanji', 'circle');
-          if ($('.toolbar-right').css('display') === 'block') {
+          if ($('.toolbar-right').css('display') === 'table') {
             slide('.toolbar-right');
             right_slided = !right_slided;
           }
-          if ($('.toolbar-left').css('display') === 'block') {
+          if ($('.toolbar-left').css('display') === 'table') {
             slide('.toolbar-left');
             return left_slided = !left_slided;
           }
@@ -159,12 +160,12 @@
             }
           }
           text += '</dl>';
-          if ($('.toolbar-right').css('display') === 'block') {
-            $('.toolbar-right').fadeOut(150, (function() {
+          if ($('.toolbar-right').css('display') === 'table') {
+            $('.content-right').fadeOut(150, (function() {
               return $(this).html(text).fadeIn(150);
             }));
           } else {
-            $('.toolbar-right').html(text);
+            $('.content-right').html(text);
           }
           if (!right_slided) {
             slide('.toolbar-right');
@@ -188,12 +189,12 @@
             details += '</dd>';
           }
           details += '</dl>';
-          if ($('.toolbar-left').css('display') === 'block') {
-            $('.toolbar-left').fadeOut(150, (function() {
+          if ($('.toolbar-left').css('display') === 'table') {
+            $('.content-left').fadeOut(150, (function() {
               return $(this).html(details).fadeIn(150);
             }));
           } else {
-            $('.toolbar-left').html(details);
+            $('.content-left').html(details);
           }
           if (!left_slided) {
             slide('.toolbar-left');

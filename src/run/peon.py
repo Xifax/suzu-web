@@ -187,8 +187,8 @@ class Peon:
                         #6. Link fact to key-fact as usages
                         key_fact.usages.append(fact)
 
-                # 1a. If still no usages found
-                if len(key_fact.usages) == 0:
+                # 1a. If still no usages found (or not enough)
+                if len(key_fact.usages) < 2:
                     words = ji.define(key.value, 7)
                     for word, info in words:
                         # 4. Create new Key and corresponding Fact entities
