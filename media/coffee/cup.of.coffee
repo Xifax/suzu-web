@@ -1,6 +1,6 @@
 ## Global states ##
-locked = false
 # TODO: refactor!
+locked = false
 left_slided = false
 right_slided = false
 
@@ -74,7 +74,6 @@ $ -> $('.circle').mousedown( (event) ->
 )
 
 # Toggle top|bottom divs on kanji hover
-# TODO: fix when on page refresh no toolbars is shown
 $ -> $('.kanji').mouseover ->
         if $('.toolbar-top').css('display') == 'none'
             slideToggle '.toolbar-top', '.toolbar-bottom'
@@ -95,9 +94,7 @@ $ -> $('ruby').click ->
     term = $(this).find('rb').text().trim()
     # Display progressbar
     $('.loader-left').fadeToggle(250)
-    # TODO: may perform one request, instead of a two!
     $.ajax '/info/' + term,
-    #$.ajax '/examples/' + term,
         type: 'GET'
         dataType: 'json'
         success: (data, textStatus, jqXHR) ->

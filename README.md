@@ -51,3 +51,15 @@ Modules and their versions listed in:
 Should probably remove major part of npm_requirements, as it's somewhat not in
 use (all compilation is currently happens on client side).
 
+## TODOism
+
+* Implement button 'lookup usages' in right top corner;
+* Fix `Weblio` bug, when english examples are shown instead of japanese;
+* Another possible button: 'lookup additional usages in Jisho';
+* Refactor `routes.py` by separating AJAX, utility and main routes;
+* Update radicals compilation;
+* Implement filtering and CRUD for `list` route;
+* Use jpNetKit instead of code duplication;
+* 'Post-process' method for `peon`, should update status (language, pos, etc)
+for already added items (when no processing happens [except for unique check],
+when adding new items)
