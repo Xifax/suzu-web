@@ -240,6 +240,7 @@ def view_item(key):
 @route('/list')
 def list_items():
     """ List all items """
+    # todo: implement 'view item details on click -> redirect to 'view/%item
     return render('list')
 
 

@@ -52,7 +52,8 @@
             {% endfor %}
 
             {% if(not kanji.usages()) %}
-                <p class="notice">No usages found</p>
+            <!-- todo: implement js-call -->
+                <a href="#" class="lookup-button">No usages found. Click here to lookup.</a>
             {% endif %}
         </div>
 
