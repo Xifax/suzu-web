@@ -7,8 +7,10 @@
 # Imports
 ###############################################################################
 
+# Stdlib
 import os
 from datetime import timedelta, date
+from json import dumps
 
 # Framework modules
 import bottle
@@ -238,8 +240,27 @@ def view_item(key):
 @route('/list')
 def list_items():
     """ List all items """
-    # TODO: show nothing if no items
-    return render('list', items=Key.objects())
+    return render('list')
+
+
+@route('/list_all')
+def list_all():
+    """ List all (AJAX) """
+    items = []
+    for i, item in enumerate(Key.objects()):
+        items.append({
+            'id': i,
+            'value': item.value,
+            'added': item.added.strftime("%Y-%m-%d %H:%M:%S"),
+            'pos': item.pos,
+            'status': item.status,
+            'category': item.category,
+            'lang': item.lang,
+        })
+
+    # NB: bottle allows only dictionary serialization
+    response.content_type = 'application/json'
+    return dumps(items)
 
 
 @route('/hello/:name')
