@@ -13,10 +13,31 @@
     vertical-align: middle
     border-top: 1px solid rgb(221, 221, 221)
 
-.item-list td:hover
-    background-color: Snow
+.items-list th
+    background-color: #dce9f9
+    background-image: linear-gradient(top, #ebf3fc, #dce9f9);
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset
+    text-shadow: 0 1px 0 rgba(255,255,255,.5)
+    border-top: none
+
+.items-list td:first-child, .items-list th:first-child
+    border-left: none
+
+.items-list th:first-child
+    border-radius: 6px 0 0 0
+
+.items-list th:last-child
+    border-radius: 0 6px 0 0
+
+.items-list th:only-child
+    border-radius: 6px 6px 0 0
+
+.backgrid .string-cell,
+.backgrid .integer-cell
+    text-align: center
 
 .backgrid .paginator ul > li > a,
 .backgrid .paginator ul > li > span
-    width: 40px
-    color: SlateBlue
+    width: 50px
+    color: #518FE1
+
