@@ -14,5 +14,5 @@ from src.app.middleware import CustomApp
 import src.app.routes
 
 
-# Run application on port provided from cmd (heroku)
-run(app=CustomApp(app()), host='0.0.0.0', port=sys.argv[1])
+# Run application on port provided from cmd (heroku), use gunicorn server
+run(app=CustomApp(app()), server='gunicorn', host='0.0.0.0', port=sys.argv[1])

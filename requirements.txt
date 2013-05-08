@@ -4,6 +4,8 @@
 
 # Web microframework
 bottle==0.10.11
+# WSGI HTTP Server with pre-fork worker model
+gunicorn==0.17.4
 # Web requests and debugging tools
 Werkzeug==0.8.3
 # Werkzeug plugin for bottle
