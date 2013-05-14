@@ -44,4 +44,6 @@ jcconv==0.1.2
 Scrapy==0.16.3
 # Cli tool
 argh==0.23.0
+# Encoding detection
+chardet==2.1.1
 

@@ -96,6 +96,9 @@ $ -> $('.lookup-button').click ->
     # TODO: Lookup examples for kanji
 
 # TODO: do something when clicking on radikal!
+$ -> $('.rad').click ->
+    rad = $(this).text().trim()
+    console.log(rad)
 
 # Lookup examples in weblio on click
 $ -> $('ruby').click ->

@@ -23,7 +23,7 @@
     _results = [];
     for (_i = 0, _len = divs.length; _i < _len; _i++) {
       div = divs[_i];
-      _results.push($(div).slideToggle(150));
+      _results.push($(div).slideToggle(100));
     }
     return _results;
   };
@@ -46,7 +46,7 @@
       div = divs[_i];
       $(div).animate({
         width: 'toggle'
-      }, 150);
+      }, 100);
     }
     if ($(div).css('display') === 'block') {
       return $(div).css('display', 'table');
@@ -129,6 +129,21 @@
     return $('.roll').click(function() {
       $.get('/lock');
       return reload();
+    });
+  });
+
+  $(function() {
+    return $('.lookup-button').click(function() {
+      var kanji;
+      return kanji = $('.kanji').text().trim();
+    });
+  });
+
+  $(function() {
+    return $('.rad').click(function() {
+      var rad;
+      rad = $(this).text().trim();
+      return console.log(rad);
     });
   });
 

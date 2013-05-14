@@ -18,8 +18,9 @@ from src.db.storage import Storage
 
 def prepare_radicals():
     """Prepare radical decomposition data"""
-    Storage().prepare_radicals()
-    Storage().prepare_radicals_info()
+    Storage().prepare_radicals() \
+        .prepare_radicals_info() \
+        .prepare_reverse_index()
 
 
 @arg('kanji', help='Kanji to lookup')
