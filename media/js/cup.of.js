@@ -143,7 +143,30 @@
     return $('.rad').click(function() {
       var rad;
       rad = $(this).text().trim();
-      return console.log(rad);
+      return $.ajax('/related/' + rad, {
+        type: 'GET',
+        dataType: 'json',
+        success: function(data, textStatus, jqXHR) {
+          var kanji, text, _i, _len;
+          text = '<div class="related-kanji">';
+          for (_i = 0, _len = data.length; _i < _len; _i++) {
+            kanji = data[_i];
+            text += kanji + ' ';
+          }
+          text += '</div>';
+          if (!right_slided) {
+            $('.content-right').html(text);
+            slide('.toolbar-right');
+            return right_slided = !right_slided;
+          } else {
+            if ($('.toolbar-right').css('display') === 'table') {
+              return $('.content-right').fadeOut(150, (function() {
+                return $(this).html(text).fadeIn(150);
+              }));
+            }
+          }
+        }
+      });
     });
   });
 

@@ -11,6 +11,7 @@
 import os
 from datetime import timedelta, date
 from json import dumps
+import random
 
 # Framework modules
 import bottle
@@ -262,6 +263,18 @@ def list_all():
     # NB: bottle allows only dictionary serialization
     response.content_type = 'application/json'
     return dumps(items)
+
+
+@route('/related/:radical')
+def related_kanji(radical):
+    """List all related kanji for specified radical (AJAX) """
+    response.content_type = 'application/json'
+    radical = unicode(radical, 'utf-8')
+    # Display 10-20 randomized kanji
+    # TODO: make random sampling optional?
+    return dumps(random.sample(
+        set(store.find_kanji_with_radical(radical)), 20)
+    )
 
 
 @route('/hello/:name')

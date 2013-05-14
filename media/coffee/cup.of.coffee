@@ -95,10 +95,27 @@ $ -> $('.lookup-button').click ->
     #$('.loader-left').fadeToggle(250)
     # TODO: Lookup examples for kanji
 
-# TODO: do something when clicking on radikal!
+# Show related kanji when clicking on radical
 $ -> $('.rad').click ->
     rad = $(this).text().trim()
-    console.log(rad)
+    $.ajax '/related/' + rad,
+        type: 'GET'
+        dataType: 'json'
+        success: (data, textStatus, jqXHR) ->
+            text = '<div class="related-kanji">'
+            for kanji in data
+                text += kanji + ' '
+            text += '</div>'
+
+            if not right_slided
+                $('.content-right').html(text)
+                slide '.toolbar-right'
+                right_slided = not right_slided
+            else
+                if $('.toolbar-right').css('display') == 'table'
+                    $('.content-right').fadeOut(150,
+                        (-> $(this).html(text).fadeIn(150))
+                    )
 
 # Lookup examples in weblio on click
 $ -> $('ruby').click ->
