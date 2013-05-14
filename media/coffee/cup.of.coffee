@@ -16,13 +16,13 @@ $(window).scroll ->
 
 # Toggle divs
 slideToggle = (divs...) ->
-    $(div).slideToggle(150) for div in divs
+    $(div).slideToggle(100) for div in divs
 
 toggle = (divs...) ->
     $(div).toggle() for div in divs
 
 slide = (divs...) ->
-    $(div).animate({width:'toggle'}, 150) for div in divs
+    $(div).animate({width:'toggle'}, 100) for div in divs
     if $(div).css('display') == 'block'
         $(div).css('display', 'table')
 
@@ -87,8 +87,17 @@ $ -> $('.roll').click ->
         $.get('/lock')
         reload()
 
+# Lookup examples for kanji
+$ -> $('.lookup-button').click ->
+    # Get current kanji
+    kanji = $('.kanji').text().trim()
+    # Display progressbar
+    #$('.loader-left').fadeToggle(250)
+    # TODO: Lookup examples for kanji
+
+# TODO: do something when clicking on radikal!
+
 # Lookup examples in weblio on click
-# TODO: show compound decomposition in left tab?
 $ -> $('ruby').click ->
     # Get usage text
     term = $(this).find('rb').text().trim()
@@ -100,7 +109,7 @@ $ -> $('ruby').click ->
         success: (data, textStatus, jqXHR) ->
             # If nothing is found -> display notification
             if data.examples.length is 0
-                humane.log('Ooops, no examples found!',  { timeout: 2000})
+                humane.log('Ooops, no examples found!',  {timeout: 2000})
                 $('.loader-left').fadeToggle(100)
                 return
 
