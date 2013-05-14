@@ -272,9 +272,12 @@ def related_kanji(radical):
     radical = unicode(radical, 'utf-8')
     # Display 10-20 randomized kanji
     # TODO: make random sampling optional?
-    return dumps(random.sample(
-        set(store.find_kanji_with_radical(radical)), 20)
-    )
+    try:
+        return dumps(random.sample(
+            set(store.find_kanji_with_radical(radical)), 30)
+        )
+    except ValueError:
+        return dumps(store.find_kanji_with_radical(radical))
 
 
 @route('/hello/:name')

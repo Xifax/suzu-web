@@ -36,7 +36,7 @@
 .lookup-button{font-family:'Volcorn',Georgia,serif;font-size:20px;background-color:transparent;-webkit-box-shadow:inset 0 0 3px 0 rgba(0,0,0,0.8);box-shadow:inset 0 0 3px 0 rgba(0,0,0,0.8);-webkit-border-radius:6px;border-radius:6px;border:1px solid #dcdcdc;display:inline-block;padding:6px 24px;line-height:40px;margin-top:25px;text-decoration:none;text-shadow:0 1px 0 #fff;color:#666}
 .lookup-button:hover{background-color:#e9e9e9;-webkit-transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;-ms-transition:all .2s ease-in-out;transition:all .2s ease-in-out}
 .lookup-button:active{position:relative;background-color:#bfbfbf;-webkit-transition:all .1s ease-in-out;-moz-transition:all .1s ease-in-out;-o-transition:all .1s ease-in-out;-ms-transition:all .1s ease-in-out;transition:all .1s ease-in-out}
-.related-kanji{font-size:40px;padding:0 200px 0 200px}
+.related-kanji{font-size:40px;padding:0 60px 0 60px}
 *{margin:0}
 html,body{height:100%}
 body:before{content:"";position:fixed;top:-10px;left:0;width:100%;height:10px;z-index:100;-webkit-box-shadow:0 0 10px rgba(0,0,0,0.8);box-shadow:0 0 10px rgba(0,0,0,0.8);font-size:100%}
