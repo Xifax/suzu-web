@@ -39,6 +39,11 @@ compile:
 watch:
 	node_modules/stylus/bin/stylus -u nib -o media/css/ -w media/styl/
 	node_modules/coffee-script/bin/coffee -o media/js/ -w media/coffee/
+	watchmedo shell-command \
+		--patterns="*.py" \
+		--recursive \
+		--command='pkill -HUP python'\
+		.
 
 minify:
 	echo 'not implemented yet'
