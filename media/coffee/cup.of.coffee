@@ -30,6 +30,29 @@ slide = (divs...) ->
 lock = (items...) ->
     $('.' + item).toggleClass(item + '-locked') for item in items
 
+# Prepare kanji details
+prepare_details = (data) ->
+    # Prepare details
+    details = '<dl>'
+    for kanji, info of data
+        # kanji itself
+        details += "<dt>#{kanji}</dt>"
+
+        details += '<hr/>'
+        # readings
+        details += "#{info.on}"
+        if info.kun
+            details += " | #{info.kun}"
+        if info.names
+            details += " | #{info.names}"
+
+        # translation (with trimmed ',')
+        meaning = info.meanings.replace /[,\s]+$/g, ''
+        details += "<br/><span class='meaning'>#{meaning}</span>"
+        details += '</dd>'
+
+    details += '</dl>'
+
 
 ## Home page ##
 
@@ -137,27 +160,10 @@ $ -> $('.content-right').on('click', '.single-kanji', ->
         success: (data, textStatus, jqXHR) ->
             # TODO: check if found something
             # Prepare details
-            details = '<dl>'
-            for kanji, info of data.info
-                # kanji itself
-                details += "<dt>#{kanji}</dt>"
-
-                details += '<hr/>'
-                # readings
-                details += "#{info.on}"
-                if info.kun
-                    details += " | #{info.kun}"
-                if info.names
-                    details += " | #{info.names}"
-
-                # translation (with trimmed ',')
-                meaning = info.meanings.replace /[,\s]+$/g, ''
-                details += "<br/><span class='meaning'>#{meaning}</span>"
-                details += '</dd>'
-
-            details += '</dl>'
+            details = prepare_details(data.info)
 
             # Animate details update
+            # TODO: should probably move to separate function too
             if $('.toolbar-left').css('display') == 'table'
                 $('.content-left').fadeOut(150,
                     (-> $(this).html(details).fadeIn(150))
@@ -213,25 +219,7 @@ $ -> $('ruby').click ->
                 right_slided = not right_slided
 
             # Prepare details
-            details = '<dl>'
-            for kanji, info of data.details
-                # kanji itself
-                details += "<dt>#{kanji}</dt>"
-
-                details += '<hr/>'
-                # readings
-                details += "#{info.on}"
-                if info.kun
-                    details += " | #{info.kun}"
-                if info.names
-                    details += " | #{info.names}"
-
-                # translation (with trimmed ',')
-                meaning = info.meanings.replace /[,\s]+$/g, ''
-                details += "<br/><span class='meaning'>#{meaning}</span>"
-                details += '</dd>'
-
-            details += '</dl>'
+            details = prepare_details(data.details)
 
             # Animate details update
             if $('.toolbar-left').css('display') == 'table'
