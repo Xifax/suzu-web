@@ -16,11 +16,17 @@ from src.run.peon import Peon
 from src.db.storage import Storage
 
 
-def prepare_radicals():
+@arg('--info', default=True, help='Prepare info for each of the radicals')
+@arg('--reverse', default=False, help='Prepare index keys for reverse search')
+def prepare_radicals(info, reverse):
     """Prepare radical decomposition data"""
-    Storage().prepare_radicals() \
-        .prepare_radicals_info() \
-        .prepare_reverse_index()
+    store = Storage()
+    store.prepare_radicals()
+
+    if info:
+        store.prepare_radicals_info()
+    if reverse:
+        store.prepare_reverse_index()
 
 
 @arg('kanji', help='Kanji to lookup')

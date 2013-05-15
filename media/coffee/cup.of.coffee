@@ -95,16 +95,20 @@ $ -> $('.lookup-button').click ->
     #$('.loader-left').fadeToggle(250)
     # TODO: Lookup examples for kanji
 
+
 # Show related kanji when clicking on radical
 $ -> $('.rad').click ->
     rad = $(this).text().trim()
+    # Display progressbar
+    $('.loader-left').fadeToggle(250)
     $.ajax '/related/' + rad,
         type: 'GET'
         dataType: 'json'
         success: (data, textStatus, jqXHR) ->
             text = '<div class="related-kanji">'
+            # TODO: check if found something
             for kanji in data
-                text += kanji + ' '
+                text += '<span class="single-kanji">' + kanji + '</span>'
             text += '</div>'
 
             if not right_slided
@@ -116,6 +120,60 @@ $ -> $('.rad').click ->
                     $('.content-right').fadeOut(150,
                         (-> $(this).html(text).fadeIn(150))
                     )
+            # Hide progressbar
+            $('.loader-left').fadeToggle(250)
+
+
+# Lookup related kanji info on click (single kanji are generated dynamically!)
+$ -> $('.content-right').on('click', '.single-kanji', ->
+    # Get kanji
+    kanji = $(this).text().trim()
+    # Display progressbar
+    $('.loader-left').fadeToggle(250)
+    # Query controller
+    $.ajax '/kanji_info/' + kanji,
+        type: 'GET'
+        dataType: 'json'
+        success: (data, textStatus, jqXHR) ->
+            # TODO: check if found something
+            # Prepare details
+            details = '<dl>'
+            for kanji, info of data.info
+                # kanji itself
+                details += "<dt>#{kanji}</dt>"
+
+                details += '<hr/>'
+                # readings
+                details += "#{info.on}"
+                if info.kun
+                    details += " | #{info.kun}"
+                if info.names
+                    details += " | #{info.names}"
+
+                # translation (with trimmed ',')
+                meaning = info.meanings.replace /[,\s]+$/g, ''
+                details += "<br/><span class='meaning'>#{meaning}</span>"
+                details += '</dd>'
+
+            details += '</dl>'
+
+            # Animate details update
+            if $('.toolbar-left').css('display') == 'table'
+                $('.content-left').fadeOut(150,
+                    (-> $(this).html(details).fadeIn(150))
+                )
+            else
+                $('.content-left').html(details)
+
+            # Display details toolbar
+            if not left_slided
+                slide '.toolbar-left'
+                left_slided = not left_slided
+
+            # Hide loader
+            $('.loader-left').fadeToggle(100)
+    )
+
 
 # Lookup examples in weblio on click
 $ -> $('ruby').click ->

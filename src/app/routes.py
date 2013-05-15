@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # TODO: readme goes here
+# TODO: move ajax routes to separate script
 
 ###############################################################################
 # Imports
@@ -154,12 +155,17 @@ def get_similar(term):
 def get_info(term):
     """Lookup info for left and right toolbars simultaneously"""
     term = unicode(term, 'utf-8')
-    #examples = Weblio().examples(term)
-    #details = Jisho().details(term)
     return {
         'details': Jisho().details(term),
         'examples': Weblio().examples(term)
     }
+
+
+@route('/kanji_info/:kanji')
+def get_kanji_info(kanji):
+    """Lookup info for single kanji"""
+    kanji = unicode(kanji, 'utf-8')
+    return {'info': Jisho().details(kanji)}
 
 
 @route('/add/:key')

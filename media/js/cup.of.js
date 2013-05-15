@@ -143,6 +143,7 @@
     return $('.rad').click(function() {
       var rad;
       rad = $(this).text().trim();
+      $('.loader-left').fadeToggle(250);
       return $.ajax('/related/' + rad, {
         type: 'GET',
         dataType: 'json',
@@ -151,20 +152,66 @@
           text = '<div class="related-kanji">';
           for (_i = 0, _len = data.length; _i < _len; _i++) {
             kanji = data[_i];
-            text += kanji + ' ';
+            text += '<span class="single-kanji">' + kanji + '</span>';
           }
           text += '</div>';
           if (!right_slided) {
             $('.content-right').html(text);
             slide('.toolbar-right');
-            return right_slided = !right_slided;
+            right_slided = !right_slided;
           } else {
             if ($('.toolbar-right').css('display') === 'table') {
-              return $('.content-right').fadeOut(150, (function() {
+              $('.content-right').fadeOut(150, (function() {
                 return $(this).html(text).fadeIn(150);
               }));
             }
           }
+          return $('.loader-left').fadeToggle(250);
+        }
+      });
+    });
+  });
+
+  $(function() {
+    return $('.content-right').on('click', '.single-kanji', function() {
+      var kanji;
+      kanji = $(this).text().trim();
+      $('.loader-left').fadeToggle(250);
+      return $.ajax('/kanji_info/' + kanji, {
+        type: 'GET',
+        dataType: 'json',
+        success: function(data, textStatus, jqXHR) {
+          var details, info, meaning, _ref;
+          details = '<dl>';
+          _ref = data.info;
+          for (kanji in _ref) {
+            info = _ref[kanji];
+            details += "<dt>" + kanji + "</dt>";
+            details += '<hr/>';
+            details += "" + info.on;
+            if (info.kun) {
+              details += " | " + info.kun;
+            }
+            if (info.names) {
+              details += " | " + info.names;
+            }
+            meaning = info.meanings.replace(/[,\s]+$/g, '');
+            details += "<br/><span class='meaning'>" + meaning + "</span>";
+            details += '</dd>';
+          }
+          details += '</dl>';
+          if ($('.toolbar-left').css('display') === 'table') {
+            $('.content-left').fadeOut(150, (function() {
+              return $(this).html(details).fadeIn(150);
+            }));
+          } else {
+            $('.content-left').html(details);
+          }
+          if (!left_slided) {
+            slide('.toolbar-left');
+            left_slided = !left_slided;
+          }
+          return $('.loader-left').fadeToggle(100);
         }
       });
     });
