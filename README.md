@@ -26,11 +26,12 @@ Uses:
 * Jinja2 (templating engine)
 * Coffe Script (JS superset)
 * Stylus (CSS superset)
+* Grunt (JS task runner)
 
 Required modules and their versions are listed in:
 
 * requirements.txt
-* npm_requirements.txt
+* npm_requirements.txt (actually, quite optional)
 * package.json
 
 ## Project structure
@@ -49,7 +50,7 @@ Required modules and their versions are listed in:
     - `source venv/bin/activate`
 2. Install `npm`;
 3. Run `make init`, it should install required python and npm modules;
-4. Run `make run` to launch application;
+4. Run `make run` to execute Grunt tasks and launch application;
 5. Run `make watch` to reload server and/or recompile styles/js on code change.
 
 ## Additional notes
@@ -61,7 +62,6 @@ use (all compilation is currently happens on developer side).
 
 * Fix `Weblio` bug, when english examples are shown instead of japanese;
 * Another possible button: 'lookup additional usages in Jisho';
-* Refactor `routes.py` by separating AJAX, utility and main routes;
 * Use jpNetKit instead of code duplication;
 * 'Post-process' method for `peon`, should update status (language, pos, etc)
 for already added items (when no processing happens [except for unique check],

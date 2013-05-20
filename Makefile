@@ -33,20 +33,15 @@ kill:
 	ps aux | grep 'python suzu.py 8000' | head -1 | cut -d " " -f 3 | xargs kill
 
 compile:
-	node_modules/stylus/bin/stylus -u nib -o media/css/ -c media/styl/
-	node_modules/coffee-script/bin/coffee -o media/js/ -c media/coffee/
+	node_modules/.bin/grunt
 
 watch:
-	node_modules/stylus/bin/stylus -u nib -o media/css/ -w media/styl/
-	node_modules/coffee-script/bin/coffee -o media/js/ -w media/coffee/
+	node_modules/.bin/grunt watch
 	watchmedo shell-command \
 		--patterns="*.py" \
 		--recursive \
 		--command='pkill -HUP python'\
 		.
-
-minify:
-	echo 'not implemented yet'
 
 link:
 	ln -s ./node_modules/.bin ./bin

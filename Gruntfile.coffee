@@ -2,14 +2,13 @@ module.exports = (grunt) ->
 
   # Project configuration
   grunt.initConfig
-    # TODO: Compile coffeescript to js
-    #coffee:
-      #app:
-        #expand: true
-        #cwd: 'src'
-        #src: ['**/*.coffee']
-        #dest: 'lib'
-        #ext: '.js'
+
+    # Compile coffeescript to js
+    coffee:
+        compile:
+            files:
+                'media/js/cup.of.js': ['media/coffee/*.coffee']
+
     # Concatenate all js files
     concat:
         dist:
@@ -21,7 +20,13 @@ module.exports = (grunt) ->
                 'media/js/jquery.tooltipster.min.js'
             ],
             dest: 'media/js/all.in.one.js'
-    # TODO: Compile stylus to css
+
+    # Compile stylus to css
+    stylus:
+        compile:
+            files:
+                'media/css/style.css': ['media/styl/*.styl']
+
     # Concatenate all css files
     cssmin:
         combine:
@@ -34,16 +39,23 @@ module.exports = (grunt) ->
                     'media/css/glyphs.css'
                 ]
 
-    #watch:
-      #app:
-        #files: '**/*.coffee'
-        #tasks: ['coffee']
+    # Monitor scripts for changes
+    watch:
+        options:
+            livereload: true
+        coffee:
+            files: 'media/coffee/**/*.coffee'
+            tasks: ['coffee', 'concat']
+        stylus:
+            files: 'media/styl/**/*.styl'
+            tasks: ['stylus', 'cssmin']
 
-  # These plugins provide necessary tasks.
-  #grunt.loadNpmTasks 'grunt-contrib-coffee'
-  #grunt.loadNpmTasks 'grunt-contrib-watch'
+  # Load required npm tasks
+  grunt.loadNpmTasks 'grunt-contrib-coffee'
+  grunt.loadNpmTasks 'grunt-contrib-stylus'
   grunt.loadNpmTasks 'grunt-contrib-concat'
   grunt.loadNpmTasks 'grunt-contrib-cssmin'
+  grunt.loadNpmTasks 'grunt-contrib-watch'
 
   # Define default task
-  grunt.registerTask 'default', ['cssmin', 'concat']
+  grunt.registerTask 'default', ['coffee', 'stylus', 'concat', 'cssmin']
