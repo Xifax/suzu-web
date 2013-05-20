@@ -187,9 +187,22 @@
     transition: all 0.2s ease-in-out
 
 .lookup-button:active
-    position:relative;
     background-color:#BFBFBF
     transition: all 0.1s ease-in-out
+
+.tool-button
+    @extends .lookup-button
+    padding: 2px 6px
+
+.tool-button:hover
+    @extends .lookup-button:hover
+
+.tool-button:active
+    @extends .lookup-button:active
+
+.buttons-left
+    position: absolute
+    left: 20px
 
 .info
     font-family: 'IPAMincho','TakaoExMincho'
