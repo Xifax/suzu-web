@@ -56,8 +56,9 @@ db = connectMongo()
 # Initialize Redis
 store = Storage()
 
+
 ###############################################################################
-# Describing route handlers
+# Separate pages
 ###############################################################################
 
 
@@ -83,11 +84,27 @@ def index():
     )
 
 
-@route('/media/<filepath:path>')
-def server_static(filepath):
-    """Serve static assets"""
-    # Note the relative paths!
-    return static_file(filepath, root='./media/')
+@route('/view/:key')
+def view_item(key):
+    """ View existing kanji """
+    kanji = unicode(key, 'utf-8')
+    # TODO: test if such kanji exists
+    radicals = store.get_radicals(kanji)
+    session = request.environ.get('beaker.session')
+    return render(
+        'home',
+        kanji=Peon(db).get_item(kanji),
+        radicals=radicals,
+        rad_info=store.get_info_for_all(radicals),
+        lock=session.get('toggled', False)
+    )
+
+
+@route('/list')
+def list_items():
+    """ List all items """
+    # todo: implement 'view item details on click -> redirect to 'view/%item
+    return render('list')
 
 
 @route('/lookup/:key')
@@ -134,38 +151,9 @@ def lookup_item(key):
         return {'result': 'error', 'reason': 'Unsupported language'}
 
 
-@route('/examples/:term')
-def get_examples(term):
-    """Lookup examples for item in Weblio"""
-    term = unicode(term, 'utf-8')
-    examples = Weblio().examples(term)
-    return {'examples': examples}
-
-
-@route('/similar/:term')
-def get_similar(term):
-    """Lookup similar words for item in Weblio"""
-    term = unicode(term, 'utf-8')
-    similar = [item['translate'] for item in Wordnet().lookup(term)]
-    # TODO: remove identical words
-    return {'similar': similar}
-
-
-@route('/info/:term')
-def get_info(term):
-    """Lookup info for left and right toolbars simultaneously"""
-    term = unicode(term, 'utf-8')
-    return {
-        'details': Jisho().details(term),
-        'examples': Weblio().examples(term)
-    }
-
-
-@route('/kanji_info/:kanji')
-def get_kanji_info(kanji):
-    """Lookup info for single kanji"""
-    kanji = unicode(kanji, 'utf-8')
-    return {'info': Jisho().details(kanji)}
+###############################################################################
+# Api calls
+###############################################################################
 
 
 @route('/add/:key')
@@ -228,27 +216,43 @@ def get_item(key):
     }
 
 
-@route('/view/:key')
-def view_item(key):
-    """ View existing kanji """
-    kanji = unicode(key, 'utf-8')
-    # TODO: test if such kanji exists
-    radicals = store.get_radicals(kanji)
-    session = request.environ.get('beaker.session')
-    return render(
-        'home',
-        kanji=Peon(db).get_item(kanji),
-        radicals=radicals,
-        rad_info=store.get_info_for_all(radicals),
-        lock=session.get('toggled', False)
-    )
+###############################################################################
+# Ajax requests
+###############################################################################
 
 
-@route('/list')
-def list_items():
-    """ List all items """
-    # todo: implement 'view item details on click -> redirect to 'view/%item
-    return render('list')
+@route('/examples/:term')
+def get_examples(term):
+    """Lookup examples for item in Weblio"""
+    term = unicode(term, 'utf-8')
+    examples = Weblio().examples(term)
+    return {'examples': examples}
+
+
+@route('/similar/:term')
+def get_similar(term):
+    """Lookup similar words for item in Weblio"""
+    term = unicode(term, 'utf-8')
+    similar = [item['translate'] for item in Wordnet().lookup(term)]
+    # TODO: remove identical words
+    return {'similar': similar}
+
+
+@route('/info/:term')
+def get_info(term):
+    """Lookup info for left and right toolbars simultaneously"""
+    term = unicode(term, 'utf-8')
+    return {
+        'details': Jisho().details(term),
+        'examples': Weblio().examples(term)
+    }
+
+
+@route('/kanji_info/:kanji')
+def get_kanji_info(kanji):
+    """Lookup info for single kanji"""
+    kanji = unicode(kanji, 'utf-8')
+    return {'info': Jisho().details(kanji)}
 
 
 @route('/list_all')
@@ -286,17 +290,6 @@ def related_kanji(radical):
         return dumps(store.find_kanji_with_radical(radical))
 
 
-@route('/hello/:name')
-def say_hello(name):
-    """Testing page"""
-    greet = {'en': 'Hello'}
-    language = req.accept_languages.best_match(greet.keys())
-    if language:
-        return wz.Response('%s %s!' % (greet[language], name))
-    else:
-        raise wz.exceptions.NotAcceptable()
-
-
 @route('/lock')
 def lock():
     """Lock|unlock kanji for today"""
@@ -332,6 +325,11 @@ def toggled():
     return {'status': session.get('toggled', False)}
 
 
+###############################################################################
+# Utility routes
+###############################################################################
+
+
 @get('/debug')
 def debug():
     """Debug info"""
@@ -360,7 +358,18 @@ def test():
     s['test'] = s.get('test', 0) + 1
     s.save()
     return 'Test counter: %d' % s['test']
-    #return render('load')
+
+
+###############################################################################
+# Special pages and routes
+###############################################################################
+
+
+@route('/media/<filepath:path>')
+def server_static(filepath):
+    """Serve static assets"""
+    # Note the relative paths!
+    return static_file(filepath, root='./media/')
 
 
 @error(404)
