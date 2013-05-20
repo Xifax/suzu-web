@@ -4,7 +4,7 @@ $(document).ready(function() {
 
     var Items = Backbone.PageableCollection.extend({
         model: Item,
-        url: "list_all",
+        url: "/list_all",
         state: {
             pageSize: 20
         },
