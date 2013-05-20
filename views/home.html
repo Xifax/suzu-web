@@ -55,6 +55,8 @@
             <!-- todo: implement js-call -->
                 <a href="#" class="lookup-button">No usages found. Click here to lookup.</a>
             {% endif %}
+
+            <div class="info-right">熟語</div>
         </div>
 
         <div class="toolbar-bottom"
@@ -62,6 +64,8 @@
             style="display:block"
             {% endif %}
             >
+
+            <div class="info-right">部首</div>
 
             <!-- Page info -->
             <div class="help" style="display:none">
@@ -71,10 +75,6 @@
             </div>
 
             <!-- Radicals for kanji -->
-            <!-- TODO: when clicking on radical, display kanji from:
-                http://nuthatch.com/kanji/demo/radicals.html
-                TODO: use font containing non-SJIS glyphs (chinese?)
-            -->
             <div class="rads">
                 {% for rad in radicals %}
                 <!-- Radikal info -->
@@ -95,24 +95,6 @@
                 </span>
                 {% endfor %}
             </div>
-
-            <div class="example" style="display:none">
-            </div>
-
-            <!-- Definitions for all of the displayed usages -->
-            <!-- TODO: may show japanese example instead? -->
-
-            <div style="display: none">
-                <a class='toggle-button' href='#'>Toggle!</a>
-                <a class='toggle-button' href='#'>Roll!</a>
-                <a class='toggle-button' href='#'>Info!</a>
-            </div>
-
-            <ul class="nav" style="display: none"> 
-              <li><a href="#" class="info">Info</a></li> 
-              <li><a href="#" class="roll">Roll</a></li> 
-              <li><a href="#" class="find">Find</a></li> 
-            </ul> 
 
         </div>
 

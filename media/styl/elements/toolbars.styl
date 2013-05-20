@@ -191,6 +191,28 @@
     background-color:#BFBFBF
     transition: all 0.1s ease-in-out
 
+.info
+    font-family: 'IPAMincho','TakaoExMincho'
+    font-size: 70px
+    color: #C2C2C2
+
+    position: absolute
+    line-height: 100px
+
+    unselectable()
+    cursor: default
+
+.info-right
+    @extends .info
+    top: 0px
+    right: 5px
+    //transform: rotate(45deg)
+
+.info-left
+    @extends .info
+    left: 20px
+    transform: rotate(-30deg)
+
 .related-kanji
     font-size: 40px
     padding: 0px 60px 0px 60px
