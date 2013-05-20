@@ -1,5 +1,5 @@
 (function() {
-  var left_slided, lock, locked, prepare_details, reload, right_slided, slide, slideToggle, toggle,
+  var left_slided, lock, locked, prepare_details, redirect, reload, right_slided, slide, slideToggle, toggle,
     __slice = [].slice;
 
   locked = false;
@@ -10,6 +10,10 @@
 
   reload = function() {
     return location.reload();
+  };
+
+  redirect = function(route) {
+    return window.location = location.protocol + "//" + location.host + "/" + route;
   };
 
   $(window).scroll(function() {
@@ -151,9 +155,17 @@
   });
 
   $(function() {
-    return $('.roll').click(function() {
-      $.get('/lock');
-      return reload();
+    return $('#roll').click(function() {
+      return $.get('/lock');
+    });
+  });
+
+  $(function() {
+    return $('#link').click(function() {
+      var kanji;
+
+      kanji = $('.kanji').text().trim();
+      return redirect('view/' + kanji);
     });
   });
 

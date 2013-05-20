@@ -56,7 +56,8 @@
                 <a href="#" class="lookup-button">No usages found. Click here to lookup.</a>
             {% endif %}
 
-            <div class="info-right">熟語</div>
+            <div class="info-right tooltip"
+                title="Kanji compounds and usages">熟語</div>
         </div>
 
         <div class="toolbar-bottom"
@@ -66,11 +67,14 @@
             >
 
             <div class="buttons-left">
-                <a href="#" class="tool-button icon-lock"></a>
-                <a href="#" class="tool-button icon-link"></a>
+                <a href="#" id="roll" class="tool-button icon-lock tooltip"
+                    title="Roll random kanji for today"></a>
+                <a href="#" id="link" class="tool-button icon-link tooltip"
+                    title="Get direct link for current kanji"></a>
             </div>
 
-            <div class="info-right">部首</div>
+            <div class="info-right tooltip"
+                title="Radical decompostion for kanji">部首</div>
 
             <!-- Page info -->
             <div class="help" style="display:none">

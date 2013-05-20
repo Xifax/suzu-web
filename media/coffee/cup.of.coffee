@@ -8,7 +8,11 @@ right_slided = false
 
 # Reload page
 reload = () ->
-  location.reload()
+    location.reload()
+
+# Redirect to route
+redirect = (route) ->
+    window.location = location.protocol + "//" + location.host + "/" + route
 
 # Do not scroll those elements
 $(window).scroll ->
@@ -106,9 +110,17 @@ $ -> $('.kanji').mouseout ->
             slideToggle '.toolbar-top', '.toolbar-bottom'
 
 # Roll kanji for today
-$ -> $('.roll').click ->
+# TODO: change icon on lock|unlock
+$ -> $('#roll').click ->
         $.get('/lock')
-        reload()
+
+# View current kanji
+# TODO: copy to clipboard instead
+$ -> $('#link').click ->
+    # Get kanji
+    kanji = $('.kanji').text().trim()
+    redirect('view/' + kanji)
+    # TODO: show notification
 
 # Lookup examples for kanji
 $ -> $('.lookup-button').click ->
