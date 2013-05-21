@@ -31,8 +31,8 @@ Uses:
 Required modules and their versions are listed in:
 
 * requirements.txt
-* npm_requirements.txt (actually, quite optional)
 * package.json
+* npm_requirements.txt (actually, quite optional)
 
 ## Project structure
 
@@ -55,8 +55,9 @@ Required modules and their versions are listed in:
 
 ## Additional notes
 
-Should probably remove major part of npm_requirements, as it's somewhat not in
-use (all compilation is currently happens on developer side).
+To use livereload (js|css only) install corresponding plugin for
+Firefox/Chrome/Safari (see _grunt-contrib-watch_ readme),
+run `grunt watch`, then activate the plugin.
 
 ## TODOism
 

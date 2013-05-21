@@ -73,7 +73,7 @@
 .tool-button:hover{color:#292929}
 .buttons-left{position:absolute;left:20px}
 .info,.info-right,.info-left{font-family:'IPAMincho','TakaoExMincho';font-size:70px;color:#c2c2c2;position:absolute;line-height:100px;-moz-user-select:-moz-none;-khtml-user-select:none;-webkit-user-select:none;cursor:default}
-.info-right{top:0;right:5px}
+.info-right{top:0;right:10px}
 .info,.info-right:hover,.info-left{color:#7dc8ed}
 .info-left{left:20px;-webkit-transform:rotate(-30deg);-moz-transform:rotate(-30deg);-o-transform:rotate(-30deg);-ms-transform:rotate(-30deg);transform:rotate(-30deg)}
 .related-kanji{font-size:40px;padding:0 60px 0 60px}
