@@ -22,7 +22,6 @@
 
   slideToggle = function() {
     var div, divs, _i, _len, _results;
-
     divs = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
     _results = [];
     for (_i = 0, _len = divs.length; _i < _len; _i++) {
@@ -34,7 +33,6 @@
 
   toggle = function() {
     var div, divs, _i, _len, _results;
-
     divs = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
     _results = [];
     for (_i = 0, _len = divs.length; _i < _len; _i++) {
@@ -46,7 +44,6 @@
 
   slide = function() {
     var div, divs, _i, _len;
-
     divs = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
     for (_i = 0, _len = divs.length; _i < _len; _i++) {
       div = divs[_i];
@@ -61,7 +58,6 @@
 
   lock = function() {
     var item, items, _i, _len, _results;
-
     items = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
     _results = [];
     for (_i = 0, _len = items.length; _i < _len; _i++) {
@@ -73,7 +69,6 @@
 
   prepare_details = function(data) {
     var details, info, kanji, meaning;
-
     details = '<dl>';
     for (kanji in data) {
       info = data[kanji];
@@ -163,7 +158,6 @@
   $(function() {
     return $('#link').click(function() {
       var kanji;
-
       kanji = $('.kanji').text().trim();
       return redirect('view/' + kanji);
     });
@@ -172,7 +166,6 @@
   $(function() {
     return $('.lookup-button').click(function() {
       var kanji;
-
       return kanji = $('.kanji').text().trim();
     });
   });
@@ -180,7 +173,6 @@
   $(function() {
     return $('.rad').click(function() {
       var rad;
-
       rad = $(this).text().trim();
       $('.loader-left').fadeToggle(250);
       return $.ajax('/related/' + rad, {
@@ -188,7 +180,6 @@
         dataType: 'json',
         success: function(data, textStatus, jqXHR) {
           var kanji, text, _i, _len;
-
           text = '<div class="related-kanji">';
           for (_i = 0, _len = data.length; _i < _len; _i++) {
             kanji = data[_i];
@@ -215,7 +206,6 @@
   $(function() {
     return $('.content-right').on('click', '.single-kanji', function() {
       var kanji;
-
       kanji = $(this).text().trim();
       $('.loader-left').fadeToggle(250);
       return $.ajax('/kanji_info/' + kanji, {
@@ -223,7 +213,6 @@
         dataType: 'json',
         success: function(data, textStatus, jqXHR) {
           var details;
-
           details = prepare_details(data.info);
           if ($('.toolbar-left').css('display') === 'table') {
             $('.content-left').fadeOut(150, (function() {
@@ -245,7 +234,6 @@
   $(function() {
     return $('ruby').click(function() {
       var term;
-
       term = $(this).find('rb').text().trim();
       $('.loader-left').fadeToggle(250);
       return $.ajax('/info/' + term, {
@@ -253,7 +241,6 @@
         dataType: 'json',
         success: function(data, textStatus, jqXHR) {
           var details, example, key, text, value, _i, _len, _ref;
-
           if (data.examples.length === 0) {
             humane.log('Ooops, no examples found!', {
               timeout: 2000

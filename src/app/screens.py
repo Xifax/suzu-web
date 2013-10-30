@@ -116,3 +116,14 @@ def lookup_item(key):
 
     else:
         return {'result': 'error', 'reason': 'Unsupported language'}
+
+
+@get('/export')
+def export():
+    """Export all kanji to csv"""
+    result = u'kanji, category'
+    kanji_list = Peon(db).export('kanji')
+    for kanji in kanji_list:
+        result += u'%s, %s' % (kanji.value, '0')
+
+    return render('export', export=result)

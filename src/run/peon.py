@@ -262,3 +262,7 @@ class Peon:
     def count(self, category='kanji', status='new'):
         """Count objects by category and status"""
         return len(Key.objects(category=category, status=status))
+
+    def export(self, category):
+        """Return all keys in specified catgory"""
+        return Key.objects(category=category)
