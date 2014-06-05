@@ -41,7 +41,7 @@ lxml==2.3.6
 # Convert kana
 jcconv==0.1.2
 # Crawl thy web
-Scrapy==0.16.3
+#Scrapy==0.16.3
 # Cli tool
 argh==0.23.0
 # Encoding detection
