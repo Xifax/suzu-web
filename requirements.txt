@@ -23,15 +23,15 @@ webassets==0.7.1
 # Additional tags for Jinja [unused]
 #jinja2modern==0.2.0
 # Unit testing utility
-nose==1.2.1
+#nose==1.2.1
 # Test coverage plugin for nose
-coverage==3.5.3
+#coverage==3.5.3
 # Mocks for tests
 mock==0.8.0
 # Dependency injection for tests
 #snake-guice==0.4
 # Documentation tool
-sphinx==1.1.3
+#sphinx==1.1.3
 # HTTP library
 requests==0.14.0
 # HTML parser wrapper
@@ -47,6 +47,6 @@ argh==0.23.0
 # Encoding detection
 chardet==2.1.1
 # Allows to reload gunicorn on code change
-watchdog==0.6.0
+#watchdog==0.6.0
 # NewRelic
 newrelic==2.20.0.17
