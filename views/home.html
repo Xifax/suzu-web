@@ -36,20 +36,22 @@
             {% endif %}
             >
             <!-- Kanji compounds and usages -->
-            {% for usage in kanji.usages() %}
-            <span class="tooltip" title="{{ usage.translation()|e }}">
-                <ruby id={{ usage.id }}>
-                    <rb>
-                    {{ usage.emphasize(usage.value(), kanji.value) }}
-                    </rb>
-                    <rp>/</rp>
-                    <rt>
-                    {{ usage.emphasize(usage.reading(), kanji.reading()) }}
-                    </rt>
-                    <rp>/</rp>
-                </ruby>
-            </span>
-            {% endfor %}
+            <div class="toolbar-vertical-center">
+                {% for usage in kanji.usages() %}
+                <span class="tooltip" title="{{ usage.translation()|e }}">
+                    <ruby id={{ usage.id }}>
+                        <rb>
+                        {{ usage.emphasize(usage.value(), kanji.value) }}
+                        </rb>
+                        <rp>/</rp>
+                        <rt>
+                        {{ usage.emphasize(usage.reading(), kanji.reading()) }}
+                        </rt>
+                        <rp>/</rp>
+                    </ruby>
+                </span>
+                {% endfor %}
+            </div>
 
             {% if(not kanji.usages()) %}
             <!-- todo: implement js-call -->
