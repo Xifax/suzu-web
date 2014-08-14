@@ -6,6 +6,17 @@ radical decomposition and examples included.
 
 Application is currently deployed on Heroku: http://suzu.herokuapp.com
 
+## To initialize project
+
+After preparing virtualenv and node modules, run the following:
+
+    ./suzu-cli.py crawl
+    ./suzu-cli.py prepare-radicals
+    ./suzu-cli.py prepare-usages
+
+This should fill the database with kanji and corresponding words based on
+japanese wiki and other web services.
+
 ## General info
 
 Development tools:
