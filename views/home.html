@@ -69,10 +69,17 @@
             >
 
             <div class="buttons-left">
+                {% if not single_item %}
                 <a href="#" id="roll" class="tool-button icon-lock tooltip"
                     title="Roll random kanji for today"></a>
                 <a href="#" id="link" class="tool-button icon-link tooltip"
                     title="Get direct link for current kanji"></a>
+                <a href="#" id="fav" class="tool-button icon-check tooltip"
+                    title="Add to favorites"></a>
+                {% else %}
+                <a href="/" id="home" class="tool-button icon-info tooltip"
+                    title="Back to title"></a>
+                {% endif %}
             </div>
 
             <div class="info-right tooltip"

@@ -46,7 +46,8 @@ def index():
         kanji=kanji,
         radicals=radicals,
         rad_info=store.get_info_for_all(radicals),
-        lock=session.get('toggled', False)
+        lock=session.get('toggled', False),
+        single_item=False
     )
 
 
@@ -62,7 +63,8 @@ def view_item(key):
         kanji=Peon(db).get_item(kanji),
         radicals=radicals,
         rad_info=store.get_info_for_all(radicals),
-        lock=session.get('toggled', False)
+        lock=session.get('toggled', False),
+        single_item=True
     )
 
 
