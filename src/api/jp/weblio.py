@@ -51,7 +51,7 @@ class Weblio:
         if data:
             #for example in data.find_all('div', 'qotC')[-number:]:
             total = data.find_all('div', 'qotC')
-            print len(total)
+            # print len(total)
             n = len(total) / portion
             # Let's take examples from the middle (TODO: golden ratio?)
             for example in total[n: n + number]:
