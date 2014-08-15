@@ -5,6 +5,9 @@
     Application screens
 """
 
+# Additional tools
+import json
+
 # Framework
 from bottle import (
     route,
@@ -39,6 +42,14 @@ def index():
     else:
         kanji = Peon(db).random()
 
+    favorites = request.get_cookie('favorites', secret='secret')
+    if favorites:
+        favorites = json.loads(favorites)
+        if kanji.value in favorites:
+            fav = True
+        else:
+            fav = False
+
     radicals = store.get_radicals(kanji.value)
 
     return render(
@@ -47,6 +58,8 @@ def index():
         radicals=radicals,
         rad_info=store.get_info_for_all(radicals),
         lock=session.get('toggled', False),
+        rolled=lock,
+        fav=fav,
         single_item=False
     )
 
@@ -129,3 +142,12 @@ def export():
         result += u"%s, %s\n" % (kanji.value, '0')
 
     return render('export', export=result)
+
+
+@get('/favs')
+def favs():
+    """Display favorite kanji (saved in cookie)"""
+    favorites = request.get_cookie('favorites', secret='secret')
+    if favorites:
+        favorites = json.loads(favorites)
+        return render('favorites', favorites=favorites)

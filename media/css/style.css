@@ -78,7 +78,7 @@
 .info,.info-right:hover,.info-left{color:#7dc8ed}
 .info-left{left:20px;-webkit-transform:rotate(-30deg);-moz-transform:rotate(-30deg);-o-transform:rotate(-30deg);-ms-transform:rotate(-30deg);transform:rotate(-30deg)}
 .related-kanji{font-size:40px;padding:0 60px 0 60px}
-.single-kanji{padding:10px}
+.single-kanji{display:table-cell;padding:10px}
 .single-kanji:hover{color:#1d95d1;cursor:pointer}
 *{margin:0}
 html,body{height:100%}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="home">
+
+      {% for kanji in favorites %}
+      <p>{{ kanji }}</p>
+      {% endfor %}
+
+    </div>
+
+{% endblock %}

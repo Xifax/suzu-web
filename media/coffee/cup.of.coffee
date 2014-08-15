@@ -130,6 +130,23 @@ $ -> $('.lookup-button').click ->
     #$('.loader-left').fadeToggle(250)
     # TODO: Lookup examples for kanji
 
+# Mark/unmark kanji as favorite
+$ -> $('#fav').click ->
+    # Get current kanji
+    kanji = $('.kanji').text().trim()
+    $.ajax '/toggle_favorite/' + kanji,
+      type: 'GET'
+      dataType: 'json'
+      success: (data, textStatus, jqXHR) ->
+          # Toggle button style
+          if data.result == 'fav'
+            $('#fav').removeClass('icon-check')
+            $('#fav').addClass('icon-cancel')
+            humane.log("#{kanji} added to favorites!",  {timeout: 1000})
+          else
+            $('#fav').removeClass('icon-cancel')
+            $('#fav').addClass('icon-check')
+            humane.log("#{kanji} removed from favorites!",  {timeout: 1000})
 
 # Show related kanji when clicking on radical
 $ -> $('.rad').click ->

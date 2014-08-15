@@ -181,6 +181,32 @@ if(x.isFunction(n))while(r=o[i++])"+"===r[0]?(r=r.slice(1)||"*",(e[r]=e[r]||[]).
   });
 
   $(function() {
+    return $('#fav').click(function() {
+      var kanji;
+      kanji = $('.kanji').text().trim();
+      return $.ajax('/toggle_favorite/' + kanji, {
+        type: 'GET',
+        dataType: 'json',
+        success: function(data, textStatus, jqXHR) {
+          if (data.result === 'fav') {
+            $('#fav').removeClass('icon-check');
+            $('#fav').addClass('icon-cancel');
+            return humane.log("" + kanji + " added to favorites!", {
+              timeout: 1000
+            });
+          } else {
+            $('#fav').removeClass('icon-cancel');
+            $('#fav').addClass('icon-check');
+            return humane.log("" + kanji + " removed from favorites!", {
+              timeout: 1000
+            });
+          }
+        }
+      });
+    });
+  });
+
+  $(function() {
     return $('.rad').click(function() {
       var rad;
       rad = $(this).text().trim();

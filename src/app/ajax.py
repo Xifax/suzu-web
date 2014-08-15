@@ -6,7 +6,7 @@
 """
 
 # Stdlib
-from json import dumps
+from json import dumps, loads
 import random
 from datetime import timedelta, date
 
@@ -134,6 +134,40 @@ def lock():
             'lock',
             kanji_id,
             secret='secret',
-            expires=next_day
+            expires=next_day,
+            path='/'
         )
         return {'result': 'locked', 'id': kanji_id}
+
+
+@route('/toggle_favorite/:kanji')
+def toggle_favorite(kanji):
+    """Toggle kanji as favorite"""
+    kanji = unicode(kanji, 'utf-8')
+    favorites = request.get_cookie('favorites', secret='secret')
+
+    # Check if cookie exists
+    if favorites:
+        # Load json and add/remove kanji from favorites
+        favorites = loads(favorites)
+        if kanji in favorites:
+            favorites.remove(kanji)
+            result = 'unfav'
+        else:
+            favorites.append(kanji)
+            result = 'fav'
+    # Otherwise, initialize cookie
+    else:
+        favorites = [kanji]
+        result = 'fav'
+
+    in_far_future = date.today() + timedelta(days=360)
+    response.set_cookie(
+        'favorites',
+        # Serialize kanji list
+        dumps(favorites),
+        secret='secret',
+        path='/',
+        expires=in_far_future
+    )
+    return {'result': result}
