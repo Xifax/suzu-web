@@ -4,9 +4,17 @@
 
     <div class="home">
 
-      {% for kanji in favorites %}
-      <p>{{ kanji }}</p>
-      {% endfor %}
+      <div class="stats">
+        Total of <strong>{{ favorites|length }}</strong> kanji
+      </div>
+
+      <div class="kanji-grid">
+
+        {% for kanji in favorites %}
+          <div class="kanji-in-grid">{{ kanji }}</div>
+        {% endfor %}
+
+      </div>
 
     </div>
 

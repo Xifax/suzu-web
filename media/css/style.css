@@ -78,8 +78,12 @@
 .info,.info-right:hover,.info-left{color:#7dc8ed}
 .info-left{left:20px;-webkit-transform:rotate(-30deg);-moz-transform:rotate(-30deg);-o-transform:rotate(-30deg);-ms-transform:rotate(-30deg);transform:rotate(-30deg)}
 .related-kanji{font-size:40px;padding:0 60px 0 60px}
-.single-kanji{display:table-cell;padding:10px}
+.single-kanji{padding:10px}
 .single-kanji:hover{color:#1d95d1;cursor:pointer}
+.kanji-grid{margin:0 auto;width:80%;height:80%;text-align:center;background-image:url("../img/pattern/escheresque.png");overflow:hidden;display:block;text-shadow:0 1px 0 #fff;color:#666;-webkit-box-shadow:inset 0 0 10px 0 rgba(0,0,0,0.8);box-shadow:inset 0 0 10px 0 rgba(0,0,0,0.8);-webkit-border-radius:12px;border-radius:12px;position:relative;top:50%;-webkit-transform:translateY(-50%);-moz-transform:translateY(-50%);-o-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%);padding:10px}
+.stats{position:relative;top:5%;padding:10px;margin:0 auto;width:10%;text-align:center;background-image:url("../img/pattern/escheresque.png");text-shadow:0 1px 0 #fff;color:#666;-webkit-box-shadow:inset 0 0 10px 0 rgba(0,0,0,0.7);box-shadow:inset 0 0 10px 0 rgba(0,0,0,0.7);-webkit-border-radius:12px;border-radius:12px}
+.kanji-in-grid{display:block;font-size:70px;float:left;height:100px;margin:8px 8px;width:100px;font-family:'IPAMincho','TakaoExMincho'}
+.kanji-in-grid:hover{color:#1d95d1;cursor:pointer}
 *{margin:0}
 html,body{height:100%}
 body:before{content:"";position:fixed;top:-10px;left:0;width:100%;height:10px;z-index:100;-webkit-box-shadow:0 0 10px rgba(0,0,0,0.8);box-shadow:0 0 10px rgba(0,0,0,0.8);font-size:100%}

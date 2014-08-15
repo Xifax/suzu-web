@@ -149,4 +149,7 @@ def favs():
     favorites = request.get_cookie('favorites', secret='secret')
     if favorites:
         favorites = json.loads(favorites)
-        return render('favorites', favorites=favorites)
+    else:
+        favorites = []
+
+    return render('favorites', favorites=favorites)

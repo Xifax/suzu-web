@@ -1,0 +1,47 @@
+@import 'mixins/effects'
+
+.kanji-grid
+    margin: 0px auto
+    width: 80%
+    height: 80%
+    text-align: center
+    pattern('escheresque')
+    overflow: hidden
+    display: block
+    letterpress()
+
+    box-shadow inset 0px 0px 10px 0px rgba(0,0,0,.8)
+    border-radius: 12px
+
+    position: relative
+    top: 50%
+    transform: translateY(-50%)
+
+    padding: 10px
+
+.stats
+    position: relative
+    top: 5%
+    padding: 10px
+
+    margin: 0px auto
+    width: 10%
+    text-align: center
+    pattern('escheresque')
+    letterpress()
+
+    box-shadow inset 0px 0px 10px 0px rgba(0,0,0,.7)
+    border-radius: 12px
+
+.kanji-in-grid
+    display: block
+    font-size: 70px
+    float: left
+    height: 100px
+    margin: 8px 8px
+    width: 100px
+    font-family: 'IPAMincho','TakaoExMincho'
+
+.kanji-in-grid:hover
+    color: #1D95D1
+    cursor: pointer
