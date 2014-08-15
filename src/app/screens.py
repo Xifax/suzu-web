@@ -43,12 +43,11 @@ def index():
         kanji = Peon(db).random()
 
     favorites = request.get_cookie('favorites', secret='secret')
+    fav = False
     if favorites:
         favorites = json.loads(favorites)
         if kanji.value in favorites:
             fav = True
-        else:
-            fav = False
 
     radicals = store.get_radicals(kanji.value)
 
