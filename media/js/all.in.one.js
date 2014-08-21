@@ -192,17 +192,47 @@ if(x.isFunction(n))while(r=o[i++])"+"===r[0]?(r=r.slice(1)||"*",(e[r]=e[r]||[]).
             $('#fav').removeClass('icon-check');
             $('#fav').addClass('icon-cancel');
             return humane.log("" + kanji + " added to favorites!", {
-              timeout: 1000
+              timeout: 1500
             });
           } else {
             $('#fav').removeClass('icon-cancel');
             $('#fav').addClass('icon-check');
             return humane.log("" + kanji + " removed from favorites!", {
-              timeout: 1000
+              timeout: 1500
             });
           }
         }
       });
+    });
+  });
+
+  $(function() {
+    return $('.kanji-in-grid').click(function() {
+      var kanji;
+      kanji = $(this).text().trim();
+      $('.loader-right').fadeToggle(250);
+      return $.ajax('/kanji_info/' + kanji, {
+        type: 'GET',
+        dataType: 'json',
+        success: function(data, textStatus, jqXHR) {
+          var details;
+          details = prepare_details(data.info);
+          $('.kanji-info').html(details).fadeIn(150);
+          return $('.loader-right').fadeToggle(100);
+        }
+      });
+    });
+  });
+
+  $(function() {
+    return $('.kanji-info').click(function() {
+      return $('.kanji-info').fadeOut(100);
+    });
+  });
+
+  $(function() {
+    return $('.kanji-grid').click(function() {
+      return $('.kanji-info').fadeOut(100);
     });
   });
 

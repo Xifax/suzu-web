@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# TODO: readme goes here
-
 # Generic libs
 import sys
 

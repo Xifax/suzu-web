@@ -4,16 +4,33 @@
 
     <div class="home">
 
+        <div class="loader-right">
+            <div class="outer-circle"></div>
+            <div class="inner-circle"></div>
+            <div class="message-right">Wait...</div>
+        </div>
+
+      <div class="go-back">
+        <a href="/" id="home" class="tool-button">
+          Back
+        </a>
+      </div>
+
       <div class="stats">
         Total of <strong>{{ favorites|length }}</strong> kanji
       </div>
 
+      <!-- Kanji grid -->
       <div class="kanji-grid">
 
         {% for kanji in favorites %}
           <div class="kanji-in-grid">{{ kanji }}</div>
         {% endfor %}
 
+      </div>
+
+      <!-- Kanji modal info -->
+      <div class="kanji-info">
       </div>
 
     </div>

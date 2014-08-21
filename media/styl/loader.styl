@@ -15,6 +15,10 @@
     @extends .loader
     left: 1%
 
+.loader-right
+    @extends .loader
+    right: 1%
+
 .message
     letterpress()
     position: absolute
@@ -24,6 +28,10 @@
 .message-left
     @extends .message
     left: 95px
+
+.message-right
+    @extends .message
+    right: 95px
 
 base-circle(radius)
   background-color: rgba(0,0,0,0)

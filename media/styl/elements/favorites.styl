@@ -45,3 +45,47 @@
 .kanji-in-grid:hover
     color: #1D95D1
     cursor: pointer
+
+.go-back
+    position: fixed
+    margin-top: 20px
+    margin-left: 20px
+
+    text-align: center
+    pattern('escheresque')
+    overflow: hidden
+    display: block
+    letterpress()
+
+    a
+        margin-top: 0px
+
+.kanji-info
+    position: absolute
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+
+    pattern('grid')
+    box-shadow 0px 0px 10px 0px rgba(0,0,0,.5)
+    border-radius: 12px
+
+    display: none
+    text-align: center
+    letterpress()
+
+    dl
+        padding: 20px
+        max-width: 500px
+
+        dt
+            font-size: 60px
+            font-family: 'IPAMincho','TakaoExMincho'
+
+        hr
+            border: 0
+            height: 0
+            margin: 10px
+
+            border-top: 2px solid rgba(0,0,0, 0.1)
+            border-bottom: 1px solid rgba(255,255,255, 0.3)

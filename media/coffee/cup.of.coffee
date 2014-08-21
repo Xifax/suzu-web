@@ -142,11 +142,36 @@ $ -> $('#fav').click ->
           if data.result == 'fav'
             $('#fav').removeClass('icon-check')
             $('#fav').addClass('icon-cancel')
-            humane.log("#{kanji} added to favorites!",  {timeout: 1000})
+            humane.log("#{kanji} added to favorites!",  {timeout: 1500})
           else
             $('#fav').removeClass('icon-cancel')
             $('#fav').addClass('icon-check')
-            humane.log("#{kanji} removed from favorites!",  {timeout: 1000})
+            humane.log("#{kanji} removed from favorites!",  {timeout: 1500})
+
+# Show info for favorite kanji
+$ -> $('.kanji-in-grid').click ->
+    kanji = $(this).text().trim()
+    $('.loader-right').fadeToggle(250)
+
+    $.ajax '/kanji_info/' + kanji,
+        type: 'GET'
+        dataType: 'json'
+        success: (data, textStatus, jqXHR) ->
+            # Prepare details
+            details = prepare_details(data.info)
+
+            # Set html and show modal
+            $('.kanji-info').html(details).fadeIn(150)
+
+            # Hide loader
+            $('.loader-right').fadeToggle(100)
+
+# Hide modal on click
+$ -> $('.kanji-info').click ->
+    $('.kanji-info').fadeOut(100)
+
+$ -> $('.kanji-grid').click ->
+    $('.kanji-info').fadeOut(100)
 
 # Show related kanji when clicking on radical
 $ -> $('.rad').click ->
