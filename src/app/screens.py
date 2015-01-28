@@ -115,7 +115,7 @@ def lookup_item(key):
         # Get readings for examples
         # TODO: double check, that everything is in unicode
         # TODO: stopped working, check why
-        for example, translation in examples.iteritems():
+        for example, translation in examples:
             #reading = mecab.reading(example)
             readings = mecab.wordByWord(example)
             results.append({
@@ -172,6 +172,8 @@ def export():
                                            meta['readings'],
                                            meta['examples']
         )
+
+    raise Exception('Debug')
 
     # result = u"kanji, category\n"
     # kanji_list = Peon(db).export('kanji')
