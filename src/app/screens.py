@@ -23,6 +23,7 @@ from src.run.peon import Peon
 
 from src.api.language import Language
 from src.api.jp.weblio import Weblio
+from src.api.jp.weblio import Jisho
 from src.api.jp.mecab import MeCab
 
 # Initialize MongoDB
@@ -114,7 +115,7 @@ def lookup_item(key):
         # Get readings for examples
         # TODO: double check, that everything is in unicode
         # TODO: stopped working, check why
-        for example, translation in examples:
+        for example, translation in examples.iteritems():
             #reading = mecab.reading(example)
             readings = mecab.wordByWord(example)
             results.append({
@@ -134,18 +135,55 @@ def lookup_item(key):
 
 @get('/export')
 def export():
-    """Export all kanji to csv"""
-    result = u"kanji, category\n"
-    kanji_list = Peon(db).export('kanji')
-    for kanji in kanji_list:
-        result += u"%s, %s\n" % (kanji.value, '0')
+    """Exports all favorite kanji in format suitable for anki import"""
 
-    return render('export', export=result)
+    favorites = request.get_cookie('favorites', secret='secret')
+    if favorites:
+        favorites = json.loads(favorites)
+    else:
+        favorites = []
+
+    export = {}
+    for kanji in favorites:
+        details = Jisho().details(term),
+        if not kanji in details:
+            continue
+        else:
+            details = details[kanji]
+
+        examples = Weblio().examples(term)
+        example_string = u''
+        for example in examples:
+            for key, translation in example.iteritems:
+                example_string += u'%s: %s <br/>' % (key, translation)
+
+        export[kanji] = {
+            'meanings': details['meanings'],
+            'readings': u'%s | %s' % (details['kun'], details['on']),
+            'examples': example_string
+        }
+
+    csv_export = ''
+    rows = 4
+    for kanji, meta in export.iteritems():
+        # Expression, meaning, reading, examples [gloss..]
+        csv_export += u"%s\t%s\t%s\t%s\n" % (kanji,
+                                           meta['meanings'],
+                                           meta['readings'],
+                                           meta['examples']
+        )
+
+    # result = u"kanji, category\n"
+    # kanji_list = Peon(db).export('kanji')
+    # for kanji in kanji_list:
+    #     result += u"%s, %s\n" % (kanji.value, '0')
+
+    return render('export', export=csv_export, rows=4)
 
 
 @get('/favs')
 def favs():
-    """Display favorite kanji (saved in cookie)"""
+    """Displays favorite kanji (saved in cookie)"""
     favorites = request.get_cookie('favorites', secret='secret')
     if favorites:
         favorites = json.loads(favorites)
