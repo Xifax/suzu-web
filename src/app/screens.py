@@ -145,13 +145,13 @@ def export():
 
     export = {}
     for kanji in favorites:
-        details = Jisho().details(term),
+        details = Jisho().details(kanji),
         if not kanji in details:
             continue
         else:
             details = details[kanji]
 
-        examples = Weblio().examples(term)
+        examples = Weblio().examples(kanji)
         example_string = u''
         for example in examples:
             for key, translation in example.iteritems:
