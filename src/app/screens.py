@@ -164,7 +164,7 @@ def export():
         }
 
     csv_export = ''
-    rows = 4
+    cols = 4
     for kanji, meta in export.iteritems():
         # Expression, meaning, reading, examples [gloss..]
         csv_export += u"%s\t%s\t%s\t%s\n" % (kanji,
