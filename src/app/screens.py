@@ -170,15 +170,7 @@ def export():
         csv_export += u"%s\t%s\t%s\t%s\n" % (kanji,
                                            meta['meanings'],
                                            meta['readings'],
-                                           meta['examples']
-        )
-
-    raise Exception('Debug')
-
-    # result = u"kanji, category\n"
-    # kanji_list = Peon(db).export('kanji')
-    # for kanji in kanji_list:
-    #     result += u"%s, %s\n" % (kanji.value, '0')
+                                           meta['examples'])
 
     return render('export', export=csv_export, rows=4)
 
