@@ -145,16 +145,16 @@ def export():
 
     export = {}
     for kanji in favorites:
-        details = Jisho().details(kanji),
+        details = Jisho().details(kanji)
         if not kanji in details:
             continue
-        else:
-            details = details[kanji]
+
+        details = details[kanji]
 
         examples = Weblio().examples(kanji)
         example_string = u''
         for example in examples:
-            for key, translation in example.iteritems:
+            for key, translation in example.iteritems():
                 example_string += u'%s: %s <br/>' % (key, translation)
 
         export[kanji] = {
