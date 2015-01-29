@@ -163,7 +163,7 @@ def export():
             'examples': example_string
         }
 
-    csv_export = ''
+    csv_export = u''
     cols = 4
     for kanji, meta in export.iteritems():
         # Expression, meaning, reading, examples [gloss..]
@@ -172,7 +172,10 @@ def export():
                                            meta['readings'],
                                            meta['examples'])
 
-    return render('export', export=csv_export, rows=4)
+    # Return text file instead of html view
+    response.content_type = 'text/html; charset=utf-8'
+    return csv_export
+    #return render('export', export=csv_export, rows=4)
 
 
 @get('/favs')
