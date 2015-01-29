@@ -174,7 +174,7 @@ def export():
                                            meta['examples'])
 
     # Return text file instead of html view
-    response.content_type = 'text/html; charset=utf-8'
+    response.content_type = 'text/plain; charset=utf-8'
     return csv_export
     #return render('export', export=csv_export, rows=4)
 
